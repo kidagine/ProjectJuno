@@ -7,9 +7,12 @@ public class PlayerAim : MonoBehaviour {
 	public Transform firePoint;
 	public GameObject bulletPrefab;
 	public CameraShaker cameraShaker;
+    [SerializeField]
+    public static bool isUsingController = false;
 
 	private PlayerMovement playerMovement;
 	private float cooldown = 0.3f;
+
 	void Start ()
 	{
 		playerMovement = gameObject.GetComponent<PlayerMovement>();
@@ -24,7 +27,7 @@ public class PlayerAim : MonoBehaviour {
 
 	private void Shooting()
 	{
-		if (Input.GetMouseButton(0))
+		if (Input.GetButton("Fire1"))
 		{
 			if (cooldown <= 0)
 			{
@@ -38,9 +41,22 @@ public class PlayerAim : MonoBehaviour {
 
 	private void PointingGun()
 	{
-		Vector3 mousePos = Input.mousePosition;
-		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-		Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+		Vector2 direction = Vector2.zero;
+		//Using Mouse
+		if (!isUsingController)
+		{
+			Vector3 mousePos = Input.mousePosition;
+			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+			direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+		}
+
+		//Using Controller
+		if (isUsingController)
+		{
+			float directionX = Input.GetAxisRaw("PadHorizontal");
+			float directionY = Input.GetAxisRaw("PadVertical");
+			direction = new Vector2(directionX, directionY);
+		}
 
 		//Limit player's aim depending on if they are on a wall
 		if (playerMovement.onRightWall)

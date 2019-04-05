@@ -25,26 +25,42 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update()
 	{
-		if (!(Input.GetMouseButton(0)))
+		if (!Input.GetButton("Fire1"))
 		{
-			if (Input.GetMouseButton(1))
+			//Using KB/M
+			if (!PlayerAim.isUsingController)
 			{
-				aimRay.SetActive(true);
+				if (Input.GetMouseButton(1))
+				{
+					aimRay.SetActive(true);
+				}
+				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRayScript.IsMovePossible())
+				{
+					ResetMovement();
+				}
+				if (Input.GetMouseButtonUp(1))
+				{
+					aimRay.SetActive(false);
+				}
 			}
-			if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRayScript.IsMovePossible())
+			//Using Controller
+			if (PlayerAim.isUsingController)
 			{
-				playerAimRayScript.ResetIsMovePossible();
-				clearWallBools();
-				rb.velocity = transform.up * speed;
-				aimRay.SetActive(false);
-				isMoving = true;
-			}
-			if (Input.GetMouseButtonUp(1))
-			{
-				aimRay.SetActive(false);
+				if (Input.GetAxis("PadHorizontal") != 0 || Input.GetAxis("PadVertical") != 0)
+				{
+					aimRay.SetActive(true);
+				}
+				if (Input.GetButton("Dash") && !isMoving && playerAimRayScript.IsMovePossible())
+				{
+					ResetMovement();
+				}
+				if (Input.GetAxis("PadHorizontal") == 0 && Input.GetAxis("PadVertical") == 0)
+				{
+					aimRay.SetActive(false);
+				}
 			}
 		}
-		else
+		else 
 		{
 			aimRay.SetActive(false);
 		}
@@ -87,7 +103,16 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	private void clearWallBools()
+	private void ResetMovement()
+	{
+		playerAimRayScript.ResetIsMovePossible();
+		ClearWallBools();
+		rb.velocity = transform.up * speed;
+		aimRay.SetActive(false);
+		isMoving = true;
+	}
+
+	private void ClearWallBools()
 	{
 		onRightWall = false;
 		onLeftWall = false;
