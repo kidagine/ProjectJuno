@@ -7,8 +7,7 @@ public class PlayerAim : MonoBehaviour {
 	public Transform firePoint;
 	public GameObject bulletPrefab;
 	public CameraShaker cameraShaker;
-    [SerializeField]
-    public static bool isUsingController = false;
+	public static bool isUsingController = false;
 
 	private PlayerMovement playerMovement;
 	private float cooldown = 0.3f;
@@ -27,7 +26,7 @@ public class PlayerAim : MonoBehaviour {
 
 	private void Shooting()
 	{
-		if (Input.GetButton("Fire1"))
+		if (Input.GetButton("Fire1") && !PauseManager.GameIsPaused)
 		{
 			if (cooldown <= 0)
 			{

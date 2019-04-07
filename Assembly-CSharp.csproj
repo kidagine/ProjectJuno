@@ -55,10 +55,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\CameraShaker.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\FontFix.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\KillLine.cs" />
-     <Compile Include="Assets\Scripts\PixelBoy.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\LogoTimer.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
-     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRay.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealth.cs" />
