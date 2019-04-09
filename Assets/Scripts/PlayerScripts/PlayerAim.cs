@@ -11,7 +11,6 @@ public class PlayerAim : MonoBehaviour {
 	public CameraShaker cameraShaker;
 	public Slider gunClipSlider;
 	public Animator gunClipSliderAnim;
-	public static bool isUsingController = false;
 
 	private PlayerMovement playerMovement;
 	private float cooldown = 0.3f;
@@ -77,7 +76,7 @@ public class PlayerAim : MonoBehaviour {
 	{
 		Vector2 direction = Vector2.zero;
 		//Using Mouse
-		if (!isUsingController)
+		if (!PauseManager.isUsingController)
 		{
 			Vector3 mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -85,7 +84,7 @@ public class PlayerAim : MonoBehaviour {
 		}
 
 		//Using Controller
-		if (isUsingController)
+		if (PauseManager.isUsingController)
 		{
 			float directionX = Input.GetAxisRaw("PadHorizontal");
 			float directionY = Input.GetAxisRaw("PadVertical");

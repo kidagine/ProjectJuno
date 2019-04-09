@@ -2,6 +2,7 @@ WindowsStandalone
 PlayerPath?
 C:/Users/Kid Agine/Desktop/junotestrun/DandaraProject.exe
 SceneListBegin?
+Assets/Scenes/LogoScene.unity
 Assets/Scenes/SampleScene.unity
 SceneListEnd?
 8ef0c7ee81abe4b89a27b3a0d1ce3b03 Cinemachine.dll:Cinemachine.CinemachineStateDrivenCamera
@@ -108,8 +109,8 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 66b3109aa5921cf800bec17926c6adba Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 66484d06c5f19c41c05ca68836821a2e Unity.2D.PixelPerfect.dll:UnityEngine.U2D.PixelPerfectCamera
-ff7ceaab7b667348f8ffb50c3ef5d93a Assembly-CSharp.dll:.PlayerHealth
-5e53a12717f8046cae883c81190f9644 Assembly-CSharp.dll:.PlayerAim
+dfee1de7426036b1bc64f3bc206bff06 Assembly-CSharp.dll:.PlayerHealth
+00ee9f7d2131fb6fa8607ae52c08b4c3 Assembly-CSharp.dll:.PlayerAim
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 0f27c39183b9eb95eba0a228bea28273 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -184,6 +185,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.LogoTimer
 2fdaf0c5b3646f8972c94ce2c153bbe5 Assembly-CSharp.dll:.PlayerMovement
 1a90b221dc803408fbafa883c12bcab4 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
@@ -207,7 +209,7 @@ a32d8f6631e1f06e474bc977d536da2c Assembly-CSharp.dll:.CameraShaker
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 b26f4defecdd285387a1ff55fb598de1 Assembly-CSharp.dll:.PixelBoy
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
-04b4dded2e1729f08c4fd5f9991a16df Assembly-CSharp.dll:.PauseManager
+c2d542327965ae04cc059d479a073681 Assembly-CSharp.dll:.PauseManager
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 69576695c448b6ad68c377089af0857d Cinemachine.dll:Cinemachine.CinemachineBrain

@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (!Input.GetButton("Fire1"))
 		{
 			//Using KB/M
-			if (!PlayerAim.isUsingController)
+			if (!PauseManager.isUsingController)
 			{
 				if (Input.GetMouseButton(1))
 				{
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 			//Using Controller
-			if (PlayerAim.isUsingController)
+			if (PauseManager.isUsingController)
 			{
 				if (Input.GetAxis("PadHorizontal") != 0 || Input.GetAxis("PadVertical") != 0)
 				{
