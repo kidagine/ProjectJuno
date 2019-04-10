@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1904
     height: 941
-  m_MinSize: {x: 711, y: 521}
-  m_MaxSize: {x: 18006, y: 14021}
+  m_MinSize: {x: 713, y: 563}
+  m_MaxSize: {x: 18008, y: 14021}
   vertical: 0
-  controlID: 7061
+  controlID: 158
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 471}
   m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 6935
+  controlID: 159
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -180,9 +180,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 32860000
-    m_LastClickedID: 34354
-    m_ExpandedIDs: 48dbebfff8dbebff7addebff80ddebff9a04feffb62dfeffd894feffa2f5feffa67cffffb092ffffe4fbffff00000000c4100000181100007c11000088110000b811000068850000f485000024860000628600009e8600000287000024870000
+    m_SelectedIDs: e22b0000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 46fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -267,19 +267,20 @@ MonoBehaviour:
     m_ScenePaths: []
     m_ShowAllHits: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\Users\Kid Agine\Documents\ProjectJuno
+  m_LastProjectPath: C:\Users\Kid Agine\Desktop\ProjectJuno
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 02070000
     m_LastClickedID: 1794
-    m_ExpandedIDs: ffffffff00000000400b0000760b00008e0b0000160e00004e0e0000d60e0000fe0e0000400f0000540f0000ee0f0000161000002e10000024330000
+    m_ExpandedIDs: 00000000e22b0000182c0000302c00005e2c0000bc2e0000f62e00007e2f0000a62f0000e82f0000fc2f000096300000be300000d6300000ae330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -304,10 +305,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 45}
-    m_SelectedIDs: 32860000
-    m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000400b0000760b00008e0b0000bc0b0000160e00004e0e0000d60e0000fe0e0000400f0000540f0000ee0f0000161000002e10000024330000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: e22b0000
+    m_LastClickedID: 11234
+    m_ExpandedIDs: ffffffff00000000e22b0000182c0000bc2e0000f62e00007e2f0000a62f0000e82f0000fc2f000096300000d6300000ae330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -332,8 +333,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 32860000
-    m_LastClickedInstanceID: 34354
+    m_SelectedInstanceIDs: e22b0000
+    m_LastClickedInstanceID: 11234
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
@@ -383,10 +384,10 @@ MonoBehaviour:
     y: 0
     width: 1238
     height: 941
-  m_MinSize: {x: 204, y: 521}
-  m_MaxSize: {x: 4004, y: 12021}
+  m_MinSize: {x: 204, y: 563}
+  m_MaxSize: {x: 4004, y: 12063}
   vertical: 1
-  controlID: 7026
+  controlID: 140
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -495,12 +496,8 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 7c991444dc18d0c4aada2d132e2488f6,
-    type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: 1107748192475709354, guid: 7c991444dc18d0c4aada2d132e2488f6,
-      type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
+  m_AnimatorController: {fileID: 0}
+  m_BreadCrumbs: []
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
   blendTreeGraph: {fileID: 0}
@@ -776,8 +773,8 @@ MonoBehaviour:
     y: 791
     width: 1238
     height: 150
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 104, y: 121}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -838,7 +835,7 @@ MonoBehaviour:
   m_AnimEditor: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 34562
+  m_LastSelectedObjectID: 34354
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -881,8 +878,8 @@ MonoBehaviour:
     y: 0
     width: 378
     height: 941
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}

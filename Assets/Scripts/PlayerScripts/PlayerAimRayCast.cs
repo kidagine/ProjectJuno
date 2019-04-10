@@ -11,10 +11,14 @@ public class PlayerAimRayCast : MonoBehaviour {
 	private Color activeAimColor;
 	private Color disabledAimColor;
 	private bool isMove;
-	
-	void Start ()
+
+	void Awake()
 	{
 		lineRenderer = GetComponent<LineRenderer>();
+	}
+
+	void Start ()
+	{
 		lineRenderer.useWorldSpace = true;
 		ColorUtility.TryParseHtmlString("#ff006f", out activeAimColor);
 		ColorUtility.TryParseHtmlString("#ffffff", out disabledAimColor);
@@ -58,22 +62,18 @@ public class PlayerAimRayCast : MonoBehaviour {
 		if (hit.collider.CompareTag("LeftWall"))
 		{
 			arrowAim.transform.eulerAngles = new Vector3(0, 0, 90);
-			Debug.Log("LEFT");
 		}
 		if (hit.collider.CompareTag("RightWall"))
 		{
 			arrowAim.transform.eulerAngles = new Vector3(0, 0, 270);
-			Debug.Log("RIGHT");
 		}
 		if (hit.collider.CompareTag("TopWall"))
 		{
 			arrowAim.transform.eulerAngles = new Vector3(0, 0, 180);
-			Debug.Log("TOP");
 		}
 		if (hit.collider.CompareTag("BottomWall"))
 		{
 			arrowAim.transform.eulerAngles = new Vector3(0, 0, 0);
-			Debug.Log("BOTTOM");
 		}
 	}
 

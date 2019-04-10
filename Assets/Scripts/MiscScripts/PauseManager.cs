@@ -19,7 +19,7 @@ public class PauseManager : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetButtonDown("Start"))
 		{
 			if (GameIsPaused)
 			{
@@ -112,7 +112,6 @@ public class PauseManager : MonoBehaviour {
 		AudioListener.volume  -= 0.1f;
 		if (AudioListener.volume <= -0.1f)
 		{
-			Debug.Log("audioo");
 			AudioListener.volume = 1;
 		}
 	}

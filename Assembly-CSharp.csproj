@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\FontFix.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\KillLine.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\LevelProgress.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\LogoTimer.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
@@ -68,28 +69,28 @@
      <Compile Include="Assets\Scripts\SoundScripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\Sounds.cs" />
  <Reference Include="Cinemachine">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/Users/Kid Agine/Documents/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
