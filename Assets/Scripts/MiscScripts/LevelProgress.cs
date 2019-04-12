@@ -21,6 +21,7 @@ public class LevelProgress : MonoBehaviour {
 	
 	void Update ()
 	{
+		if (!(player == null || endPoint == null))
 		remainingDistance = Vector3.Distance(player.position, endPoint.position);
 		distanceDone = maxDistance - remainingDistance;
 		levelProgressSlider.value = distanceDone;

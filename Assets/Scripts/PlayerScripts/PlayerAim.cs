@@ -75,6 +75,7 @@ public class PlayerAim : MonoBehaviour {
 	private void PointingGun()
 	{
 		Vector2 direction = Vector2.zero;
+		Vector2 directionOutBounds = Vector2.zero;
 		//Using Mouse
 		if (!PauseManager.isUsingController)
 		{
@@ -98,12 +99,20 @@ public class PlayerAim : MonoBehaviour {
 			{
 				transform.up = direction;
 			}
+			else
+			{
+				DirectionOutOfBoundsHorizontal(direction, directionOutBounds);
+			}
 		}
 		else if (playerMovement.onLeftWall)
 		{
 			if (direction.x >= 0)
 			{
 				transform.up = direction;
+			}
+			else
+			{
+				DirectionOutOfBoundsHorizontal(direction, directionOutBounds);
 			}
 		}
 		else if (playerMovement.onTopWall)
@@ -112,6 +121,10 @@ public class PlayerAim : MonoBehaviour {
 			{
 				transform.up = direction;
 			}
+			else
+			{
+				DirectionOutOfBoundsVertical(direction, directionOutBounds);
+			}
 		}
 		else if (playerMovement.onBottomWall)
 		{
@@ -119,10 +132,30 @@ public class PlayerAim : MonoBehaviour {
 			{
 				transform.up = direction;
 			}
+			else
+			{
+				DirectionOutOfBoundsVertical(direction, directionOutBounds);
+			}
 		}
 		else
 		{
 			transform.up = direction;
 		}
+	}
+
+	private void DirectionOutOfBoundsHorizontal(Vector2 direction, Vector2 directionOutBounds)
+	{
+		float directionOutBoundsY = direction.y;
+		float directionOutBoundsX = direction.x * -1;
+		directionOutBounds = new Vector2(directionOutBoundsX, directionOutBoundsY);
+		transform.up = directionOutBounds;
+	}
+
+	private void DirectionOutOfBoundsVertical(Vector2 direction, Vector2 directionOutBounds)
+	{
+		float directionOutBoundsY = direction.y * -1;
+		float directionOutBoundsX = direction.x;
+		directionOutBounds = new Vector2(directionOutBoundsX, directionOutBoundsY);
+		transform.up = directionOutBounds;
 	}
 }

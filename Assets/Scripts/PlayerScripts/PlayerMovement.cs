@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					aimRay.SetActive(true);
 				}
-				if (Input.GetButton("Dash") && !isMoving && playerAimRayScript.IsMovePossible())
+				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRayScript.IsMovePossible())
 				{
 					ResetMovement();
 				}
@@ -67,6 +68,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (playerHealthScript.health <= 0)
 		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			Destroy(gameObject);
 		}
 	}
@@ -78,6 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onRightWall = true;
+			Debug.Log(other.name);
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{

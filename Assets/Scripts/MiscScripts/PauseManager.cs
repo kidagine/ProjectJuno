@@ -14,6 +14,7 @@ public class PauseManager : MonoBehaviour {
 	public Text inputText;
 	public Text fullscreenText;
 	public AudioSource backgroundMusic;
+	public Button resumeButton;
 
 	private bool isBackgroundMusicOn = true;
 
@@ -35,6 +36,7 @@ public class PauseManager : MonoBehaviour {
 	public void Resume()
 	{
 		FindObjectOfType<AudioManager>().Play("Click");
+		resumeButton.Select();
 		pauseMenuUI.SetActive(false);
 		generalMenuUI.SetActive(false);	
 		Time.timeScale = 1;
