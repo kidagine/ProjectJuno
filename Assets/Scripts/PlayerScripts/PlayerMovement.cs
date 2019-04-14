@@ -5,18 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public int speed;
 	public Rigidbody2D rb;
 	public GameObject aimRay;
 	public PlayerAimRayCast playerAimRayScript;
 	public PlayerHealth playerHealthScript;
+
+	[HideInInspector] public bool isMoving;
+	[HideInInspector] public int speed;
 
 	[HideInInspector] public bool onRightWall;
 	[HideInInspector] public bool onLeftWall;
 	[HideInInspector] public bool onTopWall;
 	[HideInInspector] public bool onBottomWall;
 
-	private bool isMoving;
 
 	void Start ()
 	{
@@ -80,7 +81,6 @@ public class PlayerMovement : MonoBehaviour {
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onRightWall = true;
-			Debug.Log(other.name);
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void ResetMovement()
 	{
+		FindObjectOfType<AudioManager>().Play("Dash");
 		playerAimRayScript.ResetIsMovePossible();
 		ClearWallBools();
 		rb.velocity = transform.up * speed;

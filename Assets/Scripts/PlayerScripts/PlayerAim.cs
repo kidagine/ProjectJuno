@@ -41,7 +41,6 @@ public class PlayerAim : MonoBehaviour {
 				gunClipSlider.value -= 1;
 				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				FindObjectOfType<AudioManager>().Play("Shot");
-				cameraShaker.CameraShake();
 				cooldown = 0.3f;
 			}
 			else if (gunClip <= 0 && !isReloading)

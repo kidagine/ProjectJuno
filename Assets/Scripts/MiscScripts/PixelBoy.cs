@@ -1,4 +1,4 @@
-﻿	using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
@@ -6,6 +6,7 @@ using System.Collections;
 public class PixelBoy : MonoBehaviour
 {
 	public int w = 720;
+
 	private int h;
 
 	public Camera cam;
@@ -20,13 +21,13 @@ public class PixelBoy : MonoBehaviour
 			return;
 		}
 	}
+
 	void Update()
 	{
-
 		float ratio = ((float)cam.pixelHeight / (float)cam.pixelWidth);
 		h = Mathf.RoundToInt(w * ratio);
-
 	}
+
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
 		source.filterMode = FilterMode.Point;
@@ -35,5 +36,16 @@ public class PixelBoy : MonoBehaviour
 		Graphics.Blit(source, buffer);
 		Graphics.Blit(buffer, destination);
 		RenderTexture.ReleaseTemporary(buffer);
+	}
+
+	public void DecreaseResolution(float limit)
+	{
+
+	}
+
+	public void IncreaseResolution(float limit)
+	{
+		while (w <= limit)
+			w++;
 	}
 }
