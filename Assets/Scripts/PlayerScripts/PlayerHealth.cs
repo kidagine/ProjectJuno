@@ -6,14 +6,18 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+	public GameObject playerShield;
 	public Rigidbody2D playerRigidbody;
 	public Slider currentHealthSlider;
 	public Text currentHealthTxt;
 	public CameraShaker cameraShaker;
 	public PixelBoy pixelBoy;
+	public Animator animator;
 	public int health = 3;
 
+
 	private PlayerMovement playerMovement;
+	private float vulnerabilityCooldown = 0.3f;
 	//private PixelBoy pixelBoy;
 
 	void Start()
@@ -23,21 +27,36 @@ public class PlayerHealth : MonoBehaviour
 		currentHealthSlider.maxValue = health;
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	void Update()
+	{
+		vulnerabilityCooldown -= Time.deltaTime;
+	}
+
+	private void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.CompareTag("Deadly"))
 		{
-			Vector2 knockBackDir = (other.transform.position - transform.position).normalized;
-			knockBackDir.y = 0;
-			Debug.Log(knockBackDir);
-			playerRigidbody.AddForce(new Vector2(-200,0));
+			Vector2 dir = (transform.position - other.transform.position).normalized;
+			playerRigidbody.AddForce(dir * 200);
 			StartCoroutine(ResetVelocity());
-			cameraShaker.CameraShake();
-			FindObjectOfType<AudioManager>().Play("Hit");
+			TakeDamage(1);
+			playerShield.SetActive(true); 
+		}
+	}
 
-			health--;
+	public void TakeDamage(int damage)
+	{
+		if (vulnerabilityCooldown <= 0)
+		{
+			FindObjectOfType<AudioManager>().Play("Hit");
+			cameraShaker.CameraShake();
+			StartCoroutine(ResetVelocity());
+
+			health = health - damage;
 			currentHealthSlider.value = health;
 			currentHealthTxt.text = health + "";
+			vulnerabilityCooldown = 0.45f;
+			animator.SetTrigger("Hit");
 		}
 	}
 

@@ -31,7 +31,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
 		if (hit.collider != null)
 		{
-			if (hit.collider.CompareTag("Deadly"))
+			if (hit.collider.CompareTag("IgnoreRaycast"))
 			{
 				arrowAim.SetActive(false);
 				lineRenderer.SetPosition(1, hit.point);

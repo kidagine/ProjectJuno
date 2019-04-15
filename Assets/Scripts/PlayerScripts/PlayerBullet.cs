@@ -9,10 +9,8 @@ public class PlayerBullet : MonoBehaviour
 	public Rigidbody2D rb;
 	public GameObject shotExplode;
 
-	private Enemy enemy;
-
 	void Start()
-	{	
+	{
 		Destroy(gameObject, 1.2f);
 		rb.velocity = transform.up * speed;
 	}
@@ -27,7 +25,7 @@ public class PlayerBullet : MonoBehaviour
 			Instantiate(shotExplode, transform.position, transform.rotation);
 			Destroy(gameObject);
 		}
-		//When colliding with anything except the layer to be ignored
+		//Explode when colliding with anything except the layer to be ignored
 		if (!(other.gameObject.layer == 5))
 		{
 		speed = 0;

@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Rigidbody2D rb;
 	public GameObject aimRay;
-	public PlayerAimRayCast playerAimRayScript;
-	public PlayerHealth playerHealthScript;
+	public PlayerAimRayCast playerAimRay;
+	public PlayerHealth playerHealth;
 
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					aimRay.SetActive(true);
 				}
-				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRayScript.IsMovePossible())
+				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRay.IsMovePossible())
 				{
 					ResetMovement();
 				}
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					aimRay.SetActive(true);
 				}
-				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRayScript.IsMovePossible())
+				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRay.IsMovePossible())
 				{
 					ResetMovement();
 				}
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
 			aimRay.SetActive(false);
 		}
 
-		if (playerHealthScript.health <= 0)
+		if (playerHealth.health <= 0)
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			Destroy(gameObject);
@@ -109,11 +109,12 @@ public class PlayerMovement : MonoBehaviour {
 	private void ResetMovement()
 	{
 		FindObjectOfType<AudioManager>().Play("Dash");
-		playerAimRayScript.ResetIsMovePossible();
+		playerAimRay.ResetIsMovePossible();
 		ClearWallBools();
 		rb.velocity = transform.up * speed;
 		aimRay.SetActive(false);
 		isMoving = true;
+		playerHealth.playerShield.SetActive(false);
 	}
 
 	private void ClearWallBools()

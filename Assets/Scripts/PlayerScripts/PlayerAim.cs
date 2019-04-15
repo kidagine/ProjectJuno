@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerAim : MonoBehaviour {
 
+	public PlayerHealth playerHealth;
+	public CameraShaker cameraShaker;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
-	public CameraShaker cameraShaker;
 	public Slider gunClipSlider;
 	public Animator gunClipSliderAnim;
 
@@ -42,6 +43,7 @@ public class PlayerAim : MonoBehaviour {
 				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				FindObjectOfType<AudioManager>().Play("Shot");
 				cooldown = 0.3f;
+				playerHealth.playerShield.SetActive(false);
 			}
 			else if (gunClip <= 0 && !isReloading)
 			{
@@ -61,6 +63,7 @@ public class PlayerAim : MonoBehaviour {
 			gunClipSliderAnim.Play("Reload" ,- 1, 0f);
 			StartCoroutine(Reload());
 		}
+
 	}
 	IEnumerator Reload()
 	{

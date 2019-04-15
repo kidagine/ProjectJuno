@@ -5,11 +5,10 @@ using System.Collections;
 [AddComponentMenu("Image Effects/PixelBoy")]
 public class PixelBoy : MonoBehaviour
 {
+	public Camera cam;
 	public int w = 720;
 
 	private int h;
-
-	public Camera cam;
 
 	protected void Start()
 	{

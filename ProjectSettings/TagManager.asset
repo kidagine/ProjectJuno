@@ -12,6 +12,7 @@ TagManager:
   - BottomWall
   - Deadly
   - Raycast
+  - IgnoreRaycast
   layers:
   - Default
   - TransparentFX
