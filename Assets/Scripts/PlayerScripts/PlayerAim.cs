@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerAim : MonoBehaviour {
 
-	public PlayerHealth playerHealth;
+	public PlayerStats playerStats;
 	public CameraShaker cameraShaker;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
@@ -43,7 +43,7 @@ public class PlayerAim : MonoBehaviour {
 				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				FindObjectOfType<AudioManager>().Play("Shot");
 				cooldown = 0.3f;
-				playerHealth.playerShield.SetActive(false);
+				playerStats.playerShield.SetActive(false);
 			}
 			else if (gunClip <= 0 && !isReloading)
 			{
@@ -160,4 +160,5 @@ public class PlayerAim : MonoBehaviour {
 		directionOutBounds = new Vector2(directionOutBoundsX, directionOutBoundsY);
 		transform.up = directionOutBounds;
 	}
+
 }

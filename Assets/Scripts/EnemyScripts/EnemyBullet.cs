@@ -16,10 +16,10 @@ public class EnemyBullet : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-		if (playerHealth != null)
+		PlayerStats playerStats = other.GetComponent<PlayerStats>();
+		if (playerStats != null)
 		{
-			playerHealth.TakeDamage(1);
+			playerStats.TakeDamage(1);
 			speed = 0;
 			Instantiate(shotExplode, transform.position, transform.rotation);
 			Destroy(gameObject);

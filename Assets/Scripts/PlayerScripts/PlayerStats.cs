@@ -1,0 +1,131 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class PlayerStats : MonoBehaviour
+{
+	public GameObject playerShield;
+	public GameObject playerDeathPrefab;
+	public Rigidbody2D playerRigidbody;
+	public Slider currentHealthSlider;
+	public Slider expSlider;
+	public Text currentHealthTxt;
+	public Text receivedExpText;
+	public Text levelText;
+	public CameraShaker cameraShaker;
+	public PixelBoy pixelBoy;
+	public Animator animator;
+	public Animator animatorExpReceivedText;
+	public int health = 3;
+
+
+	private PlayerMovement playerMovement;
+	private float vulnerabilityCooldown = 0.3f;
+	private int level = 1;
+	private int currentExpTotal;
+	private bool hasReceivedExp;
+	private bool isExpSliderIncreasing;
+	//private PixelBoy pixelBoy;
+
+	void Start()
+	{
+		playerMovement = gameObject.GetComponent<PlayerMovement>();
+		//pixelBoy = gameObject.GetComponent<PixelBoy>();
+		currentHealthSlider.maxValue = health;
+	}
+
+	void Update()
+	{
+		if (hasReceivedExp)
+		{
+			showExpReceived();
+		}
+		if (isExpSliderIncreasing)
+		{
+			graduallyIncreaseExp();
+		}
+		vulnerabilityCooldown -= Time.deltaTime;
+	}
+
+	//HEALTH
+	private void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.CompareTag("Deadly"))
+		{
+			Vector2 dir = (transform.position - other.transform.position).normalized;
+			playerRigidbody.AddForce(dir * 200);
+			StartCoroutine(ResetVelocity());
+			TakeDamage(1);
+			playerShield.SetActive(true); 
+		}
+	}
+
+	public void TakeDamage(int damage)
+	{
+		if (vulnerabilityCooldown <= 0)
+		{
+				FindObjectOfType<AudioManager>().Play("Hit");
+				cameraShaker.CameraShake();
+				StartCoroutine(ResetVelocity());
+
+				health = health - damage;
+				currentHealthSlider.value = health;
+				currentHealthTxt.text = health + "";
+				vulnerabilityCooldown = 0.45f;
+				animator.SetTrigger("Hit");
+		}
+		if (health <= 0)
+		{
+			FindObjectOfType<AudioManager>().Play("Death");
+			Instantiate(playerDeathPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			pixelBoy.DecreaseResolution(3);
+			Destroy(gameObject);
+		}
+	}
+
+	IEnumerator ResetVelocity()
+	{
+		yield return new WaitForSeconds(0.225f);
+		playerRigidbody.velocity = Vector2.zero;
+		playerMovement.isMoving = false;
+	}
+
+	//LEVEL
+	public void receiveExp(int enemyExp)
+	{
+		currentExpTotal += enemyExp;
+		if (expSlider.value != enemyExp)
+		{
+			isExpSliderIncreasing = true;
+		}
+		receivedExpText.text = enemyExp + " exp";
+		hasReceivedExp = true;
+	}
+
+	private void showExpReceived()
+	{
+		Vector2 receivedExpTextPosition = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x+0.7f,transform.position.y+0.5f));
+	
+		receivedExpText.transform.position = receivedExpTextPosition;
+		animatorExpReceivedText.SetTrigger("Show");
+		hasReceivedExp = false;
+	}
+
+	private void graduallyIncreaseExp()
+	{
+		expSlider.value += 0.1f;
+		if (expSlider.value >= currentExpTotal)
+			isExpSliderIncreasing = false;
+		if (expSlider.value == expSlider.maxValue)
+		{
+			level++;
+			levelText.text = level + "";
+			expSlider.value = 0;
+			currentExpTotal = 0;
+		}
+	}
+
+}

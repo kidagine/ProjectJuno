@@ -66,8 +66,8 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerBullet.cs" />
-     <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\Sounds.cs" />
  <Reference Include="Cinemachine">

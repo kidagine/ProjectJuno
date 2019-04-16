@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	public PlayerStats playerStats;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
 	public SpriteRenderer sprite;
 
 	private Color enemyColor;
 	private float cooldown = 0.8f;
-	private int health = 10;
+	private int health = 5;
+	private int expValue = 1;
 
 	void Start()
 	{
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour {
 		health -= damage;
 		if (health <= 0)
 		{
+			playerStats.receiveExp(expValue);
 			Destroy(gameObject);
 		}
 		Invoke("ResetColor", 0.2f);

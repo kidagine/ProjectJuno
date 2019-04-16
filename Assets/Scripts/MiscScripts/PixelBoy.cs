@@ -6,9 +6,12 @@ using System.Collections;
 public class PixelBoy : MonoBehaviour
 {
 	public Camera cam;
+	public GameObject gameOver;
 	public int w = 720;
 
 	private int h;
+	private int resolutionLimit;
+	private bool isDecreasing;
 
 	protected void Start()
 	{
@@ -19,12 +22,20 @@ public class PixelBoy : MonoBehaviour
 			enabled = false;
 			return;
 		}
+
 	}
 
 	void Update()
 	{
 		float ratio = ((float)cam.pixelHeight / (float)cam.pixelWidth);
 		h = Mathf.RoundToInt(w * ratio);
+		if (isDecreasing)
+		{
+			if (w >= resolutionLimit)
+				w -= 2;
+			else
+				gameOver.SetActive(true);
+		}
 	}
 
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
@@ -37,14 +48,18 @@ public class PixelBoy : MonoBehaviour
 		RenderTexture.ReleaseTemporary(buffer);
 	}
 
-	public void DecreaseResolution(float limit)
+	public void SetResolutionZero()
 	{
+	}
 
+	public void DecreaseResolution(int limit)
+	{
+		isDecreasing = true;
+		resolutionLimit = limit;
 	}
 
 	public void IncreaseResolution(float limit)
 	{
-		while (w <= limit)
-			w++;
+		//TODO
 	}
 }

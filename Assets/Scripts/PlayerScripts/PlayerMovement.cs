@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody2D rb;
 	public GameObject aimRay;
 	public PlayerAimRayCast playerAimRay;
-	public PlayerHealth playerHealth;
+	public PlayerStats playerStats;
 
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
@@ -66,12 +66,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			aimRay.SetActive(false);
 		}
-
-		if (playerHealth.health <= 0)
-		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-			Destroy(gameObject);
-		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -114,7 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = transform.up * speed;
 		aimRay.SetActive(false);
 		isMoving = true;
-		playerHealth.playerShield.SetActive(false);
+		playerStats.playerShield.SetActive(false);
 	}
 
 	private void ClearWallBools()
