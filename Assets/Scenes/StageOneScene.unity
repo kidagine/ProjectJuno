@@ -2912,7 +2912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
-  gameOver: {fileID: 924943688}
   w: 320
 --- !u!82 &519420034
 AudioSource:
@@ -7661,11 +7660,13 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 78480128}
   generalMenuUI: {fileID: 942966014}
   optionsMenuUI: {fileID: 665393975}
+  gameOverUi: {fileID: 924943688}
   backgroundMusicText: {fileID: 264280890}
   inputText: {fileID: 1738685363}
   fullscreenText: {fileID: 1620495280}
   backgroundMusic: {fileID: 519420034}
   resumeButton: {fileID: 730602627}
+  pixelBoy: {fileID: 519420033}
 --- !u!1 &1338453734
 GameObject:
   m_ObjectHideFlags: 0

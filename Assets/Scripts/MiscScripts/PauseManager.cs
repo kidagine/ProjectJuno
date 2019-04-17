@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour {
 
 	public static bool GameIsPaused = false;
+	public static bool GameIsOver = false;
 	public static bool isUsingController = false;
 	public GameObject pauseMenuUI;
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
+	public GameObject gameOverUi;
 	public Text backgroundMusicText;
 	public Text inputText;
 	public Text fullscreenText;
 	public AudioSource backgroundMusic;
 	public Button resumeButton;
+	public PixelBoy pixelBoy;
 
 	private bool isBackgroundMusicOn = true;
+	private bool hasBegun = false;
 
+	//PauseState
 	void Update ()
 	{
 		if (Input.GetButtonDown("Start"))
@@ -30,6 +36,14 @@ public class PauseManager : MonoBehaviour {
 			{
 				Pause();
 			}
+		}
+		if (GameIsOver)
+		{
+			StartCoroutine(EndGame());
+		}
+		else if (!GameIsOver && !hasBegun)
+		{
+			BeginGame();
 		}
 	}
 
@@ -121,6 +135,23 @@ public class PauseManager : MonoBehaviour {
 	public void Hover()
 	{
 		FindObjectOfType<AudioManager>().Play("Hover");
+	}
+
+	//GameState
+
+
+	IEnumerator EndGame()
+	{
+		gameOverUi.SetActive(true);
+		yield return new WaitForSeconds(1);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		GameIsOver = false;
+	}
+
+	private void BeginGame()
+	{
+		hasBegun = true;
+		pixelBoy.IncreaseResolution(318);
 	}
 
 }

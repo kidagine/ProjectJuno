@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\CameraShaker.cs" />
+     <Compile Include="Assets\Scripts\Dialog\Dialog.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />

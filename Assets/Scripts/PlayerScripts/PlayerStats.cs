@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
@@ -80,7 +79,6 @@ public class PlayerStats : MonoBehaviour
 		{
 			FindObjectOfType<AudioManager>().Play("Death");
 			Instantiate(playerDeathPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
-			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			pixelBoy.DecreaseResolution(3);
 			Destroy(gameObject);
 		}

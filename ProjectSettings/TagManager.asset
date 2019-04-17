@@ -13,6 +13,7 @@ TagManager:
   - Deadly
   - Raycast
   - IgnoreRaycast
+  - DialogTrigger
   layers:
   - Default
   - TransparentFX

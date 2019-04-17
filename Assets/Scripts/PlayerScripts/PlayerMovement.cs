@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	private void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.CompareTag("RightWall"))
 		{
@@ -97,6 +97,11 @@ public class PlayerMovement : MonoBehaviour {
 		if (other.gameObject.CompareTag("KillLine"))
 		{
 			Destroy(gameObject, 1F);
+		}
+
+		if (other.gameObject.CompareTag("DialogTrigger"))
+		{
+			FindObjectOfType<Dialog>().StartDialog(1);
 		}
 	}
 
