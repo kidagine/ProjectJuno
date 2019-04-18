@@ -98,11 +98,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Destroy(gameObject, 1F);
 		}
-
-		if (other.gameObject.CompareTag("DialogTrigger"))
-		{
-			FindObjectOfType<Dialog>().StartDialog(1);
-		}
 	}
 
 	private void ResetMovement()

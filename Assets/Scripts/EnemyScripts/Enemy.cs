@@ -5,8 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public PlayerStats playerStats;
-	public Transform firePoint;
+	public GameObject enemyDeathPrefab;
 	public GameObject bulletPrefab;
+	public Transform firePoint;
 	public SpriteRenderer sprite;
 
 	private Color enemyColor;
@@ -43,6 +44,8 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0)
 		{
 			playerStats.receiveExp(expValue);
+			FindObjectOfType<AudioManager>().Play("Death");
+			Instantiate(enemyDeathPrefab, new Vector2(transform.position.x, transform.position.y+0.7f), Quaternion.identity);
 			Destroy(gameObject);
 		}
 		Invoke("ResetColor", 0.2f);

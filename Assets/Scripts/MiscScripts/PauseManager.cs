@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour {
 
-	public static bool GameIsPaused = false;
-	public static bool GameIsOver = false;
-	public static bool isUsingController = false;
+	public static bool GameIsPaused;
+	public static bool GameIsOver;
+	public static bool isUsingController;
 	public GameObject pauseMenuUI;
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
