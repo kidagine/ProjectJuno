@@ -347,6 +347,7 @@ MonoBehaviour:
   playerAim: {fileID: 597517305}
   dialoguePane: {fileID: 2005488971}
   dialogueArrow: {fileID: 1236655048}
+  dialoguePaneAnimator: {fileID: 2005488975}
   textDisplay: {fileID: 822345085}
   typingSpeed: 0.05
 --- !u!1 &264280886
@@ -1964,6 +1965,7 @@ GameObject:
   - component: {fileID: 597517312}
   - component: {fileID: 597517308}
   - component: {fileID: 597517311}
+  - component: {fileID: 597517310}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2092,6 +2094,16 @@ MonoBehaviour:
   onLeftWall: 0
   onTopWall: 0
   onBottomWall: 0
+--- !u!210 &597517310
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597517304}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!61 &597517311
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2947,6 +2959,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Dash
     clip: {fileID: 8300000, guid: 01a1d236fba96d14eb020d1ad2ada19a, type: 3}
+    volume: 0.405
+    pitch: 0.83
+    loop: 0
+    source: {fileID: 0}
+  - name: Typing
+    clip: {fileID: 8300000, guid: b83a43cb001f9af44aeb40639118a5bb, type: 3}
     volume: 0.405
     pitch: 0.83
     loop: 0
@@ -5305,7 +5323,8 @@ GameObject:
   - component: {fileID: 1295421329}
   - component: {fileID: 1295421328}
   - component: {fileID: 1295421330}
-  m_Layer: 0
+  - component: {fileID: 1295421331}
+  m_Layer: 2
   m_Name: AtmosDialogueTrigger
   m_TagString: DialogTrigger
   m_Icon: {fileID: 0}
@@ -5408,8 +5427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialoguePromptButton: {fileID: 437520845}
+  indexSkipTo: 14
   dialogue:
-    name: 
+    name: Atmos
     sentences:
     - '???: Hey kid, wake up.'
     - '???: Wake up.'
@@ -5426,6 +5446,25 @@ MonoBehaviour:
     - 'Atmos: It''s not like I can go anywhere else hehe.'
     - 'Atmos: I can make some adjustments, as long as you improve.'
     - 'Atmos: Now good luck out there kid, to the sky!'
+  hasDialogueStarted: 0
+--- !u!95 &1295421331
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1295421326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1aaf80f4156b7d7489bede4cd65bd191, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1410628402
 GameObject:
   m_ObjectHideFlags: 0
@@ -7166,6 +7205,7 @@ GameObject:
   - component: {fileID: 2005488972}
   - component: {fileID: 2005488974}
   - component: {fileID: 2005488973}
+  - component: {fileID: 2005488975}
   m_Layer: 5
   m_Name: DialogPane
   m_TagString: Untagged
@@ -7228,6 +7268,24 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2005488971}
   m_CullTransparentMesh: 0
+--- !u!95 &2005488975
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2005488971}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9af517d3679721c4182d1df0b4f1209f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2034874611
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,9 +5,11 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour {
 
 	public GameObject DialoguePromptButton;
+	public int indexSkipTo;
 	public Dialogue dialogue;
 
-	private bool hasDialogueStarted;
+	public bool hasDialogueStarted;
+	private bool hasDialogueBeenSaid;
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
@@ -21,12 +23,21 @@ public class DialogueTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player" || (other.gameObject.tag == "PlayerHead"))
 		{
-			if (Input.GetKeyDown(KeyCode.J) && !hasDialogueStarted)
+			if (Input.GetKey(KeyCode.K) && !hasDialogueStarted && !hasDialogueBeenSaid)
 			{
-				FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+				FindObjectOfType<DialogueManager>().StartDialogue(dialogue, 1);
+				hasDialogueStarted = true;
+				hasDialogueBeenSaid = true;
+				DialoguePromptButton.SetActive(false);
+			}
+			else if (Input.GetKey(KeyCode.K) && !hasDialogueStarted && hasDialogueBeenSaid)
+			{
+				FindObjectOfType<DialogueManager>().StartDialogue(dialogue, indexSkipTo);
 				hasDialogueStarted = true;
 				DialoguePromptButton.SetActive(false);
 			}
+			else if (!hasDialogueStarted)
+				DialoguePromptButton.SetActive(true);
 		}
 	}
 
@@ -35,6 +46,7 @@ public class DialogueTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Player" || (other.gameObject.tag == "PlayerHead"))
 		{
 			DialoguePromptButton.SetActive(false);
+			hasDialogueStarted = false;
 		}
 	}
 

@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour {
 	public PlayerAim playerAim;
 	public GameObject dialoguePane;
 	public GameObject dialogueArrow;
+	public Animator dialoguePaneAnimator;
 	public Text textDisplay;
 	public Queue<string> sentences;
 	public float typingSpeed;
@@ -16,6 +17,7 @@ public class DialogueManager : MonoBehaviour {
 	private bool isDialogueTyping;
 	private bool sentenceFinished;
 	private string currentSentence;
+	private string sentence;
 
 
 	void Start()
@@ -28,43 +30,47 @@ public class DialogueManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.J) && sentenceFinished == true)
 		{
 			isDialogueTyping = true;
-			DisplayNextSentence();
 			sentenceFinished = false;
 			dialogueArrow.SetActive(false);
+			DisplayNextSentence(1);
 		}
-		if (Input.GetKeyDown(KeyCode.J) && isDialogueTyping == true)
+		else if (Input.GetKeyDown(KeyCode.J) && isDialogueTyping == true)
 		{
-			isDialogueTyping = false;
 			StopAllCoroutines();
+			isDialogueTyping = false;
+			sentenceFinished = true;
 			textDisplay.text = "";
 			textDisplay.text = currentSentence;
-			sentenceFinished = true;
+			dialogueArrow.SetActive(true);
 		}
 	}
 
-	public void StartDialogue (Dialogue dialogue)
+	public void StartDialogue (Dialogue dialogue, int indexSkipToPass)
 	{
+		isDialogueTyping = true;
 		dialoguePane.SetActive(true);
+		dialoguePaneAnimator.SetTrigger("Open");
 		DisableMovement();
 
 		sentences.Clear();
-
 		foreach (string sentence in dialogue.sentences)
 		{
 			sentences.Enqueue(sentence);
 		}
-		DisplayNextSentence();
+		DisplayNextSentence(indexSkipToPass);
 	}
 
-	public void DisplayNextSentence()
+	public void DisplayNextSentence(int indexSkipTo)
 	{
 		if (sentences.Count == 0)
 		{
 			EndDialog();
 			return;
 		}
-
-		string sentence = sentences.Dequeue();
+		for (int i = 0; i < indexSkipTo; i++)
+		{
+			sentence = sentences.Dequeue();
+		}
 		currentSentence = sentence;
 		StopAllCoroutines();
 		StartCoroutine(Type(sentence));
@@ -75,6 +81,7 @@ public class DialogueManager : MonoBehaviour {
 		textDisplay.text = "";
 		foreach (char letter in sentence.ToCharArray())
 		{
+			FindObjectOfType<AudioManager>().Play("Typing");
 			textDisplay.text += letter;
 			yield return new WaitForSeconds(typingSpeed);
 		}
@@ -85,8 +92,17 @@ public class DialogueManager : MonoBehaviour {
 	public void EndDialog()
 	{
 		textDisplay.text = "";
-		dialoguePane.SetActive(false);
+		dialoguePaneAnimator.SetTrigger("Close");
+		FindObjectOfType<DialogueTrigger>().hasDialogueStarted = false;
+		StartCoroutine(DisablePane());
 		EnableMovement();
+	}
+
+	IEnumerator DisablePane()
+	{
+		yield return new WaitForSeconds(0.4f);
+		dialoguePaneAnimator.Rebind();
+		dialoguePane.SetActive(false);
 	}
 
 	private void DisableMovement()
