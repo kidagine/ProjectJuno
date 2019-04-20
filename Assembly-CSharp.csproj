@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BDC298AF-122F-CEBB-5C8C-F48034EF1603}</ProjectGuid>
+    <ProjectGuid>{E6B78F19-B93C-F2AF-0379-92BFA9D96DFA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -71,31 +71,34 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\ShaderScripts\PaletteSwap.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\Sounds.cs" />
+     <None Include="Assets\Scripts\ShaderScripts\PaletteSwap.shader" />
+     <None Include="Assets\Scripts\ShaderScripts\KillLineShader.shader" />
  <Reference Include="Cinemachine">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/ProjectJuno-master/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

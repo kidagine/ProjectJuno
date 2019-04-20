@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject aimRay;
 	public PlayerAimRayCast playerAimRay;
 	public PlayerStats playerStats;
+	public Tilemap tilemapTest;
 
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
