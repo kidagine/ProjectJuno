@@ -53,7 +53,7 @@ public class PauseManager : MonoBehaviour {
 		resumeButton.Select();
 		pauseMenuUI.SetActive(false);
 		generalMenuUI.SetActive(false);	
-		Time.timeScale = 1;
+		Time.timeScale = 0.2f;
 		GameIsPaused = false;
 	}
 

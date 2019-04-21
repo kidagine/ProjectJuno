@@ -31,7 +31,6 @@ public class PlayerStats : MonoBehaviour
 	void Start()
 	{
 		playerMovement = gameObject.GetComponent<PlayerMovement>();
-		//pixelBoy = gameObject.GetComponent<PixelBoy>();
 		currentHealthSlider.maxValue = health;
 	}
 
@@ -77,10 +76,7 @@ public class PlayerStats : MonoBehaviour
 		}
 		if (health <= 0)
 		{
-			FindObjectOfType<AudioManager>().Play("Death");
-			Instantiate(playerDeathPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
-			pixelBoy.DecreaseResolution(3);
-			Destroy(gameObject);
+			Dead(); 
 		}
 	}
 
@@ -89,6 +85,14 @@ public class PlayerStats : MonoBehaviour
 		yield return new WaitForSeconds(0.225f);
 		playerRigidbody.velocity = Vector2.zero;
 		playerMovement.isMoving = false;
+	}
+
+	public void Dead()
+	{
+		FindObjectOfType<AudioManager>().Play("Death");
+		Instantiate(playerDeathPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+		pixelBoy.DecreaseResolution(3);
+		Destroy(gameObject);
 	}
 
 	//LEVEL

@@ -96,9 +96,14 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onBottomWall = true;
 		}
+
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
 		if (other.gameObject.CompareTag("KillLine"))
 		{
-			Destroy(gameObject, 1F);
+			playerStats.Dead();
 		}
 	}
 

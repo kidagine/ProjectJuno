@@ -78,6 +78,7 @@ public class PlayerAim : MonoBehaviour {
 	{
 		Vector2 direction = Vector2.zero;
 		Vector2 directionOutBounds = Vector2.zero;
+
 		//Using Mouse
 		if (!PauseManager.isUsingController)
 		{
