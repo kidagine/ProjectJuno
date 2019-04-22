@@ -6,11 +6,11 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public Rigidbody2D rb;
-	public GameObject aimRay;
 	public PlayerAimRayCast playerAimRay;
 	public PlayerStats playerStats;
-	public Tilemap tilemapTest;
+	public Rigidbody2D rb;
+	public GameObject aimRay;
+	public GameObject playerAimPoint;
 
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
@@ -74,24 +74,28 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("RightWall"))
 		{
+			transform.rotation = Quaternion.Euler(0, 0, 90);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onRightWall = true;
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
+			transform.rotation = Quaternion.Euler(0, 0, 270);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onLeftWall = true;
 		}
 		if (other.gameObject.CompareTag("TopWall"))
 		{
+			transform.rotation = Quaternion.Euler(0, 0, 0);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onTopWall = true;
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
+			transform.rotation = Quaternion.Euler(0, 0, 180);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onBottomWall = true;
@@ -112,7 +116,7 @@ public class PlayerMovement : MonoBehaviour {
 		FindObjectOfType<AudioManager>().Play("Dash");
 		playerAimRay.ResetIsMovePossible();
 		ClearWallBools();
-		rb.velocity = transform.up * speed;
+		rb.velocity = playerAimPoint.transform.up * speed;
 		aimRay.SetActive(false);
 		isMoving = true;
 		playerStats.playerShield.SetActive(false);

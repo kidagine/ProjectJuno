@@ -7,20 +7,20 @@ using UnityEngine.UI;
 public class PlayerAim : MonoBehaviour {
 
 	public PlayerStats playerStats;
+	public PlayerMovement playerMovement;
 	public CameraShaker cameraShaker;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
+	public SpriteRenderer playerSprite;
 	public Slider gunClipSlider;
 	public Animator gunClipSliderAnim;
 
-	private PlayerMovement playerMovement;
 	private float cooldown = 0.3f;
 	private int gunClip = 10;
 	private bool isReloading;
 
 	void Start()
 	{
-		playerMovement = gameObject.GetComponent<PlayerMovement>();
 		gunClipSlider.maxValue = gunClip;
 		gunClipSlider.value = gunClip;
 	}
@@ -29,6 +29,7 @@ public class PlayerAim : MonoBehaviour {
 	{
 		PointingGun();
 		Shooting();
+
 		cooldown -= Time.deltaTime;
 	}
 
@@ -106,6 +107,7 @@ public class PlayerAim : MonoBehaviour {
 			{
 				DirectionOutOfBoundsHorizontal(direction, directionOutBounds);
 			}
+			FlipPlayerOnHorizontal(direction);
 		}
 		else if (playerMovement.onLeftWall)
 		{
@@ -117,6 +119,7 @@ public class PlayerAim : MonoBehaviour {
 			{
 				DirectionOutOfBoundsHorizontal(direction, directionOutBounds);
 			}
+			FlipPlayerOnHorizontal(direction);
 		}
 		else if (playerMovement.onTopWall)
 		{
@@ -128,6 +131,7 @@ public class PlayerAim : MonoBehaviour {
 			{
 				DirectionOutOfBoundsVertical(direction, directionOutBounds);
 			}
+			FlipPlayerOnVertical(direction);
 		}
 		else if (playerMovement.onBottomWall)
 		{
@@ -139,11 +143,28 @@ public class PlayerAim : MonoBehaviour {
 			{
 				DirectionOutOfBoundsVertical(direction, directionOutBounds);
 			}
+			FlipPlayerOnVertical(direction);
 		}
 		else
 		{
 			transform.up = direction;
 		}
+	}
+
+	private void FlipPlayerOnVertical(Vector2 direction)
+	{
+		if (direction.x <= 0.1)
+			playerSprite.flipX = true;
+		else if (direction.x >= 0.1)
+			playerSprite.flipX = false;
+	}
+
+	private void FlipPlayerOnHorizontal(Vector2 direction)
+	{
+		if (direction.y <= 0.1)
+			playerSprite.flipX = true;
+		else if (direction.y >= 0.1)
+			playerSprite.flipX = false;
 	}
 
 	private void DirectionOutOfBoundsHorizontal(Vector2 direction, Vector2 directionOutBounds)
