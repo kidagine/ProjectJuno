@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour
 	public Text levelText;
 	public CameraShaker cameraShaker;
 	public PixelBoy pixelBoy;
-	public Animator animator;
+	public Animator animatorPlayer;
 	public Animator animatorExpReceivedText;
 	public int health = 3;
 
@@ -72,7 +72,7 @@ public class PlayerStats : MonoBehaviour
 				currentHealthSlider.value = health;
 				currentHealthTxt.text = health + "";
 				vulnerabilityCooldown = 0.45f;
-				animator.SetTrigger("Hit");
+				animatorPlayer.SetTrigger("Hit");
 		}
 		if (health <= 0)
 		{

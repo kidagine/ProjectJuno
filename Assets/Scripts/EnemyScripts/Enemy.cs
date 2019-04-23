@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour {
 			Instantiate(enemyDeathPrefab, new Vector2(transform.position.x, transform.position.y+0.7f), Quaternion.identity);
 			Destroy(gameObject);
 		}
-		Invoke("ResetColor", 0.2f);
+		Invoke("ResetColor", 0.1f);
 	}
 
 	void ResetColor()

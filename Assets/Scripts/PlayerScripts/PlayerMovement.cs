@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody2D rb;
 	public GameObject aimRay;
 	public GameObject playerAimPoint;
+	public GameObject dashEffectPrefab;
+	public Animator animatorPlayer;
 
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
@@ -74,6 +76,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("RightWall"))
 		{
+			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 90);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
@@ -81,6 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
+			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 270);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
@@ -88,6 +92,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("TopWall"))
 		{
+			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
@@ -95,6 +100,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
+			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 180);
 			rb.velocity = Vector2.zero;
 			isMoving = false;
@@ -114,6 +120,8 @@ public class PlayerMovement : MonoBehaviour {
 	private void ResetMovement()
 	{
 		FindObjectOfType<AudioManager>().Play("Dash");
+		animatorPlayer.SetTrigger("Dash");
+		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRay.ResetIsMovePossible();
 		ClearWallBools();
 		rb.velocity = playerAimPoint.transform.up * speed;

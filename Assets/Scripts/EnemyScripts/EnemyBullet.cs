@@ -25,7 +25,7 @@ public class EnemyBullet : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		//Explode when colliding with anything except the layer to be ignored
-		if (!(other.gameObject.layer == 5))
+		if (!(other.gameObject.layer == 2))
 		{
 			speed = 0;
 			Instantiate(shotExplode, transform.position, transform.rotation);
@@ -33,6 +33,8 @@ public class EnemyBullet : MonoBehaviour {
 			if (other.name.Equals("PlayerShield"))
 				other.gameObject.SetActive(false);
 		}
+		if (other.gameObject.CompareTag("Wall"))
+			FindObjectOfType<AudioManager>().Play("Hit");
 	}
 
 }
