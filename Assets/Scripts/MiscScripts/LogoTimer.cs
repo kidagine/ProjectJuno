@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LogoTimer : MonoBehaviour {
 
-	void Start () {
-		Invoke("ChangeScene", 5f);
+	public int timer;
+
+	void Start ()
+	{
+		Invoke("ChangeScene", timer);
 	}
 
 	void ChangeScene()

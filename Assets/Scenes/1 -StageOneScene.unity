@@ -5095,7 +5095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1111241504
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8367,6 +8367,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 519420034}
   resumeButton: {fileID: 730602627}
   pixelBoy: {fileID: 519420033}
+  indexOfSceneToLoad: 2
 --- !u!1 &1338453734
 GameObject:
   m_ObjectHideFlags: 0

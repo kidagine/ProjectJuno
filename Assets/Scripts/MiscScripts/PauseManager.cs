@@ -19,6 +19,7 @@ public class PauseManager : MonoBehaviour {
 	public AudioSource backgroundMusic;
 	public Button resumeButton;
 	public PixelBoy pixelBoy;
+	public int indexOfSceneToLoad;
 
 	private bool isBackgroundMusicOn = true;
 	private bool hasBegun = false;
@@ -144,7 +145,7 @@ public class PauseManager : MonoBehaviour {
 	{
 		gameOverUi.SetActive(true);
 		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		SceneManager.LoadScene(indexOfSceneToLoad);
 		GameIsOver = false;
 	}
 

@@ -5,8 +5,8 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour {
 
 	public GameObject DialoguePromptButton;
-	public int indexSkipTo;
 	public Dialogue dialogue;
+	public int indexSkipTo;
 
 	public bool hasDialogueStarted;
 	private bool hasDialogueBeenSaid;
