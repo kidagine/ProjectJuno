@@ -106,6 +106,16 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onBottomWall = true;
 		}
+		if (other.gameObject.CompareTag("Wall"))
+		{
+			Vector2 dir = (transform.position - other.transform.position).normalized;
+			Debug.Log(dir);
+			transform.rotation = Quaternion.Euler(0, 0, 180);
+			rb.velocity = Vector2.zero;
+			isMoving = false;
+			onLeftWall = true;
+			gameObject.transform.parent = other.gameObject.transform;
+		}
 
 	}
 
@@ -121,6 +131,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
+		gameObject.transform.parent = null;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRay.ResetIsMovePossible();
 		ClearWallBools();

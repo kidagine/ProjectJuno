@@ -708,7 +708,7 @@ MonoBehaviour:
   - Hey kid
   - Are you there?
   - Wake up kid
-  - Kid wake up
+  - Wake up
   - Wake up
   - '  WAKE UP!'
 --- !u!1 &1646350859
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b8a91b98e2f0440a0389d3497f8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 19
+  timer: 19.3
 --- !u!1 &1707100830
 GameObject:
   m_ObjectHideFlags: 0

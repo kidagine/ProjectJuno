@@ -22,16 +22,17 @@ public class PlayerStats : MonoBehaviour
 
 	private PlayerMovement playerMovement;
 	private float vulnerabilityCooldown = 0.3f;
-	private int level = 1;
+	private int level = 2;
 	private int currentExpTotal;
 	private bool hasReceivedExp;
 	private bool isExpSliderIncreasing;
-	//private PixelBoy pixelBoy;
 
 	void Start()
 	{
 		playerMovement = gameObject.GetComponent<PlayerMovement>();
 		currentHealthSlider.maxValue = health;
+		level = PlayerPrefs.GetInt("level", level);
+		levelText.text = level + "";
 	}
 
 	void Update()
@@ -92,6 +93,7 @@ public class PlayerStats : MonoBehaviour
 		FindObjectOfType<AudioManager>().Play("Death");
 		Instantiate(playerDeathPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
 		pixelBoy.DecreaseResolution(3);
+		PlayerPrefs.SetInt("level", level);
 		Destroy(gameObject);
 	}
 

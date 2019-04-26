@@ -3104,6 +3104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   w: 320
 --- !u!82 &519420034
 AudioSource:
@@ -7564,6 +7567,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 519420034}
   resumeButton: {fileID: 730602627}
   pixelBoy: {fileID: 519420033}
+  indexOfSceneToLoad: 0
 --- !u!1 &1338453734
 GameObject:
   m_ObjectHideFlags: 0
@@ -10944,7 +10948,7 @@ MonoBehaviour:
   levelText: {fileID: 1748479558}
   cameraShaker: {fileID: 102132736}
   pixelBoy: {fileID: 519420033}
-  animator: {fileID: 1758468202}
+  animatorPlayer: {fileID: 0}
   animatorExpReceivedText: {fileID: 1715144591}
   health: 3
 --- !u!114 &1758468207
@@ -10963,6 +10967,9 @@ MonoBehaviour:
   rb: {fileID: 1758468205}
   aimRay: {fileID: 1533133519}
   playerAimPoint: {fileID: 2122145434}
+  dashEffectPrefab: {fileID: 1484230862077316, guid: 456c01f91a077f14d92c9439d5bc939a,
+    type: 2}
+  animatorPlayer: {fileID: 1758468202}
   isMoving: 0
   speed: 18
   onRightWall: 0

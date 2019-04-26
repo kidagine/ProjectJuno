@@ -1339,6 +1339,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   w: 2
 --- !u!82 &519420034
 AudioSource:
@@ -4651,7 +4654,7 @@ MonoBehaviour:
   levelText: {fileID: 1748479558}
   cameraShaker: {fileID: 102132736}
   pixelBoy: {fileID: 519420033}
-  animator: {fileID: 1210345028}
+  animatorPlayer: {fileID: 1210345028}
   animatorExpReceivedText: {fileID: 0}
   health: 3
 --- !u!114 &1210345033
@@ -4670,6 +4673,9 @@ MonoBehaviour:
   rb: {fileID: 1210345031}
   aimRay: {fileID: 1317550601}
   playerAimPoint: {fileID: 505353654}
+  dashEffectPrefab: {fileID: 1484230862077316, guid: 456c01f91a077f14d92c9439d5bc939a,
+    type: 2}
+  animatorPlayer: {fileID: 1210345028}
   isMoving: 0
   speed: 18
   onRightWall: 0
@@ -5509,6 +5515,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 519420034}
   resumeButton: {fileID: 730602627}
   pixelBoy: {fileID: 519420033}
+  indexOfSceneToLoad: 0
 --- !u!1 &1295421326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,7 +5631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialoguePromptButton: {fileID: 437520845}
-  indexSkipTo: 14
   dialogue:
     name: Atmos
     sentences:
@@ -5643,6 +5649,7 @@ MonoBehaviour:
     - 'Atmos: It''s not like I can go anywhere else hehe.'
     - 'Atmos: I can make some adjustments, as long as you improve.'
     - 'Atmos: Now good luck out there kid, to the sky!'
+  indexSkipTo: 14
   hasDialogueStarted: 0
 --- !u!95 &1295421331
 Animator:

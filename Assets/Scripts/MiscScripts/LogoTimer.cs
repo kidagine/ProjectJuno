@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LogoTimer : MonoBehaviour {
 
-	public int timer;
+	public float timer;
 
 	void Start ()
 	{
@@ -16,4 +16,5 @@ public class LogoTimer : MonoBehaviour {
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
+
 }
