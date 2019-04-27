@@ -4,23 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerAim : MonoBehaviour {
+public class PlayerAim : MonoBehaviour
+{
 
 	public PlayerStats playerStats;
 	public PlayerMovement playerMovement;
 	public CameraShaker cameraShaker;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
+	public GameObject beam;
 	public SpriteRenderer playerSprite;
 	public Slider gunClipSlider;
 	public Animator gunClipSliderAnim;
+	public bool isMovePossible = true;
 
 	private float cooldown = 0.3f;
+	private float limit = 0f;
 	private int gunClip = 10;
 	private bool isReloading;
+	private bool isRotatable;
 
 	void Start()
 	{
+		isMovePossible = true;
 		gunClipSlider.maxValue = gunClip;
 		gunClipSlider.value = gunClip;
 	}
@@ -61,7 +67,7 @@ public class PlayerAim : MonoBehaviour {
 			isReloading = true;
 			FindObjectOfType<AudioManager>().Play("Reload");
 			gunClipSliderAnim.enabled = true;
-			gunClipSliderAnim.Play("Reload" ,- 1, 0f);
+			gunClipSliderAnim.Play("Reload", -1, 0f);
 			StartCoroutine(Reload());
 		}
 
@@ -145,6 +151,20 @@ public class PlayerAim : MonoBehaviour {
 			}
 			FlipPlayerOnVertical(direction);
 		}
+		else if (playerMovement.onRotatable)
+		{
+			if (!isRotatable)
+			{
+				transform.up = direction;
+				isMovePossible = true;
+			}
+			else
+			{
+				transform.up = direction;
+				isMovePossible = false;
+				beam.SetActive(false);
+			}
+		}
 		else
 		{
 			transform.up = direction;
@@ -181,6 +201,20 @@ public class PlayerAim : MonoBehaviour {
 		float directionOutBoundsX = direction.x;
 		directionOutBounds = new Vector2(directionOutBoundsX, directionOutBoundsY);
 		transform.up = directionOutBounds;
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (playerMovement.onRotatable)
+		{
+			isRotatable = true;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		isRotatable = false;
+		Debug.Log(isRotatable);
 	}
 
 }

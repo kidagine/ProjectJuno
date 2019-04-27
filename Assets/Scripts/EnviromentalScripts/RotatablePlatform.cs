@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class RotatablePlatform : MonoBehaviour {
 
-	public GameObject player;
-
-	void Start()
-	{
-
-	}
-
+	public float rotationSpeed;
+	
 	void Update ()
 	{
-		transform.Rotate(0, 0, 1);
+		transform.Rotate(0, 0, rotationSpeed);
 	}
 }

@@ -53,11 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Camera\CameraShaker.cs" />
-     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
-     <Compile Include="Assets\Scripts\Dialogue\DialogueCutscene.cs" />
-     <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
-     <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\CameraShaker.cs" />
+     <Compile Include="Assets\Scripts\DialogueScripts\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\DialogueScripts\DialogueCutscene.cs" />
+     <Compile Include="Assets\Scripts\DialogueScripts\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\DialogueScripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnviromentalScripts\RotatablePlatform.cs" />
@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\MiscScripts\LogoTimer.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
+     <Compile Include="Assets\Scripts\ParticleScripts\DashEffect.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerBullet.cs" />

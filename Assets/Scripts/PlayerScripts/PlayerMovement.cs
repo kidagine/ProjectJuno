@@ -6,8 +6,9 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public PlayerAimRayCast playerAimRay;
+	public PlayerAimRayCast playerAimRayCast;
 	public PlayerStats playerStats;
+	public PlayerAim playerAim;
 	public Rigidbody2D rb;
 	public GameObject aimRay;
 	public GameObject playerAimPoint;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	[HideInInspector] public bool onLeftWall;
 	[HideInInspector] public bool onTopWall;
 	[HideInInspector] public bool onBottomWall;
+	[HideInInspector] public bool onRotatable;
 
 
 	void Start ()
@@ -40,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					aimRay.SetActive(true);
 				}
-				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRay.IsMovePossible())
+				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRayCast.IsMovePossible() && playerAim.isMovePossible)
 				{
 					ResetMovement();
 				}
@@ -56,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					aimRay.SetActive(true);
 				}
-				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRay.IsMovePossible())
+				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRayCast.IsMovePossible())
 				{
 					ResetMovement();
 				}
@@ -108,13 +110,10 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("Wall"))
 		{
-			Vector2 dir = (transform.position - other.transform.position).normalized;
-			Debug.Log(dir);
-			transform.rotation = Quaternion.Euler(0, 0, 180);
+			transform.parent = other.gameObject.transform;
 			rb.velocity = Vector2.zero;
 			isMoving = false;
-			onLeftWall = true;
-			gameObject.transform.parent = other.gameObject.transform;
+			onRotatable = true;
 		}
 
 	}
@@ -133,7 +132,7 @@ public class PlayerMovement : MonoBehaviour {
 		animatorPlayer.SetTrigger("Dash");
 		gameObject.transform.parent = null;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
-		playerAimRay.ResetIsMovePossible();
+		playerAimRayCast.ResetIsMovePossible();
 		ClearWallBools();
 		rb.velocity = playerAimPoint.transform.up * speed;
 		aimRay.SetActive(false);
@@ -147,5 +146,6 @@ public class PlayerMovement : MonoBehaviour {
 		onLeftWall = false;
 		onTopWall = false;
 		onBottomWall = false;
+		onRotatable = false;
 	}
 }
