@@ -19,7 +19,6 @@ public class PlayerAim : MonoBehaviour
 	public bool isMovePossible = true;
 
 	private float cooldown = 0.3f;
-	private float limit = 0f;
 	private int gunClip = 10;
 	private bool isReloading;
 	private bool isRotatable;

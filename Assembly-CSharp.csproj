@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\DialogueScripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\DialogueScripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\EnemyScripts\EnemyAutoAim.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnviromentalScripts\RotatablePlatform.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\MiscScripts\LogoTimer.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\StoryEvent.cs" />
      <Compile Include="Assets\Scripts\ParticleScripts\DashEffect.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />

@@ -9,10 +9,11 @@ public class Enemy : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public Transform firePoint;
 	public SpriteRenderer sprite;
+	public int health = 5;
+
 
 	private Color enemyColor;
 	private float cooldown = 0.8f;
-	private int health = 5;
 	private int expValue = 1;
 
 	void Start()
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour {
 		cooldown -= Time.deltaTime;
 	}
 
-	void Shoot()
+	public virtual void Shoot()
 	{
 		FindObjectOfType<AudioManager>().Play("Shot");
 		Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
