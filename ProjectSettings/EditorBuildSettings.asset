@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/0 -LogoScene.unity
     guid: 9102af9dbfa662e4e897a08b29cbab64
   - enabled: 1
-    path: Assets/Scenes/1 -StageOneScene.unity
+    path: Assets/Scenes/1 -GamePreIntroScene.unity
+    guid: f1bec7f4fc6d57c46979341f0ea7d46e
+  - enabled: 1
+    path: Assets/Scenes/2 -StageIntroScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/2 -GameIntroScene.unity
+    path: Assets/Scenes/3 -GameIntroScene.unity
     guid: 65bcd08f4fc42c04885df5fe68918890
   - enabled: 1
-    path: Assets/Scenes/3 -StageHubScene.unity
+    path: Assets/Scenes/4 -StageHubScene.unity
     guid: e83ba66efff780f45849d76065452141
   m_configObjects: {}

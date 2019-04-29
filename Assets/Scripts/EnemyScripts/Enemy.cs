@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour {
 	public SpriteRenderer sprite;
 	public int health = 5;
 
+	[HideInInspector] public float cooldown = 0.8f;
 
 	private Color enemyColor;
-	private float cooldown = 0.8f;
 	private int expValue = 1;
 
 	void Start()

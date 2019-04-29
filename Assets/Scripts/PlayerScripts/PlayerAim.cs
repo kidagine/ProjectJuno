@@ -213,7 +213,6 @@ public class PlayerAim : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D other)
 	{
 		isRotatable = false;
-		Debug.Log(isRotatable);
 	}
 
 }

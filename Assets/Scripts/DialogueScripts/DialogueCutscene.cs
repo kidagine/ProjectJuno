@@ -5,14 +5,18 @@ using UnityEngine.UI;
 public class DialogueCutscene : MonoBehaviour {
 
 	public Text cutsceneText;
-	public string[] sentences;
+	[TextArea] public string[] sentences;
+	public float sentencesSpeed;
+	public float[] speedarrays;
 
 	private Queue<string> sentenceQueue;
 	private int index;
+	private int speedIndex;
 	private string sentence;
 
 	void Start()
 	{
+		speedIndex = 0;
 		sentenceQueue = new Queue<string>();
 	}
 
@@ -24,10 +28,10 @@ public class DialogueCutscene : MonoBehaviour {
 			sentenceQueue.Enqueue(sentence);
 		}
 		index++;
-		DisplayNextSentence(index);
+		DisplayNextSentence(index, speedIndex);
 	}
 
-	private void DisplayNextSentence(int index)
+	private void DisplayNextSentence(int index, int speedIndex)
 	{
 		if (sentenceQueue.Count == 0)
 		{
@@ -38,17 +42,17 @@ public class DialogueCutscene : MonoBehaviour {
 			sentence = sentenceQueue.Dequeue();
 		}
 		StopAllCoroutines();
-		StartCoroutine(Type(sentence));
+		StartCoroutine(Type(sentence,speedIndex));
 	}
 
-	IEnumerator Type(string sentence)
+	IEnumerator Type(string sentence, int speedIndex)
 	{
 		cutsceneText.text = "";
 		foreach (char letter in sentence.ToCharArray())
 		{
 			FindObjectOfType<AudioManager>().Play("Typing");
 			cutsceneText.text += letter;
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(speedarrays[speedIndex]);
 		}
 	}
 }

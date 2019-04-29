@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyAutoAim : Enemy {
 
 	public GameObject player;
-	private float cooldown = 0.8f;
 	Vector2 direction;
 
 	void Update()
@@ -26,6 +25,5 @@ public class EnemyAutoAim : Enemy {
 	public override void Shoot()
 	{
 		base.Shoot();
-		Debug.Log("test");
 	}
 }
