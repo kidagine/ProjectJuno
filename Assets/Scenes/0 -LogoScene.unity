@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 879522366}
   - component: {fileID: 879522365}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: FadePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,4 +612,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b8a91b98e2f0440a0389d3497f8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paneFadeAnimator: {fileID: 879522365}
   timer: 6

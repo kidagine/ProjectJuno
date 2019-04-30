@@ -6,8 +6,7 @@ public class DialogueCutscene : MonoBehaviour {
 
 	public Text cutsceneText;
 	[TextArea] public string[] sentences;
-	public float sentencesSpeed;
-	public float[] speedarrays;
+	public float[] sentencesSpeed;
 
 	private Queue<string> sentenceQueue;
 	private int index;
@@ -16,7 +15,6 @@ public class DialogueCutscene : MonoBehaviour {
 
 	void Start()
 	{
-		speedIndex = 0;
 		sentenceQueue = new Queue<string>();
 	}
 
@@ -27,6 +25,7 @@ public class DialogueCutscene : MonoBehaviour {
 		{
 			sentenceQueue.Enqueue(sentence);
 		}
+		speedIndex++;
 		index++;
 		DisplayNextSentence(index, speedIndex);
 	}
@@ -49,10 +48,10 @@ public class DialogueCutscene : MonoBehaviour {
 	{
 		cutsceneText.text = "";
 		foreach (char letter in sentence.ToCharArray())
-		{
+		{	
 			FindObjectOfType<AudioManager>().Play("Typing");
 			cutsceneText.text += letter;
-			yield return new WaitForSeconds(speedarrays[speedIndex]);
+			yield return new WaitForSeconds(sentencesSpeed[speedIndex-1]);
 		}
 	}
 }

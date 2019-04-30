@@ -290,7 +290,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 701594e7bbc7e9d418c841ab06d317f8, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 879522366}
   - component: {fileID: 879522365}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,12 +640,11 @@ MonoBehaviour:
 
     But as his eyes opened
 
-    He felt the wings in his eyes'
-  - Now Fly!
-  sentencesSpeed: 0.05
-  speedarrays:
-  - 1.67
-  - 0
+    He felt the wings in his shoulders'
+  - Now up to the sky
+  sentencesSpeed:
+  - 0.1
+  - 0.1
 --- !u!1 &1646350859
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b8a91b98e2f0440a0389d3497f8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 19.3
+  paneFadeAnimator: {fileID: 879522365}
+  timer: 19
 --- !u!1 &1707100830
 GameObject:
   m_ObjectHideFlags: 0

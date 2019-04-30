@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		onTopWall = true;
 		aimRay.SetActive(false);
+		ResetMovement();
 	}
 
 	void Update()
