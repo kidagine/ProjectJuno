@@ -48,10 +48,17 @@ public class DialogueCutscene : MonoBehaviour {
 	{
 		cutsceneText.text = "";
 		foreach (char letter in sentence.ToCharArray())
-		{	
-			FindObjectOfType<AudioManager>().Play("Typing");
-			cutsceneText.text += letter;
-			yield return new WaitForSeconds(sentencesSpeed[speedIndex-1]);
+		{
+			if (letter.Equals('.'))
+			{
+				yield return new WaitForSeconds(0.6f);
+			}
+			else
+			{
+				FindObjectOfType<AudioManager>().Play("Typing");
+				cutsceneText.text += letter;
+				yield return new WaitForSeconds(sentencesSpeed[speedIndex - 1]);
+			}
 		}
 	}
 }

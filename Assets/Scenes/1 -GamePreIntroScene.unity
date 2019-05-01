@@ -634,11 +634,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneText: {fileID: 1614011275}
   sentences:
-  - 'And so the little kid fell in the void
+  - 'And so the little kid fell in the void.
 
-    Devoid of the world above
+    Devoid of the world above.
 
-    But as his eyes opened
+    But as his eyes opened.
 
     He felt the wings in his shoulders'
   - Now up to the sky
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paneFadeAnimator: {fileID: 879522365}
-  timer: 19
+  timer: 21
 --- !u!1 &1707100830
 GameObject:
   m_ObjectHideFlags: 0
