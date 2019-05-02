@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour {
 
@@ -13,14 +14,16 @@ public class PauseManager : MonoBehaviour {
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
 	public GameObject gameOverUi;
+	public Button resumeButton;
+	public Button bgmButton;
 	public Text backgroundMusicText;
 	public Text inputText;
 	public Text fullscreenText;
 	public AudioSource backgroundMusic;
-	public Button resumeButton;
 	public PixelBoy pixelBoy;
 	public int indexOfSceneToLoad;
 
+	private Button currentlySelectedButton;
 	private bool isBackgroundMusicOn = true;
 	private bool hasBegun = false;
 
@@ -46,14 +49,22 @@ public class PauseManager : MonoBehaviour {
 		{
 			BeginGame();
 		}
+
+		if (pauseMenuUI.activeSelf)
+		{
+			if (EventSystem.current.currentSelectedGameObject == null)
+			{
+				if(currentlySelectedButton != null)
+				currentlySelectedButton.Select();
+			}
+		}
 	}
 
 	public void Resume()
 	{
 		FindObjectOfType<AudioManager>().Play("Click");
-		resumeButton.Select();
 		pauseMenuUI.SetActive(false);
-		generalMenuUI.SetActive(false);	
+		generalMenuUI.SetActive(false);
 		Time.timeScale = 1;
 		GameIsPaused = false;
 	}
@@ -65,6 +76,7 @@ public class PauseManager : MonoBehaviour {
 		generalMenuUI.SetActive(true);
 		optionsMenuUI.SetActive(false);
 		Time.timeScale = 0;
+		resumeButton.Select();
 		GameIsPaused = true;
 	}
 
@@ -78,6 +90,7 @@ public class PauseManager : MonoBehaviour {
 	{
 		generalMenuUI.SetActive(false);
 		optionsMenuUI.SetActive(true);
+		bgmButton.Select();
 	}
 
 	public void BackgroundMusic()
@@ -133,14 +146,20 @@ public class PauseManager : MonoBehaviour {
 		}
 	}
 
-	public void Hover()
+	public void Hover(Button button)
 	{
+		currentlySelectedButton = null;
+		currentlySelectedButton = button;
+		FindObjectOfType<AudioManager>().Play("Hover");
+	}
+
+	public void Select(Button button)
+	{
+		currentlySelectedButton = button;
 		FindObjectOfType<AudioManager>().Play("Hover");
 	}
 
 	//GameState
-
-
 	IEnumerator EndGame()
 	{
 		gameOverUi.SetActive(true);

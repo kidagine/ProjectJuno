@@ -25,8 +25,10 @@ public class StoryTriggerIntroStageOne : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
+			FindObjectOfType<AudioManager>().Play("Impact");
 			backgroundMusic.Play();
 			UIPlayerAnim.SetTrigger("FadeIn");
+			Destroy(gameObject);
 		}
 	}
 }

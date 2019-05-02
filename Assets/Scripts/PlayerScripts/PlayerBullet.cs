@@ -8,6 +8,7 @@ public class PlayerBullet : MonoBehaviour
 	public int speed;
 	public Rigidbody2D rb;
 	public GameObject shotExplode;
+	public GameObject shotWall;
 
 	void Start()
 	{
@@ -30,6 +31,7 @@ public class PlayerBullet : MonoBehaviour
 		{
 		speed = 0;
 		Instantiate(shotExplode, transform.position, transform.rotation);
+		Instantiate(shotWall, transform.position, transform.rotation);
 		Destroy(gameObject);
 		}
 

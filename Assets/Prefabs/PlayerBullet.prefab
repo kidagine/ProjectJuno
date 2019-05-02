@@ -103,6 +103,7 @@ MonoBehaviour:
   rb: {fileID: 50941671711642774}
   shotExplode: {fileID: 1445632973477774, guid: 4b57da9df2775af4e80a49a26a9c42ea,
     type: 2}
+  shotWall: {fileID: 1162778911705282, guid: 47c6b75848f00ee46bc588368ffdad4d, type: 2}
 --- !u!212 &212061341318485264
 SpriteRenderer:
   m_ObjectHideFlags: 1

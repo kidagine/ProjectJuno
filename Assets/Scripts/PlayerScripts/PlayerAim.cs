@@ -88,7 +88,7 @@ public class PlayerAim : MonoBehaviour
 		//Using Mouse
 		if (!PauseManager.isUsingController)
 		{
-			Vector3 mousePos = Input.mousePosition;
+			Vector2 mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 			direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
 		}
