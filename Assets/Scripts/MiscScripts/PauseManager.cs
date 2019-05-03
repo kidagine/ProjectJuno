@@ -23,9 +23,21 @@ public class PauseManager : MonoBehaviour {
 	public PixelBoy pixelBoy;
 	public int indexOfSceneToLoad;
 
-	private Button currentlySelectedButton;
+	private GameObject currentlySelectedButton;
+	private GameObject currentlySelectedHoverButton;
+	private Button test;
+	private Color highlightButtonColor;
+	private Color whiteColor;
+	private ColorBlock colorBlock;
 	private bool isBackgroundMusicOn = true;
 	private bool hasBegun = false;
+	private bool hasHovered = false;
+
+	void Start()
+	{
+		ColorUtility.TryParseHtmlString("#828282", out highlightButtonColor);
+		ColorUtility.TryParseHtmlString("#ffffff", out whiteColor);
+	}
 
 	//PauseState
 	void Update ()
@@ -52,10 +64,12 @@ public class PauseManager : MonoBehaviour {
 
 		if (pauseMenuUI.activeSelf)
 		{
-			if (EventSystem.current.currentSelectedGameObject == null)
+			if (EventSystem.current.currentSelectedGameObject == null && hasHovered == false)
 			{
-				if(currentlySelectedButton != null)
-				currentlySelectedButton.Select();
+				if (currentlySelectedButton != null)
+				{
+					EventSystem.current.SetSelectedGameObject(currentlySelectedButton);
+				}
 			}
 		}
 	}
@@ -146,15 +160,23 @@ public class PauseManager : MonoBehaviour {
 		}
 	}
 
-	public void Hover(Button button)
+	public void Hover(GameObject button)
 	{
-		currentlySelectedButton = null;
+		hasHovered = true;
+		Button buttonHightlight = button.GetComponent<Button>();
+		test = buttonHightlight;
+		colorBlock = buttonHightlight.colors;
+		colorBlock.highlightedColor = whiteColor;
+		buttonHightlight.colors = colorBlock;
 		currentlySelectedButton = button;
-		FindObjectOfType<AudioManager>().Play("Hover");
+		EventSystem.current.SetSelectedGameObject(currentlySelectedButton);	
 	}
 
-	public void Select(Button button)
+	public void Select(GameObject button)
 	{
+		test.Select();
+		colorBlock.highlightedColor = highlightButtonColor;
+		hasHovered = false;
 		currentlySelectedButton = button;
 		FindObjectOfType<AudioManager>().Play("Hover");
 	}
