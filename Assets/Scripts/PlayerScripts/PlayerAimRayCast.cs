@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class PlayerAimRayCast : MonoBehaviour {
 
-	public GameObject arrowAim;
+	public PlayerMovement playerMovement;
+	public PlayerAimRayCastActive playerAimRayCastActive;
+	public GameObject playerAimRayCastChild;
 	public float distance;
+	public bool isTouching;
+
+	[HideInInspector] public Vector3 currentTargetPosition;
+	[HideInInspector] public Vector3 lastTargetPosition;
 
 	private LineRenderer lineRenderer;
 	private Color activeAimColor;
 	private Color disabledAimColor;
 	private bool isMove;
+	private bool isMovePossible;
 
 	void Awake()
 	{
@@ -25,7 +32,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 	}
 
 	void Update()
-	{	
+	{
 		lineRenderer.SetPosition(0, gameObject.transform.position);
 		Ray2D ray = new Ray2D(transform.position, transform.up);
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
@@ -33,48 +40,56 @@ public class PlayerAimRayCast : MonoBehaviour {
 		{
 			if (hit.collider.CompareTag("IgnoreRaycast"))
 			{
-				arrowAim.SetActive(false);
 				lineRenderer.SetPosition(1, hit.point);
 				lineRenderer.material.color = disabledAimColor;
-				isMove = false;
+				isTouching = false;
+				if (isMovePossible)
+					isMove = true;
+				else
+					isMove = false;
 			}
 			else
 			{
-				SetArrowRotation(hit);
-				arrowAim.SetActive(true);
-				arrowAim.transform.position = hit.point;
 				lineRenderer.SetPosition(1, hit.point);
 				lineRenderer.material.color = activeAimColor;
+				currentTargetPosition = hit.point;
+				isTouching = true;
 				isMove = true;
+				isMovePossible = true;
 			}
 		}
 		else
 		{
-			arrowAim.SetActive(false);
 			lineRenderer.SetPosition(1, ray.GetPoint(distance));
 			lineRenderer.material.color = disabledAimColor;
-			isMove = false;
+			isTouching = false;
+			if (isMovePossible)
+			{
+				isMove = true;
+			}
+			else
+			{
+				isMove = false;
+			}
 		}
-	}
 
-	private void SetArrowRotation(RaycastHit2D hit)
-	{
-		if (hit.collider.CompareTag("LeftWall"))
+		float distanceToChild = Vector3.Distance(gameObject.transform.position, playerAimRayCastChild.transform.position);
+
+		if (isMovePossible)
 		{
-			arrowAim.transform.eulerAngles = new Vector3(0, 0, 90);
+			isMove = true;
+			playerAimRayCastChild.SetActive(true);
 		}
-		if (hit.collider.CompareTag("RightWall"))
+		else
 		{
-			arrowAim.transform.eulerAngles = new Vector3(0, 0, 270);
+			isMove = false;
+			playerAimRayCastChild.SetActive(false);
 		}
-		if (hit.collider.CompareTag("TopWall"))
-		{
-			arrowAim.transform.eulerAngles = new Vector3(0, 0, 180);
-		}
-		if (hit.collider.CompareTag("BottomWall"))
-		{
-			arrowAim.transform.eulerAngles = new Vector3(0, 0, 0);
-		}
+
+		if (playerMovement.isMoving)
+			lastTargetPosition = currentTargetPosition;
+		if (lastTargetPosition == currentTargetPosition)
+			isMove = false;
 	}
 
 	public bool IsMovePossible()
@@ -87,13 +102,10 @@ public class PlayerAimRayCast : MonoBehaviour {
 		isMove = false;
 		IsMovePossible();
 	}
-	void OnDisable()
-	{
-		arrowAim.SetActive(false);
-	}
 
 	void OnEnable()
 	{
+		isMovePossible = false;
 		StartCoroutine(SetLineRendererEnabled());
 	}
 

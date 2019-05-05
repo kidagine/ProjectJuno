@@ -26,7 +26,6 @@ public class PauseManager : MonoBehaviour {
 	public int indexOfSceneToLoad;
 
 	private Button currentlySelectedButton;
-	private Button lastSelectedButton;
 	private Button currentlyHoveredButton;
 	private Text currentlySelectedText;
 	private Text lastSelectedText;
@@ -77,6 +76,10 @@ public class PauseManager : MonoBehaviour {
 	{
 		FindObjectOfType<AudioManager>().Play("Click");
 		animator.SetTrigger("Close");
+		if (isBackgroundMusicOn)
+			backgroundMusic.Play();
+		generalMenuUI.SetActive(false);
+		optionsMenuUI.SetActive(false);
 		Time.timeScale = 1;
 		GameIsPaused = false;
 	}
@@ -84,14 +87,20 @@ public class PauseManager : MonoBehaviour {
 	public void Pause()
 	{
 		FindObjectOfType<AudioManager>().Play("Click");
+		Invoke("ActivateGeneralMenu", 0.2f);
+		backgroundMusic.Pause();
 		pauseMenuUI.SetActive(true);
-		generalMenuUI.SetActive(true);	
+		generalMenuUI.SetActive(true);
 		optionsMenuUI.SetActive(false);
 		animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 		animator.SetTrigger("Open");
 		resumeButton.Select();
 		Time.timeScale = 0;
 		GameIsPaused = true;
+	}
+
+	private void ActivateGeneralMenu()
+	{
 	}
 
 	public void QuitGame()
@@ -117,7 +126,6 @@ public class PauseManager : MonoBehaviour {
 		}
 		else if (!isBackgroundMusicOn)
 		{
-			backgroundMusic.Play();
 			isBackgroundMusicOn = true;
 			backgroundMusicText.text = "bgm: on";
 		}
@@ -192,7 +200,6 @@ public class PauseManager : MonoBehaviour {
 
 		if (currentlySelectedButton != null)
 		{
-			lastSelectedButton = currentlySelectedButton;
 			lastSelectedText = currentlySelectedText;
 			lastSelectedText.color = Color.gray;
 		}

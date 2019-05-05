@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject dashEffectPrefab;
 	public Animator animatorPlayer;
 
+	[HideInInspector] public Vector3 lastTargetPosition;
 	[HideInInspector] public bool isMoving;
 	[HideInInspector] public int speed;
 
@@ -33,7 +34,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update()
 	{
-		if (!Input.GetButton("Fire1"))
+		if (isMoving)
+			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPosition, speed * Time.deltaTime);
+		if (!Input.GetButtonDown("Fire1"))
 		{
 			//Using KB/M
 			if (!PauseManager.isUsingController)
@@ -80,7 +83,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 90);
-			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onRightWall = true;
 		}
@@ -88,7 +90,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 270);
-			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onLeftWall = true;
 		}
@@ -96,7 +97,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 0);
-			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onTopWall = true;
 		}
@@ -104,14 +104,12 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 180);
-			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onBottomWall = true;
 		}
 		if (other.gameObject.CompareTag("Wall"))
 		{
 			transform.parent = other.gameObject.transform;
-			rb.velocity = Vector2.zero;
 			isMoving = false;
 			onRotatable = true;
 		}
@@ -134,9 +132,9 @@ public class PlayerMovement : MonoBehaviour {
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRayCast.ResetIsMovePossible();
 		ClearWallBools();
-		rb.velocity = playerAimPoint.transform.up * speed;
 		aimRay.SetActive(false);
 		isMoving = true;
+		lastTargetPosition = playerAimRayCast.currentTargetPosition;
 		playerStats.playerShield.SetActive(false);
 	}
 

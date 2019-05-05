@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\ParticleScripts\DashEffect.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCastActive.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerStats.cs" />

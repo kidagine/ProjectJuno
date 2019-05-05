@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2818f01b66cba9c429b65954bc68f207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   rb: {fileID: 50001091075790850}
   shotExplode: {fileID: 1445632973477774, guid: 4b57da9df2775af4e80a49a26a9c42ea,
     type: 2}
