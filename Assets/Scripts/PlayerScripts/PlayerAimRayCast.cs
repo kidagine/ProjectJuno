@@ -11,7 +11,9 @@ public class PlayerAimRayCast : MonoBehaviour {
 	public bool isTouching;
 
 	[HideInInspector] public Vector3 currentTargetPosition;
+	[HideInInspector] public Quaternion currentTargetRotation;
 	[HideInInspector] public Vector3 lastTargetPosition;
+	[HideInInspector] public Quaternion lastTargetRotation;
 
 	private LineRenderer lineRenderer;
 	private Color activeAimColor;
@@ -31,7 +33,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 		ColorUtility.TryParseHtmlString("#ffffff", out disabledAimColor);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		lineRenderer.SetPosition(0, gameObject.transform.position);
 		Ray2D ray = new Ray2D(transform.position, transform.up);
@@ -53,6 +55,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 				lineRenderer.SetPosition(1, hit.point);
 				lineRenderer.material.color = activeAimColor;
 				currentTargetPosition = hit.point;
+				currentTargetRotation = gameObject.transform.rotation;
 				isTouching = true;
 				isMove = true;
 				isMovePossible = true;
@@ -74,6 +77,10 @@ public class PlayerAimRayCast : MonoBehaviour {
 		}
 
 		float distanceToChild = Vector3.Distance(gameObject.transform.position, playerAimRayCastChild.transform.position);
+		if (distanceToChild > 0.3f && !isTouching)
+		{
+			isMovePossible = false;
+		}
 
 		if (isMovePossible)
 		{
@@ -87,7 +94,10 @@ public class PlayerAimRayCast : MonoBehaviour {
 		}
 
 		if (playerMovement.isMoving)
+		{
 			lastTargetPosition = currentTargetPosition;
+			lastTargetRotation = currentTargetRotation;
+		}
 		if (lastTargetPosition == currentTargetPosition)
 			isMove = false;
 	}

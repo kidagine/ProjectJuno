@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
 			//Using KB/M
 			if (!PauseManager.isUsingController)
 			{
-				if (Input.GetMouseButton(1))
+				if (Input.GetMouseButton(1) && !isMoving)
 				{
 					aimRay.SetActive(true);
 				}

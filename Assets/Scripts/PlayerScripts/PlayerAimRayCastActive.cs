@@ -31,7 +31,7 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 		ColorUtility.TryParseHtmlString("#ff006f", out disabledAimColor);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		lineRenderer.SetPosition(0, gameObject.transform.position);
 		Ray2D ray = new Ray2D(transform.position, transform.up);
@@ -40,21 +40,27 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 		{
 				SetArrowRotation(hit);
 				arrowAim.SetActive(true);
-				arrowAim.transform.position = hit.point;
-				lineRenderer.SetPosition(1, hit.point);
+				arrowAim.transform.position = playerAimRayCast.currentTargetPosition;
+				lineRenderer.SetPosition(1, playerAimRayCast.currentTargetPosition);
 				lineRenderer.material.color = activeAimColor;
 				currentTargetPosition = hit.point;
-		}
 
+		}
 		if (!playerAimRayCast.isTouching)
+		{
+
 			gameObject.transform.parent = null;
+
+		}
 		else
 		{
 			ResetPosition();
 		}
 
 		if (playerMovement.isMoving)
+		{
 			gameObject.SetActive(false);
+		}
 
 	}
 
