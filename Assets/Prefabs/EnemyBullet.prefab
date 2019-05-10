@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rb: {fileID: 50001091075790850}
-  shotExplode: {fileID: 1445632973477774, guid: 4b57da9df2775af4e80a49a26a9c42ea,
+  shotExplode: {fileID: 1612081157856750, guid: 25d4dbb646da7cb45b9b833adbecd663,
     type: 2}
 --- !u!212 &212223459643503488
 SpriteRenderer:
@@ -138,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bbb677b46d8acc045a95d6a3c48657fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc9127d0629684f4390d557e50695c2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

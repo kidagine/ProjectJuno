@@ -80,7 +80,7 @@ public class PauseManager : MonoBehaviour {
 			backgroundMusic.Play();
 		generalMenuUI.SetActive(false);
 		optionsMenuUI.SetActive(false);
-		Time.timeScale = 1;
+		Time.timeScale = 0.2f;
 		GameIsPaused = false;
 	}
 

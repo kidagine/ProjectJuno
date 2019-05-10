@@ -14,10 +14,6 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 	[HideInInspector] public Vector3 lastTargetPosition;
 
 	private LineRenderer lineRenderer;
-	private Color activeAimColor;
-	private Color disabledAimColor;
-	private bool isMove;
-	private bool isMovePossible;
 
 	void Awake()
 	{
@@ -27,14 +23,11 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 	void Start()
 	{
 		lineRenderer.useWorldSpace = true;
-		ColorUtility.TryParseHtmlString("#ff006f", out activeAimColor);
-		ColorUtility.TryParseHtmlString("#ff006f", out disabledAimColor);
 	}
 
 	void FixedUpdate()
 	{
 		lineRenderer.SetPosition(0, gameObject.transform.position);
-		Ray2D ray = new Ray2D(transform.position, transform.up);
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
 		if (hit.collider != null)
 		{
@@ -42,15 +35,12 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 				arrowAim.SetActive(true);
 				arrowAim.transform.position = playerAimRayCast.currentTargetPosition;
 				lineRenderer.SetPosition(1, playerAimRayCast.currentTargetPosition);
-				lineRenderer.material.color = activeAimColor;
 				currentTargetPosition = hit.point;
 
 		}
 		if (!playerAimRayCast.isTouching)
 		{
-
 			gameObject.transform.parent = null;
-
 		}
 		else
 		{
@@ -98,7 +88,6 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 
 	void OnEnable()
 	{
-		isMovePossible = false;
 		StartCoroutine(SetLineRendererEnabled());
 	}
 

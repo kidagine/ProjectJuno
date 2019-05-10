@@ -7,6 +7,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 	public PlayerMovement playerMovement;
 	public PlayerAimRayCastActive playerAimRayCastActive;
 	public GameObject playerAimRayCastChild;
+	public GameObject firePoint;
 	public float distance;
 	public bool isTouching;
 
@@ -29,15 +30,15 @@ public class PlayerAimRayCast : MonoBehaviour {
 	void Start ()
 	{
 		lineRenderer.useWorldSpace = true;
-		ColorUtility.TryParseHtmlString("#ff006f", out activeAimColor);
+		ColorUtility.TryParseHtmlString("#00ffff", out activeAimColor);
 		ColorUtility.TryParseHtmlString("#ffffff", out disabledAimColor);
 	}
 
 	void FixedUpdate()
 	{
-		lineRenderer.SetPosition(0, gameObject.transform.position);
-		Ray2D ray = new Ray2D(transform.position, transform.up);
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
+		lineRenderer.SetPosition(0, firePoint.transform.position);
+		Ray2D ray = new Ray2D(firePoint.transform.position, transform.up);
+		RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, firePoint.transform.up, distance);
 		if (hit.collider != null)
 		{
 			if (hit.collider.CompareTag("IgnoreRaycast"))
@@ -55,7 +56,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 				lineRenderer.SetPosition(1, hit.point);
 				lineRenderer.material.color = activeAimColor;
 				currentTargetPosition = hit.point;
-				currentTargetRotation = gameObject.transform.rotation;
+				currentTargetRotation = firePoint.transform.rotation;
 				isTouching = true;
 				isMove = true;
 				isMovePossible = true;
@@ -77,8 +78,19 @@ public class PlayerAimRayCast : MonoBehaviour {
 		}
 
 		float distanceToChild = Vector3.Distance(gameObject.transform.position, playerAimRayCastChild.transform.position);
-		if (distanceToChild > 0.3f && !isTouching)
+
+		if (!playerAimRayCastChild.activeSelf)
 		{
+			float distanceToNearestPlatform = Vector3.Distance(gameObject.transform.position, playerAimRayCastChild.transform.position);
+			if (distanceToNearestPlatform <= 0.15f)
+			{
+
+			} 
+		}
+
+		if (distanceToChild >= 0.3f && !isTouching)
+		{
+			if (playerAimRayCastChild.activeSelf)
 			isMovePossible = false;
 		}
 

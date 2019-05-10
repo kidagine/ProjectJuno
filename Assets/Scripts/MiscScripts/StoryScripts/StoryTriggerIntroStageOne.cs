@@ -6,6 +6,7 @@ public class StoryTriggerIntroStageOne : MonoBehaviour {
 
 	public GameObject player;
 	public Animator UIPlayerAnim;
+	public Animator UIStageTitleAnim;
 	public Animator cinemachineAnim;
 	public AudioSource backgroundMusic;
 
@@ -28,6 +29,7 @@ public class StoryTriggerIntroStageOne : MonoBehaviour {
 			FindObjectOfType<AudioManager>().Play("Impact");
 			backgroundMusic.Play();
 			UIPlayerAnim.SetTrigger("FadeIn");
+			UIStageTitleAnim.SetTrigger("FadeIn");
 			Destroy(gameObject);
 		}
 	}

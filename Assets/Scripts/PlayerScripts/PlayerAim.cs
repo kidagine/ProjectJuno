@@ -136,7 +136,6 @@ public class PlayerAim : MonoBehaviour
 			{
 				DirectionOutOfBoundsVertical(direction, directionOutBounds);
 			}
-			FlipPlayerOnVertical(direction);
 		}
 		else if (playerMovement.onBottomWall)
 		{
