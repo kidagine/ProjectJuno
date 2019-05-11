@@ -33,8 +33,12 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 rayPositionRight;
 	private Vector3 rayPositionLeft;
 	private bool facingRight;
+    private bool jump;
+    private bool isGrounded;
 	private float horizontalMove;
-	private readonly float rayDistance = 1;
+    private float jumpCooldown = 0.3f;
+    private float jumpForce = 400f;
+	private readonly float rayDistance = 0.1f;
 
 
 	void Start ()
@@ -87,32 +91,63 @@ public class PlayerMovement : MonoBehaviour {
 			aimRay.SetActive(false);
 		}
 
-		if (onTopWall && !isMoving)
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            FindObjectOfType<AudioManager>().Play("Jump");
+            jump = true;
+            animatorPlayer.SetBool("IsJumping", true);
+        }
+        if (rb.velocity.y != 0)
+        {
+            animatorPlayer.SetBool("IsJumping", true);
+        }
+        else
+        {
+            animatorPlayer.SetBool("IsJumping", false);
+        }
+        if (onTopWall && !isMoving)
 		{
-			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            rb.gravityScale = 3;
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		}
+        else
+        {
+            rb.gravityScale = 0;
+        }
+        jumpCooldown -= Time.deltaTime;
+    }
 
-	}
-
-	void FixedUpdate()
+    void FixedUpdate()
 	{
 		if (onTopWall && !isMoving)
 		{
 			playerSprite.flipX = false;
-			Run(horizontalMove * Time.fixedDeltaTime);
+            Run(horizontalMove * Time.fixedDeltaTime, jump);
 			animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(horizontalMove));
+            jump = false;
 
-			RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
-			Debug.DrawRay(movementRaycast.transform.position, Vector2.down, Color.red);
-			if (hit.collider != null)
-				if (hit.collider.CompareTag("IgnoreRaycast"))
-				{
-					rb.velocity = Vector3.zero;
-				}
+            RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
+			Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
+            if (hit.collider != null)
+            {
+                if (!hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("1"); 
+                    isGrounded = true;
+                }
+            }
+            else
+            {
+                {
+                    Debug.Log("2");
+                    isGrounded = false;
+                }
+            }
 		}
 	}
 
-	private void Run(float move)
+	private void Run(float move, bool jump)
 	{
 		rb.velocity = new Vector2(move * 10, rb.velocity.y);
 		if (move < 0 && !facingRight)
@@ -123,7 +158,12 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Flip();
 		}
-	}
+
+        if (jump && isGrounded)
+        {
+            rb.AddForce(new Vector2(0f, jumpForce));
+        }
+    }
 
 	private void Flip()
 	{
@@ -190,7 +230,7 @@ public class PlayerMovement : MonoBehaviour {
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
 		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
-		playerTrail.SetActive(true);
+        playerTrail.SetActive(true);
 		gameObject.transform.parent = null;
 		horizontalMove = 0;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
