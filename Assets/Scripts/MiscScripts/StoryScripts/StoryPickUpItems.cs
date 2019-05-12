@@ -1,21 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoryPickUpItems : MonoBehaviour {
 
     public GameObject promptButton;
     public GameObject playerAim;
-
-    private GameObject promptButtonPrefab;
+	public GameObject itemMenu;
+	public Animator itemMenuAnimator;
+	public Text itemNameText;
+	public Text itemDescriptionText;
+	public string itemName;
+	[TextArea] public string itemDescription;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Vector3 promptButtonPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-            Instantiate(promptButton, promptButtonPosition, Quaternion.identity);
-            promptButtonPrefab = promptButton;
+			if (!playerAim.activeSelf)
+			{
+				Vector3 promptButtonPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+				promptButton.transform.position = promptButtonPosition;
+				promptButton.SetActive(true);
+			}
         }
     }
 
@@ -23,18 +31,37 @@ public class StoryPickUpItems : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                playerAim.SetActive(true);
-            }
-        }
+			if (!itemMenu.activeSelf)
+			{
+				if (Input.GetKeyDown(KeyCode.E))
+				{
+					itemMenu.SetActive(true);
+					playerAim.SetActive(true);
+					promptButton.SetActive(false);
+					FindObjectOfType<PauseManager>().DisablePlayerMovement();
+					itemMenuAnimator.SetTrigger("Open");
+					itemNameText.text = itemName;
+					itemDescriptionText.text = itemDescription;
+				}
+			}
+			else
+			{
+				if (Input.GetKeyDown(KeyCode.E))
+				{
+					FindObjectOfType<PauseManager>().EnablePlayerMovement();
+					itemMenuAnimator.SetTrigger("Close");
+					itemNameText.text = "";
+					itemDescriptionText.text = "";
+				}
+			}
+		}
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(promptButtonPrefab);
-        }
-    }
+			promptButton.SetActive(false);
+		}
+	}
 }

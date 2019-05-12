@@ -36,9 +36,9 @@ public class PlayerMovement : MonoBehaviour {
     private bool jump;
     private bool isGrounded;
 	private float horizontalMove;
-    private float jumpCooldown = 0.3f;
+    private float jumpCooldown = 0.1f;
     private float jumpForce = 400f;
-	private readonly float rayDistance = 0.1f;
+	private readonly float rayDistance = 0.2f;
 
 
 	void Start ()
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 			//Using Controller
 			if (PauseManager.isUsingController)
 			{
-				if (Input.GetAxis("PadHorizontal") != 0 || Input.GetAxis("PadVertical") != 0)
+				if (Input.GetAxis("CameraHorizontal") != 0 || Input.GetAxis("CameraVertical") != 0 && !isMoving)
 				{
 					aimRay.SetActive(true);
 				}
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					ResetMovement();
 				}
-				if (Input.GetAxis("PadHorizontal") == 0 && Input.GetAxis("PadVertical") == 0)
+				if (Input.GetAxis("CameraHorizontal") == 0 && Input.GetAxis("CameraVertical") == 0)
 				{
 					aimRay.SetActive(false);
 				}
@@ -122,28 +122,11 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (onTopWall && !isMoving)
 		{
+			CheckGround();
 			playerSprite.flipX = false;
-            Run(horizontalMove * Time.fixedDeltaTime, jump);
+			Run(horizontalMove * Time.fixedDeltaTime, jump);
 			animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(horizontalMove));
-            jump = false;
-
-            RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
-			Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
-            if (hit.collider != null)
-            {
-                if (!hit.collider.CompareTag("Player"))
-                {
-                    Debug.Log("1"); 
-                    isGrounded = true;
-                }
-            }
-            else
-            {
-                {
-                    Debug.Log("2");
-                    isGrounded = false;
-                }
-            }
+			jump = false;
 		}
 	}
 
@@ -162,8 +145,9 @@ public class PlayerMovement : MonoBehaviour {
         if (jump && isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpForce));
-        }
-    }
+			isGrounded = false;
+		}
+	}
 
 	private void Flip()
 	{
@@ -171,6 +155,29 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 scale = transform.localScale;
 		scale.x *= -1;
 		transform.localScale = scale;
+	}
+
+	private void CheckGround()
+	{
+		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
+		Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
+		if (hit.collider != null)
+		{
+			if (!hit.collider.CompareTag("Player") && !jump)
+			{
+				isGrounded = true;
+				jumpCooldown = 0.1f;
+			}
+		}
+		else
+		{
+			{
+				if (jumpCooldown <= 0)
+				{
+					isGrounded = false;
+				}
+			}
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)

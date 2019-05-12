@@ -14,6 +14,7 @@ public class PauseManager : MonoBehaviour {
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
 	public GameObject gameOverUi;
+	public PlayerMovement playerMovement;
 	public Animator animator;
 	public AnimatorUpdateMode animatorUpdateMode;
 	public Button resumeButton;
@@ -230,4 +231,13 @@ public class PauseManager : MonoBehaviour {
 		pixelBoy.IncreaseResolution(318);
 	}
 
+	public void DisablePlayerMovement()
+	{
+		playerMovement.enabled = false;
+	}
+
+	public void EnablePlayerMovement()
+	{
+		playerMovement.enabled = true;
+	}
 }
