@@ -9,6 +9,10 @@ public class SceneSwitch : MonoBehaviour {
     public Animator animatorCamera;
     public int indexOfSceneToLoad;
 
+	void Start()
+	{
+	}
+
     public enum PositionForAnimation
     {
         Up,Down,Left,Right
@@ -19,26 +23,30 @@ public class SceneSwitch : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (positionForAnimation == PositionForAnimation.Up)
-            { 
-                StartCoroutine(SwitchScene());
-                animatorCamera.SetTrigger("Up");
-            }
-            else if (positionForAnimation == PositionForAnimation.Down)
-            {
-                StartCoroutine(SwitchScene());
-                animatorCamera.SetTrigger("Down");
-            }
-            else if (positionForAnimation == PositionForAnimation.Left)
-            {
-                StartCoroutine(SwitchScene());
-                animatorCamera.SetTrigger("Left");
-            }
-            else if (positionForAnimation == PositionForAnimation.Right)
-            {
-                StartCoroutine(SwitchScene());
-                animatorCamera.SetTrigger("Right");
-            }
+			Vector3 test = new Vector3(-2, -8, 0);
+
+			SceneTransitionManager.Instance.SetPlayerPosition(test);
+			StartCoroutine(SwitchScene());
+
+			//if (positionForAnimation == PositionForAnimation.Up)
+   //         { 
+   //             animatorCamera.SetTrigger("Up");
+   //         }
+   //         else if (positionForAnimation == PositionForAnimation.Down)
+   //         {
+   //             StartCoroutine(SwitchScene());
+   //             animatorCamera.SetTrigger("Down");
+   //         }
+   //         else if (positionForAnimation == PositionForAnimation.Left)
+   //         {
+   //             StartCoroutine(SwitchScene());
+   //             animatorCamera.SetTrigger("Left");
+   //         }
+   //         else if (positionForAnimation == PositionForAnimation.Right)
+   //         {
+   //             StartCoroutine(SwitchScene());
+   //             animatorCamera.SetTrigger("Right");
+   //         }
         }
     }
 

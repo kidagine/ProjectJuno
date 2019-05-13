@@ -2900,7 +2900,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.37672937, y: 18.23013, z: -8}
+  m_LocalPosition: {x: -0.3762349, y: 18.23013, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -10101,7 +10101,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1278514549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.37672937, y: 18.23013, z: -8}
+  m_LocalPosition: {x: -0.3762349, y: 18.23013, z: -8}
   m_LocalScale: {x: 0.76853526, y: 0.76853526, z: 0.76853526}
   m_Children:
   - {fileID: 1261732015}
@@ -10273,10 +10273,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffafa6e455450249b6d4b37e6219d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 597517304}
   pauseMenuUI: {fileID: 78480128}
   generalMenuUI: {fileID: 942966014}
   optionsMenuUI: {fileID: 665393975}
   gameOverUi: {fileID: 924943688}
+  playerMovement: {fileID: 0}
   animator: {fileID: 78480132}
   animatorUpdateMode: 2
   resumeButton: {fileID: 1953500640}
@@ -10287,6 +10289,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 1297848812}
   pixelBoy: {fileID: 519420033}
   indexOfSceneToLoad: 4
+  isMultiRoom: 1
 --- !u!1 &1297848811
 GameObject:
   m_ObjectHideFlags: 0
@@ -10448,7 +10451,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1318390445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.253, y: -8.21, z: 0}
+  m_LocalPosition: {x: 0.415, y: -8.21, z: 0}
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1214043108}
@@ -10713,6 +10716,46 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343156382}
   m_CullTransparentMesh: 0
+--- !u!1 &1346892158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346892160}
+  - component: {fileID: 1346892159}
+  m_Layer: 0
+  m_Name: SceneTransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1346892159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1346892158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9c2e6e6a7182429488787e4d2ef0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1346892160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1346892158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.7214208, y: -7.731207, z: -0.28557155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1353586356
 GameObject:
   m_ObjectHideFlags: 0

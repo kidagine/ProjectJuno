@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour {
 	public static bool GameIsPaused;
 	public static bool GameIsOver;
 	public static bool isUsingController;
+	public GameObject player;
 	public GameObject pauseMenuUI;
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
@@ -25,6 +26,7 @@ public class PauseManager : MonoBehaviour {
 	public AudioSource backgroundMusic;
 	public PixelBoy pixelBoy;
 	public int indexOfSceneToLoad;
+	public bool isMultiRoom;
 
 	private Button currentlySelectedButton;
 	private Button currentlyHoveredButton;
@@ -36,7 +38,28 @@ public class PauseManager : MonoBehaviour {
 	private bool isBackgroundMusicOn = true;
 	private bool hasBegun = false;
 
-	//PauseState
+
+	void Start()
+	{
+		if (isMultiRoom)
+		{
+			Vector3 playerPositionGoTo;
+			playerPositionGoTo = SceneTransitionManager.Instance.GetPlayerPosition();
+			if (playerPositionGoTo != Vector3.zero)
+			{
+				Debug.Log(playerPositionGoTo);
+				player.transform.position = playerPositionGoTo;
+			}
+			else
+			{
+				Debug.Log("test");
+
+
+				return;
+			}
+		}
+	}
+
 	void Update ()
 	{
 		if (Input.GetButtonDown("Start"))
@@ -72,6 +95,8 @@ public class PauseManager : MonoBehaviour {
 			}
 		}
 	}
+
+	//PauseState
 
 	public void Resume()
 	{

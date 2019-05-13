@@ -8,6 +8,7 @@ public class StoryPickUpItems : MonoBehaviour {
     public GameObject promptButton;
     public GameObject playerAim;
 	public GameObject itemMenu;
+	public GameObject itemMenuImage;
 	public Animator itemMenuAnimator;
 	public Text itemNameText;
 	public Text itemDescriptionText;
@@ -36,6 +37,7 @@ public class StoryPickUpItems : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					itemMenu.SetActive(true);
+					itemMenuImage.SetActive(true);
 					playerAim.SetActive(true);
 					promptButton.SetActive(false);
 					FindObjectOfType<PauseManager>().DisablePlayerMovement();
@@ -50,6 +52,7 @@ public class StoryPickUpItems : MonoBehaviour {
 				{
 					FindObjectOfType<PauseManager>().EnablePlayerMovement();
 					itemMenuAnimator.SetTrigger("Close");
+					itemMenuImage.SetActive(false);
 					itemNameText.text = "";
 					itemDescriptionText.text = "";
 				}
