@@ -47,14 +47,10 @@ public class PauseManager : MonoBehaviour {
 			playerPositionGoTo = SceneTransitionManager.Instance.GetPlayerPosition();
 			if (playerPositionGoTo != Vector3.zero)
 			{
-				Debug.Log(playerPositionGoTo);
 				player.transform.position = playerPositionGoTo;
 			}
 			else
 			{
-				Debug.Log("test");
-
-
 				return;
 			}
 		}

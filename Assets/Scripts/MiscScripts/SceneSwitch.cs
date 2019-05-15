@@ -9,10 +9,6 @@ public class SceneSwitch : MonoBehaviour {
     public Animator animatorCamera;
     public int indexOfSceneToLoad;
 
-	void Start()
-	{
-	}
-
     public enum PositionForAnimation
     {
         Up,Down,Left,Right
@@ -53,7 +49,8 @@ public class SceneSwitch : MonoBehaviour {
     IEnumerator SwitchScene()
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(indexOfSceneToLoad);
-    }
+		SceneManager.LoadScene(indexOfSceneToLoad);
+
+	}
 
 }

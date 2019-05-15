@@ -39,11 +39,11 @@ public class PlayerStats : MonoBehaviour
 	{
 		if (hasReceivedExp)
 		{
-			showExpReceived();
+			ShowExpReceived();
 		}
 		if (isExpSliderIncreasing)
 		{
-			graduallyIncreaseExp();
+			GraduallyIncreaseExp();
 		}
 		vulnerabilityCooldown -= Time.deltaTime;
 	}
@@ -98,7 +98,7 @@ public class PlayerStats : MonoBehaviour
 	}
 
 	//LEVEL
-	public void receiveExp(int enemyExp)
+	public void ReceiveExp(int enemyExp)
 	{
 		currentExpTotal += enemyExp;
 		if (expSlider.value != enemyExp)
@@ -109,7 +109,7 @@ public class PlayerStats : MonoBehaviour
 		hasReceivedExp = true;
 	}
 
-	private void showExpReceived()
+	private void ShowExpReceived()
 	{
 		Vector2 receivedExpTextPosition = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x+0.7f,transform.position.y+0.5f));
 	
@@ -118,7 +118,7 @@ public class PlayerStats : MonoBehaviour
 		hasReceivedExp = false;
 	}
 
-	private void graduallyIncreaseExp()
+	private void GraduallyIncreaseExp()
 	{
 		expSlider.value += 0.1f;
 		if (expSlider.value >= currentExpTotal)

@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
 		health -= damage;
 		if (health <= 0)
 		{
-			playerStats.receiveExp(expValue);
+			playerStats.ReceiveExp(expValue);
 			FindObjectOfType<AudioManager>().Play("Death");
 			Instantiate(enemyDeathPrefab, new Vector2(transform.position.x, transform.position.y+0.7f), Quaternion.identity);
 			Destroy(gameObject);

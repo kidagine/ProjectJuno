@@ -40,6 +40,7 @@ public class StoryPickUpItems : MonoBehaviour {
 					itemMenuImage.SetActive(true);
 					playerAim.SetActive(true);
 					promptButton.SetActive(false);
+					SceneTransitionManager.Instance.HasPickedItem(true);
 					FindObjectOfType<PauseManager>().DisablePlayerMovement();
 					itemMenuAnimator.SetTrigger("Open");
 					itemNameText.text = itemName;
