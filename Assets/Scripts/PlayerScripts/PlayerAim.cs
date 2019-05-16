@@ -40,7 +40,7 @@ public class PlayerAim : MonoBehaviour
 
 	private void Shooting()
 	{
-		if (Input.GetButton("Fire1") && !PauseManager.GameIsPaused)
+		if (Input.GetButton("Fire1") && !PauseManager.GameIsPaused && bulletPrefab != null)
 		{
 			if (cooldown <= 0 && gunClip >= 1 && !isReloading)
 			{

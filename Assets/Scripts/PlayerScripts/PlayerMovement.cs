@@ -50,7 +50,10 @@ public class PlayerMovement : MonoBehaviour {
 	void Update()
 	{
 		if (isMoving)
+		{
 			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPosition, speed * Time.deltaTime);
+			Debug.Log("MOVING");
+		}
 		if (!Input.GetButtonDown("Fire1"))
 		{
 			//Using KB/M
@@ -111,7 +114,7 @@ public class PlayerMovement : MonoBehaviour {
             rb.gravityScale = 3;
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		}
-        else
+		else
         {
             rb.gravityScale = 0;
         }
@@ -144,6 +147,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (jump && isGrounded)
         {
+			Debug.Log("TEST");
             rb.AddForce(new Vector2(0f, jumpForce));
 			isGrounded = false;
 		}
@@ -237,14 +241,16 @@ public class PlayerMovement : MonoBehaviour {
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
 		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
+
         playerTrail.SetActive(true);
-		gameObject.transform.parent = null;
+		isMoving = true;
+
 		horizontalMove = 0;
+		rb.velocity = Vector2.zero;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRayCast.ResetIsMovePossible();
 		ClearWallBools();
 		aimRay.SetActive(false);
-		isMoving = true;
 		lastTargetPosition = playerAimRayCast.currentTargetPosition;
 		playerStats.playerShield.SetActive(false);
 	}

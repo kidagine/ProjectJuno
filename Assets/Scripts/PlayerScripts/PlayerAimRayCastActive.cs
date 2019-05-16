@@ -94,7 +94,7 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 	IEnumerator SetLineRendererEnabled()
 	{
 		lineRenderer.enabled = false;
-		yield return new WaitForSeconds(0.02f);
+		yield return new WaitForSeconds(0.04f);
 		lineRenderer.enabled = true;
 	}
 
