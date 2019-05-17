@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoryPickUpItems : MonoBehaviour {
 
+	public GameObject itemToPickUp;
     public GameObject promptButton;
     public GameObject playerAim;
 	public GameObject itemMenu;
@@ -41,6 +42,8 @@ public class StoryPickUpItems : MonoBehaviour {
 					playerAim.SetActive(true);
 					promptButton.SetActive(false);
 					SceneTransitionManager.Instance.HasPickedItem(true);
+					itemToPickUp.SetActive(true);
+					//TODO I dont have animation yet. playerAnimation.SetBool("PickUpItem",true);
 					FindObjectOfType<PauseManager>().DisablePlayerMovement();
 					itemMenuAnimator.SetTrigger("Open");
 					itemNameText.text = itemName;
@@ -52,6 +55,9 @@ public class StoryPickUpItems : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					FindObjectOfType<PauseManager>().EnablePlayerMovement();
+					Vector2 itemPickParticlesPosition = itemToPickUp.transform.position;
+					Destroy(itemToPickUp);
+					//TODO I dont have animation yet. playerAnimation.SetBool("PickUpItem",false);
 					itemMenuAnimator.SetTrigger("Close");
 					itemMenuImage.SetActive(false);
 					itemNameText.text = "";
