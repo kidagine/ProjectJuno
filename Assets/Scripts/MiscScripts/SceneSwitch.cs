@@ -9,6 +9,9 @@ public class SceneSwitch : MonoBehaviour {
     public Animator animatorCamera;
     public int indexOfSceneToLoad;
 
+	private Rigidbody2D rb;
+	private float playerMove = 2f;
+
     public enum PositionForAnimation
     {
         Up,Down,Left,Right
@@ -19,9 +22,13 @@ public class SceneSwitch : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-			Vector3 test = new Vector3(-2, -8, 0);
+			rb = other.GetComponent<Rigidbody2D>();
+			FindObjectOfType<PauseManager>().DisablePlayerMovement();
 
+			Vector3 test = new Vector3(-2, -8, 0);
 			SceneTransitionManager.Instance.SetPlayerPosition(test);
+
+			animatorFade.SetTrigger("FadeOut");
 			StartCoroutine(SwitchScene());
 
 			//if (positionForAnimation == PositionForAnimation.Up)
@@ -46,9 +53,17 @@ public class SceneSwitch : MonoBehaviour {
         }
     }
 
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (rb != null && other.gameObject.CompareTag("Player"))
+		{
+			rb.velocity = new Vector2(playerMove * -1, rb.velocity.y);
+		}
+	}
+
     IEnumerator SwitchScene()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 		SceneManager.LoadScene(indexOfSceneToLoad);
 
 	}

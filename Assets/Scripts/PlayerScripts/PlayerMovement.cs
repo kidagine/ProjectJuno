@@ -249,6 +249,10 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = Vector2.zero;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRayCast.ResetIsMovePossible();
+		if (onRotatable)
+		{
+			gameObject.transform.parent = null;
+		}
 		ClearWallBools();
 		aimRay.SetActive(false);
 		lastTargetPosition = playerAimRayCast.currentTargetPosition;
