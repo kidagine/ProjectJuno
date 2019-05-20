@@ -59,11 +59,9 @@ public class SceneTransitionManager : MonoBehaviour {
 			if (!hasPickedBoots)
 			{
 				playerAim.SetActive(false);
-				Debug.Log("loaded");
 			}
 			else
 			{
-				Debug.Log("loaded2");
 				playerAim.SetActive(true);
 			}
 		}

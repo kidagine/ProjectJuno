@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (isMoving)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPosition, speed * Time.deltaTime);
-			Debug.Log("MOVING");
 		}
 		if (!Input.GetButtonDown("Fire1"))
 		{
@@ -175,11 +174,9 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else
 		{
+			if (jumpCooldown <= 0)
 			{
-				if (jumpCooldown <= 0)
-				{
-					isGrounded = false;
-				}
+				isGrounded = false;
 			}
 		}
 	}
@@ -196,6 +193,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
+
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 270);
 			isMoving = false;
@@ -221,6 +219,10 @@ public class PlayerMovement : MonoBehaviour {
 		if (other.gameObject.CompareTag("Wall"))
 		{
 			transform.parent = other.gameObject.transform;
+			Vector3 hit = other.contacts[0].normal;
+			transform.up = hit;
+			Debug.Log(hit);
+
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
@@ -245,6 +247,7 @@ public class PlayerMovement : MonoBehaviour {
         playerTrail.SetActive(true);
 		isMoving = true;
 
+		transform.rotation = Quaternion.identity;
 		horizontalMove = 0;
 		rb.velocity = Vector2.zero;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
