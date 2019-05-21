@@ -34,6 +34,7 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 				SetArrowRotation(hit);
 				arrowAim.SetActive(true);
 				arrowAim.transform.position = playerAimRayCast.currentTargetPosition;
+				arrowAim.transform.up = hit.normal;
 				lineRenderer.SetPosition(1, playerAimRayCast.currentTargetPosition);
 				currentTargetPosition = hit.point;
 

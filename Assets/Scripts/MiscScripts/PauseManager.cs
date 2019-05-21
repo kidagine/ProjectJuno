@@ -102,14 +102,14 @@ public class PauseManager : MonoBehaviour {
 			backgroundMusic.Play();
 		generalMenuUI.SetActive(false);
 		optionsMenuUI.SetActive(false);
-		Time.timeScale = 0.2f;
+		Time.timeScale = 0.05f;
 		GameIsPaused = false;
 	}
 
 	public void Pause()
 	{
 		FindObjectOfType<AudioManager>().Play("Click");
-		Invoke("ActivateGeneralMenu", 0.2f);
+		Invoke("ActivateGeneralMenu", 0.05f);
 		backgroundMusic.Pause();
 		pauseMenuUI.SetActive(true);
 		generalMenuUI.SetActive(true);

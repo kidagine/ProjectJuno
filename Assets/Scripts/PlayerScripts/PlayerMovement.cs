@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour {
 	public PlayerStats playerStats;
 	public PlayerAim playerAim;
 	public Rigidbody2D rb;
+	public BoxCollider2D boxCollider;
+	public BoxCollider2D boxDashCollider;
 	public GameObject aimRay;
 	public GameObject dashEffectPrefab;
 	public GameObject movementRaycast;
@@ -33,15 +35,16 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 rayPositionRight;
 	private Vector3 rayPositionLeft;
 	private bool facingRight;
-    private bool jump;
-    private bool isGrounded;
+	private bool jump;
+	private bool isGrounded;
 	private float horizontalMove;
-    private float jumpCooldown = 0.1f;
-    private float jumpForce = 400f;
+	private float jumpCooldown = 0.1f;
+	private float jumpForce = 400f;
+	private float endPositionDistance;
 	private readonly float rayDistance = 0.2f;
 
 
-	void Start ()
+	void Start()
 	{
 		onTopWall = true;
 		aimRay.SetActive(false);
@@ -88,39 +91,48 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 		}
-		else 
+		else
 		{
 			aimRay.SetActive(false);
 		}
 
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            FindObjectOfType<AudioManager>().Play("Jump");
-            jump = true;
-            animatorPlayer.SetBool("IsJumping", true);
-        }
-        if (rb.velocity.y != 0)
-        {
-            animatorPlayer.SetBool("IsJumping", true);
-        }
-        else
-        {
-            animatorPlayer.SetBool("IsJumping", false);
-        }
-        if (onTopWall && !isMoving)
+		if (Input.GetButtonDown("Jump"))
 		{
-            rb.gravityScale = 3;
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+			FindObjectOfType<AudioManager>().Play("Jump");
+			jump = true;
+			animatorPlayer.SetBool("IsJumping", true);
+		}
+		if (rb.velocity.y != 0)
+		{
+			animatorPlayer.SetBool("IsJumping", true);
 		}
 		else
-        {
-            rb.gravityScale = 0;
-        }
-        jumpCooldown -= Time.deltaTime;
-    }
+		{
+			animatorPlayer.SetBool("IsJumping", false);
+		}
+		if (onTopWall && !isMoving)
+		{
+			rb.gravityScale = 3;
+			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		}
+		else
+		{
+			rb.gravityScale = 0;
+		}
+		jumpCooldown -= Time.deltaTime;
 
-    void FixedUpdate()
+		if (playerAimRayCast.currentTargetPosition != null)
+		{
+			endPositionDistance = Vector3.Distance(transform.position, playerAimRayCast.currentTargetPosition);
+			if (endPositionDistance <= 0.6f)
+			{
+				boxCollider.enabled = true;
+			}
+		}
+	}
+
+	void FixedUpdate()
 	{
 		if (onTopWall && !isMoving)
 		{
@@ -163,7 +175,6 @@ public class PlayerMovement : MonoBehaviour {
 	private void CheckGround()
 	{
 		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
-		Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
 		if (hit.collider != null)
 		{
 			if (!hit.collider.CompareTag("Player") && !jump)
@@ -188,7 +199,8 @@ public class PlayerMovement : MonoBehaviour {
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 90);
 			isMoving = false;
-			onRightWall = true;
+			onRightWall = true; 
+
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
@@ -198,6 +210,7 @@ public class PlayerMovement : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(0, 0, 270);
 			isMoving = false;
 			onLeftWall = true;
+
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("TopWall"))
@@ -206,14 +219,14 @@ public class PlayerMovement : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 			isMoving = false;
 			onTopWall = true;
+
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
 			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 			transform.rotation = Quaternion.Euler(0, 0, 180);
-			isMoving = false;
-			onBottomWall = true;
+			isMoving = false;			onBottomWall = true;
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("Wall"))
@@ -222,6 +235,7 @@ public class PlayerMovement : MonoBehaviour {
 			Vector3 hit = other.contacts[0].normal;
 			transform.up = hit;
 			Debug.Log(hit);
+
 
 			isMoving = false;
 			onRotatable = true;
@@ -240,6 +254,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void ResetMovement()
 	{
+		boxCollider.enabled = false;
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
 		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
