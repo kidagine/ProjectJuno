@@ -27,7 +27,7 @@ public class PlayerBullet : MonoBehaviour
 			Destroy(gameObject);
 		}
 		//Explode when colliding with anything except the layer to be ignored
-		if (!(other.gameObject.layer == 2))
+		if (!(other.gameObject.layer == 2) && !(other.gameObject.CompareTag("Player")))
 		{
 		speed = 0;
 		Instantiate(shotExplode, transform.position, transform.rotation);

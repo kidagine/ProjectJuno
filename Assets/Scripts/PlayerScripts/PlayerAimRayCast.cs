@@ -11,10 +11,12 @@ public class PlayerAimRayCast : MonoBehaviour {
 	public float distance;
 	public bool isTouching;
 
+	[HideInInspector] public Vector3 currentTargetPositionOffset;
 	[HideInInspector] public Vector3 currentTargetPosition;
 	[HideInInspector] public Quaternion currentTargetRotation;
 	[HideInInspector] public Vector3 lastTargetPosition;
 	[HideInInspector] public Quaternion lastTargetRotation;
+
 
 	private LineRenderer lineRenderer;
 	private Color activeAimColor;
@@ -32,6 +34,7 @@ public class PlayerAimRayCast : MonoBehaviour {
 		lineRenderer.useWorldSpace = true;
 		ColorUtility.TryParseHtmlString("#00ffff", out activeAimColor);
 		ColorUtility.TryParseHtmlString("#ffffff", out disabledAimColor);
+
 	}
 
 	void FixedUpdate()
@@ -55,6 +58,8 @@ public class PlayerAimRayCast : MonoBehaviour {
 			{
 				lineRenderer.SetPosition(1, hit.point);
 				lineRenderer.material.color = activeAimColor;
+				Vector2 offset = hit.normal * playerMovement.extents.y;
+				currentTargetPositionOffset = offset + hit.point;
 				currentTargetPosition = hit.point;
 				currentTargetRotation = firePoint.transform.rotation;
 				isTouching = true;

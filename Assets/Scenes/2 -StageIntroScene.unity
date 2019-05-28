@@ -2901,7 +2901,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0033012629, y: 18.230131, z: -8}
+  m_LocalPosition: {x: 0.003042698, y: 18.230131, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -3547,7 +3547,6 @@ MonoBehaviour:
   playerAim: {fileID: 872246283}
   rb: {fileID: 597517308}
   boxCollider: {fileID: 597517311}
-  boxDashCollider: {fileID: 0}
   aimRay: {fileID: 1824793687}
   dashEffectPrefab: {fileID: 1484230862077316, guid: 456c01f91a077f14d92c9439d5bc939a,
     type: 2}
@@ -3555,7 +3554,8 @@ MonoBehaviour:
   playerTrail: {fileID: 1033274048}
   playerSprite: {fileID: 597517306}
   animatorPlayer: {fileID: 597517313}
-  runSpeed: 12
+  runSpeed: 16
+  extents: {x: 0, y: 0}
   lastTargetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   speed: 18
@@ -3576,7 +3576,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028848201, y: -0.07493095}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3587,7 +3587,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4016704, y: 0.4698619}
+  m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
 --- !u!114 &597517312
 MonoBehaviour:
@@ -11240,7 +11240,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1278514549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.37679708, y: 18.23013, z: -8}
+  m_LocalPosition: {x: -0.3766446, y: 18.23013, z: -8}
   m_LocalScale: {x: 0.76853526, y: 0.76853526, z: 0.76853526}
   m_Children:
   - {fileID: 1261732015}
@@ -19308,6 +19308,7 @@ MonoBehaviour:
   firePoint: {fileID: 1908605505}
   distance: 3.4
   isTouching: 0
+  currentTargetPositionOffset: {x: 0, y: 0, z: 0}
   currentTargetPosition: {x: 0, y: 0, z: 0}
   currentTargetRotation: {x: 0, y: 0, z: 0, w: 0}
   lastTargetPosition: {x: 0, y: 0, z: 0}
@@ -20319,8 +20320,6 @@ MonoBehaviour:
   playerAimRayCastObject: {fileID: 1824793687}
   arrowAim: {fileID: 1065620601}
   distance: 3.4
-  currentTargetPosition: {x: 0, y: 0, z: 0}
-  lastTargetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2090326618
 GameObject:
   m_ObjectHideFlags: 0

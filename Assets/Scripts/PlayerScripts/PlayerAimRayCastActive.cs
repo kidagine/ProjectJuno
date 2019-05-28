@@ -10,9 +10,6 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 	public GameObject arrowAim;
 	public float distance;
 
-	[HideInInspector] public Vector3 currentTargetPosition;
-	[HideInInspector] public Vector3 lastTargetPosition;
-
 	private LineRenderer lineRenderer;
 
 	void Awake()
@@ -31,14 +28,12 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
 		if (hit.collider != null)
 		{
-				SetArrowRotation(hit);
-				arrowAim.SetActive(true);
-				arrowAim.transform.position = playerAimRayCast.currentTargetPosition;
-				arrowAim.transform.up = hit.normal;
-				lineRenderer.SetPosition(1, playerAimRayCast.currentTargetPosition);
-				currentTargetPosition = hit.point;
-
+			SetArrowRotation(hit);
+			arrowAim.transform.position = playerAimRayCast.currentTargetPosition;
+			arrowAim.transform.up = hit.normal;
+			lineRenderer.SetPosition(1, playerAimRayCast.currentTargetPosition);
 		}
+
 		if (!playerAimRayCast.isTouching)
 		{
 			gameObject.transform.parent = null;
@@ -97,6 +92,7 @@ public class PlayerAimRayCastActive : MonoBehaviour {
 		lineRenderer.enabled = false;
 		yield return new WaitForSeconds(0.04f);
 		lineRenderer.enabled = true;
+		arrowAim.SetActive(true);
 	}
 
 }

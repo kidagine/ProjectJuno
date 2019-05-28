@@ -1363,7 +1363,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.283882, y: -7.21, z: -8}
+  m_LocalPosition: {x: -5.28225, y: -7.21, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -2235,6 +2235,7 @@ MonoBehaviour:
   playerStats: {fileID: 597517312}
   playerAim: {fileID: 872246283}
   rb: {fileID: 597517308}
+  boxCollider: {fileID: 597517311}
   aimRay: {fileID: 1824793687}
   dashEffectPrefab: {fileID: 1484230862077316, guid: 456c01f91a077f14d92c9439d5bc939a,
     type: 2}
@@ -2243,6 +2244,7 @@ MonoBehaviour:
   playerSprite: {fileID: 597517306}
   animatorPlayer: {fileID: 597517313}
   runSpeed: 12
+  extents: {x: 0, y: 0}
   lastTargetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   speed: 18
@@ -12503,8 +12505,6 @@ MonoBehaviour:
   playerAimRayCastObject: {fileID: 1824793687}
   arrowAim: {fileID: 1065620601}
   distance: 3.4
-  currentTargetPosition: {x: 0, y: 0, z: 0}
-  lastTargetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2090326618
 GameObject:
   m_ObjectHideFlags: 0

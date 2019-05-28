@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
 	public PlayerAim playerAim;
 	public Rigidbody2D rb;
 	public BoxCollider2D boxCollider;
-	public BoxCollider2D boxDashCollider;
 	public GameObject aimRay;
 	public GameObject dashEffectPrefab;
 	public GameObject movementRaycast;
@@ -19,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	public SpriteRenderer playerSprite;
 	public Animator animatorPlayer;
 	public float runSpeed;
+	public Vector2 extents;
 
 	[HideInInspector] public Vector3 lastTargetPosition;
 	[HideInInspector] public bool isMoving;
@@ -35,17 +35,17 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 rayPositionRight;
 	private Vector3 rayPositionLeft;
 	private bool facingRight;
-	private bool jump;
-	private bool isGrounded;
+    private bool jump;
+    private bool isGrounded;
 	private float horizontalMove;
-	private float jumpCooldown = 0.1f;
-	private float jumpForce = 400f;
-	private float endPositionDistance;
+    private float jumpCooldown = 0.1f;
+    private float jumpForce = 400f;
 	private readonly float rayDistance = 0.2f;
 
 
-	void Start()
+	void Start ()
 	{
+		extents = boxCollider.bounds.extents;
 		onTopWall = true;
 		aimRay.SetActive(false);
 	}
@@ -54,7 +54,13 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (isMoving)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPosition, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, speed * Time.deltaTime);
+			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
+			if (distance <= 0.3f)
+			{
+				boxCollider.enabled = true;
+				Debug.Log("enabled");
+			}
 		}
 		if (!Input.GetButtonDown("Fire1"))
 		{
@@ -91,48 +97,39 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 		}
-		else
+		else 
 		{
 			aimRay.SetActive(false);
 		}
 
 
-		if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
+        {
+            FindObjectOfType<AudioManager>().Play("Jump");
+            jump = true;
+            animatorPlayer.SetBool("IsJumping", true);
+        }
+        if (rb.velocity.y != 0)
+        {
+            animatorPlayer.SetBool("IsJumping", true);
+        }
+        else
+        {
+            animatorPlayer.SetBool("IsJumping", false);
+        }
+        if (onTopWall && !isMoving)
 		{
-			FindObjectOfType<AudioManager>().Play("Jump");
-			jump = true;
-			animatorPlayer.SetBool("IsJumping", true);
-		}
-		if (rb.velocity.y != 0)
-		{
-			animatorPlayer.SetBool("IsJumping", true);
+            rb.gravityScale = 3;
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		}
 		else
-		{
-			animatorPlayer.SetBool("IsJumping", false);
-		}
-		if (onTopWall && !isMoving)
-		{
-			rb.gravityScale = 3;
-			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-		}
-		else
-		{
-			rb.gravityScale = 0;
-		}
-		jumpCooldown -= Time.deltaTime;
+        {
+            rb.gravityScale = 0;
+        }
+        jumpCooldown -= Time.deltaTime;
+    }
 
-		if (playerAimRayCast.currentTargetPosition != null)
-		{
-			endPositionDistance = Vector3.Distance(transform.position, playerAimRayCast.currentTargetPosition);
-			if (endPositionDistance <= 0.6f)
-			{
-				boxCollider.enabled = true;
-			}
-		}
-	}
-
-	void FixedUpdate()
+    void FixedUpdate()
 	{
 		if (onTopWall && !isMoving)
 		{
@@ -158,7 +155,6 @@ public class PlayerMovement : MonoBehaviour {
 
         if (jump && isGrounded)
         {
-			Debug.Log("TEST");
             rb.AddForce(new Vector2(0f, jumpForce));
 			isGrounded = false;
 		}
@@ -175,6 +171,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void CheckGround()
 	{
 		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
+		Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
 		if (hit.collider != null)
 		{
 			if (!hit.collider.CompareTag("Player") && !jump)
@@ -196,37 +193,46 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("RightWall"))
 		{
-			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
+			transform.parent = other.gameObject.transform;
+			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 90);
-			isMoving = false;
-			onRightWall = true; 
 
+			onRightWall = true;
+			isMoving = false;
+			onRotatable = true;
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
-
-			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
+			transform.parent = other.gameObject.transform;
+			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 270);
-			isMoving = false;
-			onLeftWall = true;
 
+			onLeftWall = true;
+			isMoving = false;
+			onRotatable = true;
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("TopWall"))
 		{
-			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
+			transform.parent = other.gameObject.transform;
+			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 0);
-			isMoving = false;
-			onTopWall = true;
 
+			onTopWall = true;
+			isMoving = false;
+			onRotatable = true;
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
-			Instantiate(dashEffectPrefab, transform.position, transform.rotation);
+			transform.parent = other.gameObject.transform;
+			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 180);
-			isMoving = false;			onBottomWall = true;
+
+			onBottomWall = true;
+			isMoving = false;
+			onRotatable = true;
 			playerTrail.SetActive(false);
 		}
 		if (other.gameObject.CompareTag("Wall"))
@@ -235,7 +241,6 @@ public class PlayerMovement : MonoBehaviour {
 			Vector3 hit = other.contacts[0].normal;
 			transform.up = hit;
 			Debug.Log(hit);
-
 
 			isMoving = false;
 			onRotatable = true;
@@ -254,6 +259,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void ResetMovement()
 	{
+		gameObject.transform.parent = null;
 		boxCollider.enabled = false;
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
@@ -267,10 +273,8 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = Vector2.zero;
 		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRayCast.ResetIsMovePossible();
-		if (onRotatable)
-		{
-			gameObject.transform.parent = null;
-		}
+
+		
 		ClearWallBools();
 		aimRay.SetActive(false);
 		lastTargetPosition = playerAimRayCast.currentTargetPosition;

@@ -16,7 +16,7 @@ public class PlayerAim : MonoBehaviour
 	public SpriteRenderer playerSprite;
 	public Slider gunClipSlider;
 	public Animator gunClipSliderAnim;
-	public bool isMovePossible = true;
+	public bool isMovePossible;
 
 	private float cooldown = 0.3f;
 	private int gunClip = 10;
@@ -172,17 +172,27 @@ public class PlayerAim : MonoBehaviour
 	private void FlipPlayerOnVertical(Vector2 direction)
 	{
 		if (direction.x <= 0.1)
-			playerSprite.flipX = true;
-		else if (direction.x >= 0.1)
 			playerSprite.flipX = false;
+		else if (direction.x >= 0.1)
+			playerSprite.flipX = true;
 	}
 
 	private void FlipPlayerOnHorizontal(Vector2 direction)
 	{
-		if (direction.y <= 0.1)
-			playerSprite.flipX = true;
-		else if (direction.y >= 0.1)
-			playerSprite.flipX = false;
+		if (playerMovement.onLeftWall)
+		{
+			if (direction.y <= 0.1)
+				playerSprite.flipX = false;
+			else if (direction.y >= 0.1)
+				playerSprite.flipX = true;
+		}
+		else if (playerMovement.onRightWall)
+		{
+			if (direction.y <= 0.1)
+				playerSprite.flipX = true;
+			else if (direction.y >= 0.1)
+				playerSprite.flipX = false;
+		}
 	}
 
 	private void DirectionOutOfBoundsHorizontal(Vector2 direction, Vector2 directionOutBounds)
