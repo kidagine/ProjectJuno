@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody2D rb;
 	public BoxCollider2D boxCollider;
 	public GameObject aimRay;
-	public GameObject dashEffectPrefab;
+	public ParticleSystem dashParticle;
 	public GameObject movementRaycast;
 	public GameObject playerTrail;
 	public SpriteRenderer playerSprite;
@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour {
 			if (distance <= 0.3f)
 			{
 				boxCollider.enabled = true;
-				Debug.Log("enabled");
 			}
 		}
 		if (!Input.GetButtonDown("Fire1"))
@@ -105,11 +104,10 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-            FindObjectOfType<AudioManager>().Play("Jump");
-            jump = true;
             animatorPlayer.SetBool("IsJumping", true);
-        }
-        if (rb.velocity.y != 0)
+			jump = true;
+		}
+		if (rb.velocity.y != 0)
         {
             animatorPlayer.SetBool("IsJumping", true);
         }
@@ -155,7 +153,8 @@ public class PlayerMovement : MonoBehaviour {
 
         if (jump && isGrounded)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
+			FindObjectOfType<AudioManager>().Play("Jump");
+			rb.AddForce(new Vector2(0f, jumpForce));
 			isGrounded = false;
 		}
 	}
@@ -176,6 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			if (!hit.collider.CompareTag("Player") && !jump)
 			{
+				Debug.Log("grounded");
 				isGrounded = true;
 				jumpCooldown = 0.1f;
 			}
@@ -201,6 +201,7 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
+			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
@@ -212,6 +213,7 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
+			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("TopWall"))
 		{
@@ -223,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
+			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
@@ -234,6 +237,7 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
+			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("Wall"))
 		{
@@ -245,6 +249,7 @@ public class PlayerMovement : MonoBehaviour {
 			isMoving = false;
 			onRotatable = true;
 			playerTrail.SetActive(false);
+			dashParticle.Stop();
 		}
 
 	}
@@ -265,13 +270,13 @@ public class PlayerMovement : MonoBehaviour {
 		animatorPlayer.SetTrigger("Dash");
 		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
 
-        playerTrail.SetActive(true);
+		dashParticle.Play();
+		playerTrail.SetActive(true);
 		isMoving = true;
 
 		transform.rotation = Quaternion.identity;
 		horizontalMove = 0;
 		rb.velocity = Vector2.zero;
-		Instantiate(dashEffectPrefab, transform.position, transform.rotation);
 		playerAimRayCast.ResetIsMovePossible();
 
 		
