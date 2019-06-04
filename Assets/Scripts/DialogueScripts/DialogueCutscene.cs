@@ -13,7 +13,7 @@ public class DialogueCutscene : MonoBehaviour {
 	private int speedIndex;
 	private string sentence;
 
-	void Start()
+	void Awake()
 	{
 		sentenceQueue = new Queue<string>();
 	}

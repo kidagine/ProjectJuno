@@ -12,17 +12,18 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody2D rb;
 	public BoxCollider2D boxCollider;
 	public GameObject aimRay;
-	public ParticleSystem dashParticle;
 	public GameObject movementRaycast;
 	public GameObject playerTrail;
+	public ParticleSystem dashParticle;
+	public ParticleSystem jumpParticle;
 	public SpriteRenderer playerSprite;
 	public Animator animatorPlayer;
 	public float runSpeed;
+	public float dashSpeed;
 	public Vector2 extents;
 
 	[HideInInspector] public Vector3 lastTargetPosition;
 	[HideInInspector] public bool isMoving;
-	[HideInInspector] public int speed;
 
 	[HideInInspector] public bool onRightWall;
 	[HideInInspector] public bool onLeftWall;
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (isMoving)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, dashSpeed * Time.deltaTime);
 			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
 			if (distance <= 0.3f)
 			{
@@ -155,6 +156,7 @@ public class PlayerMovement : MonoBehaviour {
         {
 			FindObjectOfType<AudioManager>().Play("Jump");
 			rb.AddForce(new Vector2(0f, jumpForce));
+			jumpParticle.Play();
 			isGrounded = false;
 		}
 	}

@@ -65,11 +65,11 @@
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnviromentalScripts\RotatablePlatform.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\ArrowAim.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\BootUp.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DontDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\FontFix.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\LevelProgress.cs" />
-     <Compile Include="Assets\Scripts\MiscScripts\LogoTimer.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\SceneSwitch.cs" />
