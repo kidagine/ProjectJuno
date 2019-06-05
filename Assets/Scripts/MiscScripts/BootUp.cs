@@ -66,7 +66,7 @@ public class BootUp : MonoBehaviour {
 		FindObjectOfType<AudioManager>().Play("Intro");
 		paneFade.SetActive(false);
 		introVideo.SetActive(true);
-		yield return new WaitForSeconds(4);
+		yield return new WaitForSeconds(5);
 		flyMyChildText.SetActive(false);
 	}
 

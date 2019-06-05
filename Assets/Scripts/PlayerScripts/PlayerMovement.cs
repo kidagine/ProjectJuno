@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject aimRay;
 	public GameObject movementRaycast;
 	public GameObject playerTrail;
+	public GameObject cinemachineCamera;
 	public ParticleSystem dashParticle;
 	public ParticleSystem jumpParticle;
 	public SpriteRenderer playerSprite;
@@ -39,7 +40,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool jump;
     private bool isGrounded;
 	private float horizontalMove;
-    private float jumpCooldown = 0.1f;
+	private float slowdownTimer = 0.5f;	
+	private float jumpCooldown = 0.1f;
     private float jumpForce = 400f;
 	private readonly float rayDistance = 0.2f;
 
@@ -118,14 +120,18 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (onTopWall && !isMoving)
 		{
+			cinemachineCamera.SetActive(false);
             rb.gravityScale = 3;
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		}
 		else
         {
-            rb.gravityScale = 0;
+			cinemachineCamera.SetActive(true);
+			rb.gravityScale = 0;
         }
         jumpCooldown -= Time.deltaTime;
+
+		DetectLongFall();
     }
 
     void FixedUpdate()
@@ -177,7 +183,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			if (!hit.collider.CompareTag("Player") && !jump)
 			{
-				Debug.Log("grounded");
 				isGrounded = true;
 				jumpCooldown = 0.1f;
 			}
@@ -296,4 +301,26 @@ public class PlayerMovement : MonoBehaviour {
 		onBottomWall = false;
 		onRotatable = false;
 	}
+
+	private void DetectLongFall()
+	{
+		float slowdownTimerMax = 0.5f;
+		if (!isGrounded && rb.gravityScale == 3)
+		{
+			slowdownTimer -= Time.deltaTime;
+			if (slowdownTimer <= 0.0f)
+			{
+				Time.timeScale = 0.1f;
+			}
+		}
+		else
+		{
+			if (Time.timeScale != 1.0f || slowdownTimer != slowdownTimerMax)
+			{
+				Time.timeScale = 1.0f;
+				slowdownTimer = slowdownTimerMax;
+			}
+		}
+	}
+
 }

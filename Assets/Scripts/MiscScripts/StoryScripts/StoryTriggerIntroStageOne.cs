@@ -11,7 +11,7 @@ public class StoryTriggerIntroStageOne : MonoBehaviour {
 	public AudioSource backgroundMusic;
 
 	private Rigidbody2D playerRigidbody;
-	private int speed = -20;
+	private readonly int speed = -20;
 
 	void Start()
 	{

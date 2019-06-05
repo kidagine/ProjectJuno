@@ -4,14 +4,15 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: NormalRuleTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300070, guid: 9945b7a527ff45d4bbe92565f4ab99e8, type: 3}
+  m_DefaultSprite: {fileID: 21300002, guid: 9945b7a527ff45d4bbe92565f4ab99e8, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 2
   m_TilingRules:
