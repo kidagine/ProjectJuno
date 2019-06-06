@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject aimRay;
 	public GameObject movementRaycast;
 	public GameObject playerTrail;
-	public GameObject cinemachineCamera;
+	public CinemachineVirtualCamera cinemachineVirtualCamera;
 	public ParticleSystem dashParticle;
 	public ParticleSystem jumpParticle;
 	public SpriteRenderer playerSprite;
@@ -118,15 +119,16 @@ public class PlayerMovement : MonoBehaviour {
         {
             animatorPlayer.SetBool("IsJumping", false);
         }
+
         if (onTopWall && !isMoving)
 		{
-			cinemachineCamera.SetActive(false);
-            rb.gravityScale = 3;
+			cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.3f;
+			rb.gravityScale = 3;
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		}
 		else
         {
-			cinemachineCamera.SetActive(true);
+			cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.0f;
 			rb.gravityScale = 0;
         }
         jumpCooldown -= Time.deltaTime;

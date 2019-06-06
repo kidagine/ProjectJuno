@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyAutoAim.cs" />
      <Compile Include="Assets\Scripts\EnemyScripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnviromentalScripts\RotatablePlatform.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\AnimationEventHandler.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\ArrowAim.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\BootUp.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\DestroyTime.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\Scripts\MiscScripts\SceneTransitionManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryEvent.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryPickUpItems.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryStateIntroStage.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryTriggerIntroStageOne.cs" />
      <Compile Include="Assets\Scripts\ParticleScripts\DashEffect.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />

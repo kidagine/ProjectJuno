@@ -9,6 +9,8 @@ public class PlayerFallIntroCin : MonoBehaviour
 	[SerializeField] private GameObject beam;
 	[SerializeField] private PlayerMovement playerMovement;
 	[SerializeField] private PlayerAim playerAim;
+	[SerializeField] private Animator animator;
+	[SerializeField] private GameObject dashParticle;
 
 	void Start()
     {
@@ -29,6 +31,7 @@ public class PlayerFallIntroCin : MonoBehaviour
 	private void EnablePlayer()
 	{
 		beam.SetActive(true);
+		dashParticle.SetActive(true);
 		playerMovement.enabled = true;
 		playerAim.enabled = true;
 	}
