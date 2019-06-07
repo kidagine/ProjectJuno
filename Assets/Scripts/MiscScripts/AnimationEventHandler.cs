@@ -6,7 +6,8 @@ public class AnimationEventHandler : MonoBehaviour
 {
 
 	private static AnimationEventHandler instance = null;
-	[HideInInspector] public string stringValue;
+	private string activate = "";
+	private string release = "";
 
 	public static AnimationEventHandler Instance
 	{
@@ -17,19 +18,47 @@ public class AnimationEventHandler : MonoBehaviour
 	{
 		if (instance != null)
 		{
-			Destroy(this.gameObject);
+			Destroy(this);
 			return;
 		}
 		else
 		{
 			instance = this;
 		}
-		DontDestroyOnLoad(this.gameObject);
 	}
 
-	public void SetActivate(string value)
+	public void SetActivate(string stringValue)
 	{
-		stringValue = value;
+		activate = stringValue;
+	}
+
+	public bool GetActivate()
+	{
+		if (activate.Equals("Activate"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void SetRelease(string stringValue)
+	{
+		release = stringValue;
+	}
+
+	public bool GetRelease()
+	{
+		if (release.Equals("Release"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

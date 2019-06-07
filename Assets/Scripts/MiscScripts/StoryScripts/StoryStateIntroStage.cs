@@ -13,19 +13,28 @@ public class StoryStateIntroStage : MonoBehaviour
 
 	void Start()
     {
-		playerAnimator.SetTrigger("Lay");
+		playerAnimator.SetBool(("IsLaying"), true);
 		fadePanelAnimator.SetTrigger("FadeIntroStage");
 		playerMovement.enabled = false;
     }
 
 	void Update()
 	{
+		if (AnimationEventHandler.Instance.GetRelease())
+		{
+			if (Input.anyKey)
+			{
+				playerMovement.enabled = true;
+				playerAnimator.SetBool(("IsLaying"), false);
+				Destroy(this);
+			}
+		}
 
-		if (AnimationEventHandler.Instance.stringValue.Equals("Activate"))
+		if (AnimationEventHandler.Instance.GetActivate())
 		{
 			npc.SetActive(true);
 		}
-		else if (AnimationEventHandler.Instance.stringValue.Equals("Deactivate"))
+		else if (!(AnimationEventHandler.Instance.GetActivate()))
 		{
 			npc.SetActive(false);
 		}
@@ -33,7 +42,6 @@ public class StoryStateIntroStage : MonoBehaviour
 
 	public void ShowNPC()
 	{
-		Debug.Log("TEST");
 		npc.SetActive(true);
 	}
 

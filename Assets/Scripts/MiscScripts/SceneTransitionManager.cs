@@ -25,14 +25,14 @@ public class SceneTransitionManager : MonoBehaviour {
 
 		if (instance != null)
 		{
-			Destroy(this.gameObject);
+			Destroy(this);
 			return;
 		}
 		else
 		{
 			instance = this;
 		}
-		DontDestroyOnLoad(this.gameObject);
+		DontDestroyOnLoad(this);
 	}
 
 	public void SetPlayerPosition(Vector3 playerPosition)
