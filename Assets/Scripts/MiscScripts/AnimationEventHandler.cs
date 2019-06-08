@@ -8,6 +8,7 @@ public class AnimationEventHandler : MonoBehaviour
 	private static AnimationEventHandler instance = null;
 	private string activate = "";
 	private string release = "";
+	private string anim = "";
 
 	public static AnimationEventHandler Instance
 	{
@@ -44,6 +45,23 @@ public class AnimationEventHandler : MonoBehaviour
 		}
 	}
 
+	public void SetChangeAnim(string stringValue)
+	{
+		anim = stringValue;
+	}
+
+	public bool GetChangeAnim()
+	{
+		if (anim.Equals("Change"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public void SetRelease(string stringValue)
 	{
 		release = stringValue;
@@ -59,6 +77,11 @@ public class AnimationEventHandler : MonoBehaviour
 		{
 			return false;
 		}
+	}
+
+	public void PlaySound(string sound)
+	{
+		FindObjectOfType<AudioManager>().Play(sound);
 	}
 
 }

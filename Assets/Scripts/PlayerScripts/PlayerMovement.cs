@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float jumpCooldown = 0.1f;
     private float jumpForce = 400f;
 	private readonly float rayDistance = 0.2f;
+	private int footstepIndex;
 
 
 	void Start ()
@@ -323,6 +324,26 @@ public class PlayerMovement : MonoBehaviour {
 				slowdownTimer = slowdownTimerMax;
 			}
 		}
+	}
+
+	public void PlayFootstepSound()
+	{
+		footstepIndex++;
+		ArrayList listSounds = new ArrayList
+		{
+			FindObjectOfType<AudioManager>().GetSound("Footstep1"),
+			FindObjectOfType<AudioManager>().GetSound("Footstep2"),
+			FindObjectOfType<AudioManager>().GetSound("Footstep3"),
+			FindObjectOfType<AudioManager>().GetSound("Footstep4"),
+			FindObjectOfType<AudioManager>().GetSound("Footstep5"),
+			FindObjectOfType<AudioManager>().GetSound("Footstep6")
+		};
+		if (footstepIndex >= listSounds.Count)
+		{
+			footstepIndex = 0;
+		}
+		Sounds s = (Sounds)listSounds[footstepIndex];
+		s.source.Play();
 	}
 
 }

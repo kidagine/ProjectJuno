@@ -13,15 +13,24 @@ public class StoryStateIntroStage : MonoBehaviour
 
 	void Start()
     {
-		playerAnimator.SetBool(("IsLaying"), true);
+		playerAnimator.SetBool("IsLaying", true);
+		playerAnimator.SetBool("CutsIsSleeping", true);
 		fadePanelAnimator.SetTrigger("FadeIntroStage");
 		playerMovement.enabled = false;
-    }
+	}
 
 	void Update()
 	{
+		if (AnimationEventHandler.Instance.GetChangeAnim())
+		{
+			Debug.Log("se");
+			playerAnimator.SetBool("CutsIsSleeping", false);
+			playerAnimator.SetTrigger("OpenEyes");
+		}
+
 		if (AnimationEventHandler.Instance.GetRelease())
 		{
+			playerAnimator.SetTrigger("WakeUp");
 			if (Input.anyKey)
 			{
 				playerMovement.enabled = true;
