@@ -4586,7 +4586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.002153039, y: -7.9078407, z: -8}
+  m_LocalPosition: {x: 0.0028883219, y: -7.9078407, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -11208,7 +11208,7 @@ MonoBehaviour:
     pitch: 1.47
     loop: 0
     source: {fileID: 0}
-  - name: Death
+  - name: 1
     clip: {fileID: 8300000, guid: 45a8832f325276a4cb311cbee7c9af7d, type: 3}
     volume: 0.358
     pitch: 1.01
@@ -11240,43 +11240,55 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FadeOut
     clip: {fileID: 8300000, guid: 977853763883ef64c95fbcec3dcdf6a4, type: 3}
-    volume: 0.765
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep1
     clip: {fileID: 8300000, guid: 5d406f72f6bcd834f8bc7e2f019115dc, type: 3}
-    volume: 0.02
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep2
     clip: {fileID: 8300000, guid: 3754600c580f41b4e812a2f4452921b3, type: 3}
-    volume: 0.02
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep3
     clip: {fileID: 8300000, guid: 95656b1261f14214f95c8caecb78a64e, type: 3}
-    volume: 0.02
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep4
     clip: {fileID: 8300000, guid: 45cbe5b643eae73469ec444fe056ba48, type: 3}
-    volume: 0.02
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep5
     clip: {fileID: 8300000, guid: 7dbbcc430e89de147a9f60c63a457c3b, type: 3}
-    volume: 0.02
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Footstep6
     clip: {fileID: 8300000, guid: 37decc4af6200fd468aec98c7391d0c0, type: 3}
-    volume: 0.02
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BackgroundIntroStage
+    clip: {fileID: 8300000, guid: 8c34bf3c885944644b97d42caf703042, type: 3}
+    volume: 0.072
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: LightFadeOut
+    clip: {fileID: 8300000, guid: 7f8af81cdcaf1eb4fa361ad5bc0c6f19, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -17729,7 +17741,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1346892161
 AudioSource:
