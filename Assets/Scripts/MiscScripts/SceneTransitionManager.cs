@@ -9,10 +9,12 @@ public class SceneTransitionManager : MonoBehaviour {
 
 	private GameObject player;
 	private Vector3 lastPlayerPosition;
+	
 
-	private static bool hasPickedBoots;
 	private GameObject boots;
 	private GameObject playerAim;
+	private static bool hasPickedBoots;
+	private bool isPlayerFacingRight;
 
 	public static SceneTransitionManager Instance
 	{
@@ -43,6 +45,16 @@ public class SceneTransitionManager : MonoBehaviour {
 	public Vector3 GetPlayerPosition()
 	{
 		return lastPlayerPosition;
+	}
+
+	public void SetPlayerFacing(bool value)
+	{
+		isPlayerFacingRight = value;
+	}
+
+	public bool GetPlayerFacing()
+	{
+		return isPlayerFacingRight;
 	}
 
 	public void HasPickedItem(bool itemPicked)

@@ -7,6 +7,7 @@ public class SceneSwitch : MonoBehaviour {
 
     public Animator animatorFade;
     public Animator animatorCamera;
+	public SpriteRenderer playerSpriteRenderer;
     public int indexOfSceneToLoad;
 
 	private Rigidbody2D rb;
@@ -20,13 +21,16 @@ public class SceneSwitch : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+		bool isFacingRight;
+		if (other.gameObject.CompareTag("Player"))
         {
 			rb = other.GetComponent<Rigidbody2D>();
 			FindObjectOfType<PauseManager>().DisablePlayerMovement();
 
 			Vector3 test = new Vector3(-2, -8, 0);
+			isFacingRight = playerSpriteRenderer.flipX;
 			SceneTransitionManager.Instance.SetPlayerPosition(test);
+			SceneTransitionManager.Instance.SetPlayerFacing(isFacingRight);
 
 			animatorFade.SetTrigger("FadeOut");
 			StartCoroutine(SwitchScene());
@@ -63,7 +67,7 @@ public class SceneSwitch : MonoBehaviour {
 
     IEnumerator SwitchScene()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 		SceneManager.LoadScene(indexOfSceneToLoad);
 
 	}

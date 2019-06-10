@@ -4586,7 +4586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0028883219, y: -7.9078407, z: -8}
+  m_LocalPosition: {x: 0.002597928, y: -7.9078407, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -5149,7 +5149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597517304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68, y: -8.051, z: -0.07935435}
+  m_LocalPosition: {x: 0.667, y: -8.051, z: -0.07935435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 872246281}
@@ -5205,7 +5205,7 @@ MonoBehaviour:
   jumpParticle: {fileID: 791137430}
   playerSprite: {fileID: 597517306}
   animatorPlayer: {fileID: 597517313}
-  runSpeed: 12
+  runSpeed: 10
   dashSpeed: 25
   extents: {x: 0, y: 0}
   lastTargetPosition: {x: 0, y: 0, z: 0}
@@ -11286,6 +11286,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Land
+    clip: {fileID: 8300000, guid: 58b3ad74593b4584e94b73fadc113eca, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: LightFadeOut
     clip: {fileID: 8300000, guid: 7f8af81cdcaf1eb4fa361ad5bc0c6f19, type: 3}
     volume: 1
@@ -17069,7 +17075,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278514549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7996897, y: -7.97087, z: -8}
+  m_LocalPosition: {x: -0.8126897, y: -7.97087, z: -8}
   m_LocalScale: {x: 0.76853526, y: 0.76853526, z: 0.76853526}
   m_Children:
   - {fileID: 1261732015}
@@ -17272,6 +17278,7 @@ MonoBehaviour:
   generalMenuUI: {fileID: 942966014}
   optionsMenuUI: {fileID: 665393975}
   gameOverUi: {fileID: 924943688}
+  playerSpriteRenderer: {fileID: 597517306}
   playerMovement: {fileID: 597517309}
   animator: {fileID: 78480132}
   animatorUpdateMode: 2
@@ -17418,8 +17425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318390445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.799, y: -8.21, z: 0}
-  m_LocalScale: {x: 6.875, y: 2.5, z: 1}
+  m_LocalPosition: {x: -2.02, y: -8.202, z: 0}
+  m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1214043108}
   m_RootOrder: 0
@@ -17510,8 +17517,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de409a98261eda408bc5eadf6fec66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorFade: {fileID: 1343156384}
+  animatorFade: {fileID: 1291461327}
   animatorCamera: {fileID: 1278514552}
+  playerSpriteRenderer: {fileID: 597517306}
   indexOfSceneToLoad: 2
 --- !u!1 &1338453734
 GameObject:
@@ -22113,7 +22121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!199 &2752820335685350534
 ParticleSystemRenderer:
   serializedVersion: 6

@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool facingRight;
     private bool jump;
     private bool isGrounded;
+	private bool hasLanded;
 	private float horizontalMove;
 	private float slowdownTimer = 0.5f;	
 	private float jumpCooldown = 0.1f;
@@ -60,6 +61,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (isMoving)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, dashSpeed * Time.deltaTime);
+			Debug.Log("test");
+			Debug.Log(playerAimRayCast.currentTargetPositionOffset);
 			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
 			if (distance <= 0.3f)
 			{
@@ -142,7 +145,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (onTopWall && !isMoving)
 		{
 			CheckGround();
-			playerSprite.flipX = false;
 			Run(horizontalMove * Time.fixedDeltaTime, jump);
 			animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(horizontalMove));
 			jump = false;
@@ -152,30 +154,22 @@ public class PlayerMovement : MonoBehaviour {
 	private void Run(float move, bool jump)
 	{
 		rb.velocity = new Vector2(move * 10, rb.velocity.y);
-		if (move < 0 && !facingRight)
+		if (move < 0)
 		{
-			Flip();
+			playerSprite.flipX = true;
 		}
-		else if (move > 0 && facingRight)
+		else if (move > 0)
 		{
-			Flip();
+			playerSprite.flipX = false;
 		}
 
-        if (jump && isGrounded)
+		if (jump && isGrounded)
         {
 			FindObjectOfType<AudioManager>().Play("Jump");
 			rb.AddForce(new Vector2(0f, jumpForce));
 			jumpParticle.Play();
 			isGrounded = false;
 		}
-	}
-
-	private void Flip()
-	{
-		facingRight = !facingRight;
-		Vector3 scale = transform.localScale;
-		scale.x *= -1;
-		transform.localScale = scale;
 	}
 
 	private void CheckGround()
@@ -188,6 +182,11 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				isGrounded = true;
 				jumpCooldown = 0.1f;
+				if (!hasLanded)
+				{
+					FindObjectOfType<AudioManager>().Play("Land");
+					hasLanded = true;
+				}
 			}
 		}
 		else
@@ -195,6 +194,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (jumpCooldown <= 0)
 			{
 				isGrounded = false;
+				hasLanded = false;
 			}
 		}
 	}
@@ -289,7 +289,6 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = Vector2.zero;
 		playerAimRayCast.ResetIsMovePossible();
 
-		
 		ClearWallBools();
 		aimRay.SetActive(false);
 		lastTargetPosition = playerAimRayCast.currentTargetPosition;

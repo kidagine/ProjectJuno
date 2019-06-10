@@ -15,6 +15,7 @@ public class PauseManager : MonoBehaviour {
 	public GameObject generalMenuUI;
 	public GameObject optionsMenuUI;
 	public GameObject gameOverUi;
+	public SpriteRenderer playerSpriteRenderer;
 	public PlayerMovement playerMovement;
 	public Animator animator;
 	public AnimatorUpdateMode animatorUpdateMode;
@@ -54,6 +55,9 @@ public class PauseManager : MonoBehaviour {
 				return;
 			}
 		}
+		bool isFacingRight;
+		isFacingRight = SceneTransitionManager.Instance.GetPlayerFacing();
+		playerSpriteRenderer.flipX = isFacingRight;
 	}
 
 	void Update ()
@@ -72,10 +76,6 @@ public class PauseManager : MonoBehaviour {
 		if (GameIsOver)
 		{
 			StartCoroutine(EndGame());
-		}
-		else if (!GameIsOver && !hasBegun)
-		{
-			BeginGame();
 		}
 
 		if (pauseMenuUI.activeSelf)
@@ -244,12 +244,6 @@ public class PauseManager : MonoBehaviour {
 		yield return new WaitForSeconds(1);
 		SceneManager.LoadScene(indexOfSceneToLoad);
 		GameIsOver = false;
-	}
-
-	private void BeginGame()
-	{
-		hasBegun = true;
-		pixelBoy.IncreaseResolution(318);
 	}
 
 	public void DisablePlayerMovement()
