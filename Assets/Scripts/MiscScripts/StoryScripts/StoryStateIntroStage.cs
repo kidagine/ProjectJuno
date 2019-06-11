@@ -23,14 +23,13 @@ public class StoryStateIntroStage : MonoBehaviour
 
 	void Update()
 	{
-		if (AnimationEventHandler.Instance.GetChangeAnim())
+		if (FindObjectOfType<AnimationEventHandler>().GetChangeAnim())
 		{
-			Debug.Log("se");
 			playerAnimator.SetBool("CutsIsSleeping", false);
 			playerAnimator.SetTrigger("OpenEyes");
 		}
 
-		if (AnimationEventHandler.Instance.GetRelease())
+		if (FindObjectOfType<AnimationEventHandler>().GetRelease())
 		{
 			playerAnimator.SetTrigger("WakeUp");
 			if (Input.anyKey)
@@ -41,11 +40,11 @@ public class StoryStateIntroStage : MonoBehaviour
 			}
 		}
 
-		if (AnimationEventHandler.Instance.GetActivate())
+		if (FindObjectOfType<AnimationEventHandler>().GetActivate())
 		{
 			npc.SetActive(true);
 		}
-		else if (!(AnimationEventHandler.Instance.GetActivate()))
+		else if (!(FindObjectOfType<AnimationEventHandler>().GetActivate()))
 		{
 			npc.SetActive(false);
 		}

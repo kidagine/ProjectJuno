@@ -10,24 +10,6 @@ public class AnimationEventHandler : MonoBehaviour
 	private string release = "";
 	private string anim = "";
 
-	public static AnimationEventHandler Instance
-	{
-		get { return instance; }
-	}
-
-	void Awake()
-	{
-		if (instance != null)
-		{
-			Destroy(this);
-			return;
-		}
-		else
-		{
-			instance = this;
-		}
-	}
-
 	public void SetActivate(string stringValue)
 	{
 		activate = stringValue;

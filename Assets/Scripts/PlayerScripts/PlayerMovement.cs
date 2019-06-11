@@ -345,4 +345,9 @@ public class PlayerMovement : MonoBehaviour {
 		s.source.Play();
 	}
 
+	public void PlaySound(string sound)
+	{
+		FindObjectOfType<AudioManager>().Play(sound);
+	}
+
 }
