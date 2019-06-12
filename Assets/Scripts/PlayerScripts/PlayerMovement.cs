@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -61,8 +59,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (isMoving)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, dashSpeed * Time.deltaTime);
-			Debug.Log("test");
-			Debug.Log(playerAimRayCast.currentTargetPositionOffset);
 			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
 			if (distance <= 0.3f)
 			{

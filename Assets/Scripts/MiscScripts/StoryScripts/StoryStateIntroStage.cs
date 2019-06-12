@@ -7,6 +7,7 @@ public class StoryStateIntroStage : MonoBehaviour
 
 	[SerializeField] private Animator fadePanelAnimator;
 	[SerializeField] private Animator playerAnimator;
+	[SerializeField] private Animator cameraAnimator;
 	[SerializeField] private PlayerMovement playerMovement;
 	[SerializeField] private GameObject npc;
 
@@ -14,6 +15,8 @@ public class StoryStateIntroStage : MonoBehaviour
 	void Start()
     {
 		FindObjectOfType<AudioManager>().Play("LightFadeOut");
+		FindObjectOfType<AudioManager>().Play("IntroStagePiano");
+		cameraAnimator.SetTrigger("ZoomOut");
 		playerAnimator.SetBool("IsLaying", true);
 		playerAnimator.SetBool("CutsIsSleeping", true);
 		fadePanelAnimator.SetTrigger("FadeIntroStage");

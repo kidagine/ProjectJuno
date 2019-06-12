@@ -11281,7 +11281,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: BackgroundIntroStage
-    clip: {fileID: 8300000, guid: 8c34bf3c885944644b97d42caf703042, type: 3}
+    clip: {fileID: 8300000, guid: dbcddbf42664c9948b3ff69224e25335, type: 3}
     volume: 0.072
     pitch: 1
     loop: 1
@@ -11294,7 +11294,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LightFadeOut
     clip: {fileID: 8300000, guid: 7f8af81cdcaf1eb4fa361ad5bc0c6f19, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -11307,6 +11307,12 @@ MonoBehaviour:
   - name: Blink
     clip: {fileID: 8300000, guid: dbcddbf42664c9948b3ff69224e25335, type: 3}
     volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: IntroStagePiano
+    clip: {fileID: 8300000, guid: cdc81430b290dde49bde201922ec9af8, type: 3}
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -12488,7 +12494,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -2.1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13343,6 +13349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePanelAnimator: {fileID: 1291461327}
   playerAnimator: {fileID: 597517313}
+  cameraAnimator: {fileID: 1278514552}
   playerMovement: {fileID: 597517309}
   npc: {fileID: 130848479}
 --- !u!1 &1157413854
@@ -17549,7 +17556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1338453735
 RectTransform:
   m_ObjectHideFlags: 0
