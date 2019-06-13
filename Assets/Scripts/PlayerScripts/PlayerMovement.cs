@@ -46,6 +46,11 @@ public class PlayerMovement : MonoBehaviour {
 	private readonly float rayDistance = 0.2f;
 	private int footstepIndex;
 
+	private float cooldownRunFlip = 0.1f;
+	private bool isGoingRight;
+	private bool hasRunFlipped;
+	private bool isTempRunSpeedSaved;
+
 
 	void Start ()
 	{
@@ -125,6 +130,7 @@ public class PlayerMovement : MonoBehaviour {
 			cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.3f;
 			rb.gravityScale = 3;
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+			TurnAround();
 		}
 		else
         {
@@ -191,6 +197,54 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				isGrounded = false;
 				hasLanded = false;
+			}
+		}
+	}
+
+	private void TurnAround()
+	{
+		if (horizontalMove != 0 && !isTempRunSpeedSaved)
+		{
+			if (horizontalMove > 0.0f)
+			{
+				isGoingRight = true;
+			}
+			else if (horizontalMove < 0.0f)
+			{
+				isGoingRight = false;
+			}
+			isTempRunSpeedSaved = true;
+		}
+		else if (horizontalMove == 0)
+		{
+			cooldownRunFlip -= Time.deltaTime;
+			if (cooldownRunFlip <= 0)
+			{
+				cooldownRunFlip = 0.1f;
+				isTempRunSpeedSaved = false;
+			}
+		}
+		else
+		{
+			cooldownRunFlip = 0.1f;
+		}
+
+		if (isGoingRight && !hasRunFlipped)
+		{
+			if (horizontalMove < 0.0f)
+			{
+				animatorPlayer.SetTrigger("RunFlip");
+				hasRunFlipped = false;
+				isGoingRight = false;
+			}
+		}
+		if (!isGoingRight && !hasRunFlipped)
+		{
+			if (horizontalMove > 0.0f)
+			{
+				animatorPlayer.SetTrigger("RunFlip");
+				hasRunFlipped = false;
+				isGoingRight = true;
 			}
 		}
 	}

@@ -21,7 +21,6 @@ public class StoryStateIntroStage : MonoBehaviour
 		playerAnimator.SetBool("CutsIsSleeping", true);
 		fadePanelAnimator.SetTrigger("FadeIntroStage");
 		playerMovement.enabled = false;
-		Invoke("PlayBackgroundSound", 1);
 	}
 
 	void Update()
@@ -61,11 +60,6 @@ public class StoryStateIntroStage : MonoBehaviour
 	public void HideNPC()
 	{
 		npc.SetActive(false);
-	}
-
-	private void PlayBackgroundSound()
-	{
-		FindObjectOfType<AudioManager>().Play("BackgroundIntroStage");
 	}
 
 }

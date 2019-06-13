@@ -104,37 +104,37 @@
      <None Include="Assets\Tiles\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />
      <None Include="Assets\Scripts\ShaderScripts\KillLineShader.shader" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Cinemachine">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>C:/Users/Kid Agine/Desktop/UnityProjects/New folder/ProjectJuno/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
