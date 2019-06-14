@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryPickUpItems.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryStateIntroStage.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryTriggerIntroStageOne.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\TimelineSignalInvoker.cs" />
      <Compile Include="Assets\Scripts\ParticleScripts\DashEffect.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAim.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAimRayCast.cs" />
