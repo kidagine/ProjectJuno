@@ -38,12 +38,10 @@ public class PlayerMovement : MonoBehaviour {
 	private bool facingRight;
     private bool jump;
     private bool isGrounded;
-	private bool hasLanded;
 	private float horizontalMove;
-	private float slowdownTimer = 0.5f;	
+	private float slowdownTimer;	
 	private float jumpCooldown = 0.1f;
     private float jumpForce = 400f;
-	private readonly float rayDistance = 0.2f;
 	private int footstepIndex;
 
 	private float cooldownRunFlip = 0.1f;
@@ -57,6 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 		extents = boxCollider.bounds.extents;
 		onTopWall = true;
 		aimRay.SetActive(false);
+		isGrounded = false;
 	}
 
 	void Update()
@@ -110,27 +109,26 @@ public class PlayerMovement : MonoBehaviour {
 			aimRay.SetActive(false);
 		}
 
-
         if (Input.GetButtonDown("Jump"))
         {
-            animatorPlayer.SetBool("IsJumping", true);
 			jump = true;
 		}
-		if (rb.velocity.y != 0)
-        {
-            animatorPlayer.SetBool("IsJumping", true);
-        }
-        else
-        {
-            animatorPlayer.SetBool("IsJumping", false);
-        }
+		if (rb.velocity.y != 0 && isGrounded)
+		{
+			animatorPlayer.SetBool("IsJumping", true);
+		}
+		else if (!isGrounded)
+		{
+			animatorPlayer.SetBool("IsJumping", false);
+		}
 
-        if (onTopWall && !isMoving)
+		if (onTopWall && !isMoving)
 		{
 			cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.3f;
 			rb.gravityScale = 3;
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 			TurnAround();
+			CheckDropForSlowdown();
 		}
 		else
         {
@@ -139,7 +137,6 @@ public class PlayerMovement : MonoBehaviour {
         }
         jumpCooldown -= Time.deltaTime;
 
-		DetectLongFall();
     }
 
     void FixedUpdate()
@@ -176,27 +173,48 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void CheckGround()
 	{
+		float rayDistance = 0.2f;
 		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
 		Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
 		if (hit.collider != null)
 		{
 			if (!hit.collider.CompareTag("Player") && !jump)
 			{
-				isGrounded = true;
 				jumpCooldown = 0.1f;
-				if (!hasLanded)
+				if (!isGrounded)
 				{
 					FindObjectOfType<AudioManager>().Play("Land");
-					hasLanded = true;
+					isGrounded = true;
+				}
+			}
+			else
+			{
+				if (jumpCooldown <= 0)
+				{
+					isGrounded = false;
 				}
 			}
 		}
-		else
+	}
+
+	private void CheckDropForSlowdown()
+	{
+		float rayDistance = 3.5f;
+		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
+		if (hit.collider != null)
 		{
-			if (jumpCooldown <= 0)
+			if (!hit.collider.CompareTag("Player"))
 			{
-				isGrounded = false;
-				hasLanded = false;
+				Time.timeScale = 1.0f;
+				slowdownTimer = 0.3f;
+			}
+			else
+			{
+				slowdownTimer -= Time.deltaTime;
+				if (slowdownTimer <= 0.0f)
+				{
+					Time.timeScale = 0.1f;
+				}
 			}
 		}
 	}
@@ -281,6 +299,7 @@ public class PlayerMovement : MonoBehaviour {
 			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 
+			hasRunFlipped = false;
 			onTopWall = true;
 			isMoving = false;
 			onRotatable = true;
@@ -324,12 +343,13 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void ResetMovement()
 	{
+		Time.timeScale = 1.0f;
 		gameObject.transform.parent = null;
 		boxCollider.enabled = false;
 		FindObjectOfType<AudioManager>().Play("Dash");
 		animatorPlayer.SetTrigger("Dash");
 		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
-
+		hasRunFlipped = true;
 		dashParticle.Play();
 		playerTrail.SetActive(true);
 		isMoving = true;
@@ -352,27 +372,6 @@ public class PlayerMovement : MonoBehaviour {
 		onTopWall = false;
 		onBottomWall = false;
 		onRotatable = false;
-	}
-
-	private void DetectLongFall()
-	{
-		float slowdownTimerMax = 0.5f;
-		if (!isGrounded && rb.gravityScale == 3)
-		{
-			slowdownTimer -= Time.deltaTime;
-			if (slowdownTimer <= 0.0f)
-			{
-				Time.timeScale = 0.1f;
-			}
-		}
-		else
-		{
-			if (Time.timeScale != 1.0f || slowdownTimer != slowdownTimerMax)
-			{
-				Time.timeScale = 1.0f;
-				slowdownTimer = slowdownTimerMax;
-			}
-		}
 	}
 
 	public void PlayFootstepSound()

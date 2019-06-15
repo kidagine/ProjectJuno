@@ -50,7 +50,7 @@ public class PlayerAim : MonoBehaviour
 				gunClipSlider.value -= 1;
 				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				FindObjectOfType<AudioManager>().Play("Shot");
-				cooldown = 0.2f;
+				cooldown = 0.35f;
 				playerStats.playerShield.SetActive(false);
 				playerMovement.runSpeed = defaultRunSpeed / 2;
 			}

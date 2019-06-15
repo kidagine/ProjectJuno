@@ -4483,6 +4483,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4586,7 +4587,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0030766726, y: -7.9078407, z: -8}
+  m_LocalPosition: {x: 0.0010176897, y: -7.9078407, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -4599,7 +4600,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 819f454ebbd357740ac8f6316cdc6cb9, type: 3}
   m_Name: 
@@ -4607,8 +4608,28 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   excludeLayers:
     serializedVersion: 2
-    m_Bits: 1591
-  w: 320
+    m_Bits: 0
+  w: 1080
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 100
+  m_RefResolutionX: 640
+  m_RefResolutionY: 360
+  m_UpscaleRT: 1
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &524330777
 GameObject:
   m_ObjectHideFlags: 0
@@ -11208,7 +11229,7 @@ MonoBehaviour:
     pitch: 1.47
     loop: 0
     source: {fileID: 0}
-  - name: 1
+  - name: Death
     clip: {fileID: 8300000, guid: 45a8832f325276a4cb311cbee7c9af7d, type: 3}
     volume: 0.358
     pitch: 1.01
