@@ -2908,11 +2908,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361008496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.127, y: -0.3226, z: 0}
+  m_LocalPosition: {x: -0.029, y: -0.3213, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 597517307}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403128012
 GameObject:
@@ -4587,7 +4587,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0010176897, y: -7.9078407, z: -8}
+  m_LocalPosition: {x: 0.0010234118, y: -7.9078407, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1128572065}
@@ -5173,8 +5173,8 @@ Transform:
   m_LocalPosition: {x: 0.667, y: -8.051, z: -0.07935435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 872246281}
   - {fileID: 361008497}
+  - {fileID: 872246281}
   - {fileID: 1065620602}
   - {fileID: 1470776267}
   m_Father: {fileID: 0}
@@ -5216,20 +5216,23 @@ MonoBehaviour:
   playerAimRayCast: {fileID: 1824793688}
   playerStats: {fileID: 597517312}
   playerAim: {fileID: 872246283}
-  rb: {fileID: 597517308}
-  boxCollider: {fileID: 597517311}
-  aimRay: {fileID: 1824793687}
-  movementRaycast: {fileID: 361008496}
-  playerTrail: {fileID: 1033274048}
-  cinemachineVirtualCamera: {fileID: 1278514551}
   dashParticle: {fileID: 2753736565542954972}
   jumpParticle: {fileID: 791137430}
   playerSprite: {fileID: 597517306}
-  animatorPlayer: {fileID: 597517313}
+  playerTrail: {fileID: 1033274048}
   runSpeed: 12
   dashSpeed: 25
-  extents: {x: 0, y: 0}
+  playerAnimator: {fileID: 597517313}
+  rb: {fileID: 597517308}
+  boxCollider: {fileID: 597517311}
+  aimRay: {fileID: 1824793687}
+  movementRaycast: {fileID: 361008497}
+  cinemachineVirtualCamera: {fileID: 1278514551}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   lastTargetPosition: {x: 0, y: 0, z: 0}
+  extents: {x: 0, y: 0}
   isMoving: 0
   onRightWall: 0
   onLeftWall: 0
@@ -11573,7 +11576,7 @@ Transform:
   - {fileID: 1908605506}
   - {fileID: 1824793691}
   m_Father: {fileID: 597517307}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &872246282
 BoxCollider2D:
@@ -13983,7 +13986,7 @@ GameObject:
   - component: {fileID: 1246545553}
   - component: {fileID: 1246545552}
   - component: {fileID: 1246545551}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spikes
   m_TagString: IgnoreRaycast
   m_Icon: {fileID: 0}
@@ -21981,7 +21984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2048741298
 Transform:
   m_ObjectHideFlags: 0

@@ -5,24 +5,33 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public PlayerAimRayCast playerAimRayCast;
-	public PlayerStats playerStats;
-	public PlayerAim playerAim;
-	public Rigidbody2D rb;
-	public BoxCollider2D boxCollider;
-	public GameObject aimRay;
-	public GameObject movementRaycast;
-	public GameObject playerTrail;
-	public CinemachineVirtualCamera cinemachineVirtualCamera;
-	public ParticleSystem dashParticle;
-	public ParticleSystem jumpParticle;
-	public SpriteRenderer playerSprite;
-	public Animator animatorPlayer;
+	[Header("Scripts")]
+	[SerializeField] private PlayerAimRayCast playerAimRayCast;
+	[SerializeField] private PlayerStats playerStats;
+	[SerializeField] private PlayerAim playerAim;
+
+	[Header("Particle effects")]
+	[SerializeField] private ParticleSystem dashParticle;
+	[SerializeField] private ParticleSystem jumpParticle;
+	[SerializeField] private SpriteRenderer playerSprite;
+	[SerializeField] private GameObject playerTrail;
+
+
+	[Header("Player stats")]
 	public float runSpeed;
-	public float dashSpeed;
-	public Vector2 extents;
+	[SerializeField] private float dashSpeed;
+
+	[Header("Misc")]
+	[SerializeField] private Animator playerAnimator;
+	[SerializeField] private Rigidbody2D rb;
+	[SerializeField] private BoxCollider2D boxCollider;
+	[SerializeField] private GameObject aimRay;
+	[SerializeField] private Transform movementRaycast;
+	[SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
+	[SerializeField] private LayerMask groundLayerMask;
 
 	[HideInInspector] public Vector3 lastTargetPosition;
+	[HideInInspector] public Vector2 extents;
 	[HideInInspector] public bool isMoving;
 
 	[HideInInspector] public bool onRightWall;
@@ -38,16 +47,16 @@ public class PlayerMovement : MonoBehaviour {
 	private bool facingRight;
     private bool jump;
     private bool isGrounded;
-	private float horizontalMove;
-	private float slowdownTimer;	
-	private float jumpCooldown = 0.1f;
-    private float jumpForce = 400f;
-	private int footstepIndex;
-
-	private float cooldownRunFlip = 0.1f;
 	private bool isGoingRight;
 	private bool hasRunFlipped;
 	private bool isTempRunSpeedSaved;
+	private float horizontalMove;
+	private float slowdownTimer;	
+	private float jumpCooldown = 0.1f;
+	private float cooldownAnimJump = 0.1f;
+	private float cooldownRunFlip = 0.1f;
+	private float jumpForce = 400f;
+	private int footstepIndex;
 
 
 	void Start ()
@@ -60,15 +69,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update()
 	{
-		if (isMoving)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, dashSpeed * Time.deltaTime);
-			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
-			if (distance <= 0.3f)
-			{
-				boxCollider.enabled = true;
-			}
-		}
 		if (!Input.GetButtonDown("Fire1"))
 		{
 			//Using KB/M
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				if (Input.GetMouseButtonUp(1) && !isMoving && playerAimRayCast.IsMovePossible() && playerAim.isMovePossible)
 				{
-					ResetMovement();
+					Dash();
 				}
 				if (Input.GetMouseButtonUp(1))
 				{
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				if (Input.GetButtonDown("Dash") && !isMoving && playerAimRayCast.IsMovePossible())
 				{
-					ResetMovement();
+					Dash();
 				}
 				if (Input.GetAxis("CameraHorizontal") == 0 && Input.GetAxis("CameraVertical") == 0)
 				{
@@ -109,17 +109,33 @@ public class PlayerMovement : MonoBehaviour {
 			aimRay.SetActive(false);
 		}
 
-        if (Input.GetButtonDown("Jump"))
+		if (isMoving)
+		{
+			transform.position = Vector3.MoveTowards(transform.position, playerAimRayCast.currentTargetPositionOffset, dashSpeed * Time.deltaTime);
+			float distance = Vector2.Distance(transform.position, playerAimRayCast.currentTargetPositionOffset);
+			if (distance <= 0.3f)
+			{
+				boxCollider.enabled = true;
+			}
+		}
+
+		if (Input.GetButtonDown("Jump"))
         {
 			jump = true;
 		}
-		if (rb.velocity.y != 0 && isGrounded)
+
+		if (rb.velocity.y != 0)
 		{
-			animatorPlayer.SetBool("IsJumping", true);
+			playerAnimator.SetBool("IsJumping", true);
+			cooldownAnimJump = 0.05f;
 		}
-		else if (!isGrounded)
+		else
 		{
-			animatorPlayer.SetBool("IsJumping", false);
+			cooldownAnimJump -= Time.deltaTime;
+			if (cooldownAnimJump <= 0.0f)
+			{
+				playerAnimator.SetBool("IsJumping", false);
+			}
 		}
 
 		if (onTopWall && !isMoving)
@@ -145,7 +161,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			CheckGround();
 			Run(horizontalMove * Time.fixedDeltaTime, jump);
-			animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(horizontalMove));
+			playerAnimator.SetFloat("RunSpeed", Mathf.Abs(horizontalMove));
 			jump = false;
 		}
 	}
@@ -173,34 +189,31 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void CheckGround()
 	{
-		float rayDistance = 0.2f;
-		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
-		Debug.DrawRay(movementRaycast.transform.position, Vector2.down * rayDistance, Color.red);
-		if (hit.collider != null)
+		Vector2 boxSize = new Vector2(0.15f, 0.15f);
+		float boxAngle = 0.0f;
+		bool isGroundedBox = Physics2D.OverlapBox(movementRaycast.position, boxSize, boxAngle, groundLayerMask);
+		if (isGroundedBox)
 		{
-			if (!hit.collider.CompareTag("Player") && !jump)
+			jumpCooldown = 0.1f;
+			if (!isGrounded)
 			{
-				jumpCooldown = 0.1f;
-				if (!isGrounded)
-				{
-					FindObjectOfType<AudioManager>().Play("Land");
-					isGrounded = true;
-				}
+				isGrounded = true;
+				FindObjectOfType<AudioManager>().Play("Land");
 			}
-			else
+		}
+		else
+		{
+			if (jumpCooldown <= 0.0f)
 			{
-				if (jumpCooldown <= 0)
-				{
-					isGrounded = false;
-				}
+				isGrounded = false;
 			}
 		}
 	}
 
 	private void CheckDropForSlowdown()
 	{
-		float rayDistance = 3.5f;
-		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.transform.position, Vector2.down, rayDistance);
+		float rayDistance = 5.0f;
+		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.position, Vector2.down, rayDistance);
 		if (hit.collider != null)
 		{
 			if (!hit.collider.CompareTag("Player"))
@@ -251,16 +264,16 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			if (horizontalMove < 0.0f)
 			{
-				animatorPlayer.SetTrigger("RunFlip");
+				playerAnimator.SetTrigger("RunFlip");
 				hasRunFlipped = false;
 				isGoingRight = false;
 			}
 		}
-		if (!isGoingRight && !hasRunFlipped)
+		else
 		{
 			if (horizontalMove > 0.0f)
 			{
-				animatorPlayer.SetTrigger("RunFlip");
+				playerAnimator.SetTrigger("RunFlip");
 				hasRunFlipped = false;
 				isGoingRight = true;
 			}
@@ -271,7 +284,6 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("RightWall"))
 		{
-			transform.parent = other.gameObject.transform;
 			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 90);
 
@@ -283,7 +295,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
 		{
-			transform.parent = other.gameObject.transform;
 			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 270);
 
@@ -295,7 +306,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("TopWall"))
 		{
-			transform.parent = other.gameObject.transform;
 			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -308,7 +318,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
 		{
-			transform.parent = other.gameObject.transform;
 			Vector3 hit = other.contacts[0].normal;
 			transform.rotation = Quaternion.Euler(0, 0, 180);
 
@@ -323,7 +332,6 @@ public class PlayerMovement : MonoBehaviour {
 			transform.parent = other.gameObject.transform;
 			Vector3 hit = other.contacts[0].normal;
 			transform.up = hit;
-			Debug.Log(hit);
 
 			isMoving = false;
 			onRotatable = true;
@@ -341,20 +349,20 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	private void ResetMovement()
+	private void Dash()
 	{
 		Time.timeScale = 1.0f;
+		FindObjectOfType<AudioManager>().Play("Dash");
+		playerAnimator.SetTrigger("Dash");
+		playerAnimator.SetFloat("RunSpeed", Mathf.Abs(0));
+
 		gameObject.transform.parent = null;
 		boxCollider.enabled = false;
-		FindObjectOfType<AudioManager>().Play("Dash");
-		animatorPlayer.SetTrigger("Dash");
-		animatorPlayer.SetFloat("RunSpeed", Mathf.Abs(0));
 		hasRunFlipped = true;
 		dashParticle.Play();
 		playerTrail.SetActive(true);
 		isMoving = true;
 
-		transform.rotation = Quaternion.identity;
 		horizontalMove = 0;
 		rb.velocity = Vector2.zero;
 		playerAimRayCast.ResetIsMovePossible();

@@ -5,10 +5,10 @@ using UnityEngine;
 public class AnimationEventHandler : MonoBehaviour
 {
 
-	private static AnimationEventHandler instance = null;
 	private string activate = "";
 	private string release = "";
 	private string anim = "";
+
 
 	public void SetActivate(string stringValue)
 	{

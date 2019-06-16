@@ -37,7 +37,6 @@ public class PauseManager : MonoBehaviour {
 	private Text lastHoveredText;
 	private bool hasNoSelectedButton;
 	private bool isBackgroundMusicOn = true;
-	private bool hasBegun = false;
 
 
 	void Start()

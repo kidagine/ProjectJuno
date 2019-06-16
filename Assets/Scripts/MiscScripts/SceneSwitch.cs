@@ -24,16 +24,11 @@ public class SceneSwitch : MonoBehaviour {
 		bool isFacingRight;
 		if (other.gameObject.CompareTag("Player"))
         {
-			rb = other.GetComponent<Rigidbody2D>();
-			FindObjectOfType<PauseManager>().DisablePlayerMovement();
-
 			Vector3 test = new Vector3(-2, -8, 0);
 			isFacingRight = playerSpriteRenderer.flipX;
 			SceneTransitionManager.Instance.SetPlayerPosition(test);
 			SceneTransitionManager.Instance.SetPlayerFacing(isFacingRight);
-
-			animatorFade.SetTrigger("FadeOut");
-			StartCoroutine(SwitchScene());
+			SceneManager.LoadScene(indexOfSceneToLoad);
 
 			//if (positionForAnimation == PositionForAnimation.Up)
    //         { 
@@ -63,13 +58,6 @@ public class SceneSwitch : MonoBehaviour {
 		{
 			rb.velocity = new Vector2(playerMove * -1, rb.velocity.y);
 		}
-	}
-
-    IEnumerator SwitchScene()
-    {
-        yield return new WaitForSeconds(0.1f);
-		SceneManager.LoadScene(indexOfSceneToLoad);
-
 	}
 
 }

@@ -19,14 +19,12 @@ public class PlayerAim : MonoBehaviour
 	public bool isMovePossible;
 
 	private float cooldown = 0.3f;
-	private float defaultRunSpeed;
 	private int gunClip = 10;
 	private bool isReloading;
 	private bool isRotatable;
 
 	void Start()
 	{
-		defaultRunSpeed = playerMovement.runSpeed;
 		isMovePossible = true;
 		gunClipSlider.maxValue = gunClip;
 		gunClipSlider.value = gunClip;
@@ -36,7 +34,7 @@ public class PlayerAim : MonoBehaviour
 	{
 		PointingGun();
 		Shooting();
-
+	
 		cooldown -= Time.deltaTime;
 	}
 
@@ -48,11 +46,10 @@ public class PlayerAim : MonoBehaviour
 			{
 				gunClip--;
 				gunClipSlider.value -= 1;
-				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				FindObjectOfType<AudioManager>().Play("Shot");
-				cooldown = 0.35f;
+				Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 				playerStats.playerShield.SetActive(false);
-				playerMovement.runSpeed = defaultRunSpeed / 2;
+				cooldown = 0.25f;
 			}
 			else if (gunClip <= 0 && !isReloading)
 			{
@@ -61,7 +58,6 @@ public class PlayerAim : MonoBehaviour
 				gunClipSliderAnim.enabled = true;
 				gunClipSliderAnim.Play("Reload", -1, 0f);
 				StartCoroutine(Reload());
-				playerMovement.runSpeed = 0;
 			}
 		}
 		else if (Input.GetKey(KeyCode.R) && gunClip != 10 && !isReloading)
@@ -71,11 +67,6 @@ public class PlayerAim : MonoBehaviour
 			gunClipSliderAnim.enabled = true;
 			gunClipSliderAnim.Play("Reload", -1, 0f);
 			StartCoroutine(Reload());
-			playerMovement.runSpeed = 0;
-		}
-		else if (!isReloading)
-		{
-			playerMovement.runSpeed = defaultRunSpeed;
 		}
 	}
 	IEnumerator Reload()
