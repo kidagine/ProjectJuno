@@ -14,11 +14,11 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] private ParticleSystem dashParticle;
 	[SerializeField] private ParticleSystem jumpParticle;
 	[SerializeField] private SpriteRenderer playerSprite;
-	[SerializeField] private GameObject playerTrail;
+	[SerializeField] private TrailRenderer playerTrail;
 
 
 	[Header("Player stats")]
-	public float runSpeed;
+	[SerializeField] private float runSpeed;
 	[SerializeField] private float dashSpeed;
 
 	[Header("Misc")]
@@ -53,8 +53,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float horizontalMove;
 	private float slowdownTimer;	
 	private float jumpCooldown = 0.1f;
-	private float cooldownAnimJump = 0.1f;
-	private float cooldownRunFlip = 0.1f;
+	private float turnAroundCooldown = 0.1f;
 	private float jumpForce = 400f;
 	private int footstepIndex;
 
@@ -119,25 +118,6 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonDown("Jump"))
-        {
-			jump = true;
-		}
-
-		if (rb.velocity.y != 0)
-		{
-			playerAnimator.SetBool("IsJumping", true);
-			cooldownAnimJump = 0.05f;
-		}
-		else
-		{
-			cooldownAnimJump -= Time.deltaTime;
-			if (cooldownAnimJump <= 0.0f)
-			{
-				playerAnimator.SetBool("IsJumping", false);
-			}
-		}
-
 		if (onTopWall && !isMoving)
 		{
 			cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneHeight = 0.3f;
@@ -145,6 +125,10 @@ public class PlayerMovement : MonoBehaviour {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 			TurnAround();
 			CheckDropForSlowdown();
+					if (Input.GetButtonDown("Jump"))
+        {
+			jump = true;
+		}
 		}
 		else
         {
@@ -152,7 +136,6 @@ public class PlayerMovement : MonoBehaviour {
 			rb.gravityScale = 0;
         }
         jumpCooldown -= Time.deltaTime;
-
     }
 
     void FixedUpdate()
@@ -195,10 +178,13 @@ public class PlayerMovement : MonoBehaviour {
 		if (isGroundedBox)
 		{
 			jumpCooldown = 0.1f;
+
 			if (!isGrounded)
 			{
 				isGrounded = true;
 				FindObjectOfType<AudioManager>().Play("Land");
+				playerAnimator.SetBool("IsJumping", false);
+
 			}
 		}
 		else
@@ -206,6 +192,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (jumpCooldown <= 0.0f)
 			{
 				isGrounded = false;
+				playerAnimator.SetBool("IsJumping", true);
 			}
 		}
 	}
@@ -248,16 +235,16 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else if (horizontalMove == 0)
 		{
-			cooldownRunFlip -= Time.deltaTime;
-			if (cooldownRunFlip <= 0)
+			turnAroundCooldown -= Time.deltaTime;
+			if (turnAroundCooldown <= 0)
 			{
-				cooldownRunFlip = 0.1f;
+				turnAroundCooldown = 0.1f;
 				isTempRunSpeedSaved = false;
 			}
 		}
 		else
 		{
-			cooldownRunFlip = 0.1f;
+			turnAroundCooldown = 0.1f;
 		}
 
 		if (isGoingRight && !hasRunFlipped)
@@ -290,7 +277,7 @@ public class PlayerMovement : MonoBehaviour {
 			onRightWall = true;
 			isMoving = false;
 			onRotatable = true;
-			playerTrail.SetActive(false);
+			playerTrail.enabled = false;
 			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("LeftWall"))
@@ -301,7 +288,7 @@ public class PlayerMovement : MonoBehaviour {
 			onLeftWall = true;
 			isMoving = false;
 			onRotatable = true;
-			playerTrail.SetActive(false);
+			playerTrail.enabled = false;
 			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("TopWall"))
@@ -313,7 +300,7 @@ public class PlayerMovement : MonoBehaviour {
 			onTopWall = true;
 			isMoving = false;
 			onRotatable = true;
-			playerTrail.SetActive(false);
+			playerTrail.enabled = false;
 			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("BottomWall"))
@@ -324,7 +311,7 @@ public class PlayerMovement : MonoBehaviour {
 			onBottomWall = true;
 			isMoving = false;
 			onRotatable = true;
-			playerTrail.SetActive(false);
+			playerTrail.enabled = false;
 			dashParticle.Stop();
 		}
 		if (other.gameObject.CompareTag("Wall"))
@@ -335,7 +322,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			isMoving = false;
 			onRotatable = true;
-			playerTrail.SetActive(false);
+			playerTrail.enabled = false;
 			dashParticle.Stop();
 		}
 
@@ -354,13 +341,14 @@ public class PlayerMovement : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		FindObjectOfType<AudioManager>().Play("Dash");
 		playerAnimator.SetTrigger("Dash");
+		playerAnimator.SetBool("IsJumping", false);
 		playerAnimator.SetFloat("RunSpeed", Mathf.Abs(0));
 
 		gameObject.transform.parent = null;
 		boxCollider.enabled = false;
 		hasRunFlipped = true;
 		dashParticle.Play();
-		playerTrail.SetActive(true);
+		playerTrail.enabled = true;
 		isMoving = true;
 
 		horizontalMove = 0;

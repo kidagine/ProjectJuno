@@ -391,7 +391,9 @@ namespace UnityEditor
 				return;
 
 			GameObject instance = null;
+#pragma warning disable CS0618 // Type or member is obsolete
 			if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab)
+#pragma warning restore CS0618 // Type or member is obsolete
 			{
 				instance = (GameObject) PrefabUtility.InstantiatePrefab(go);
 			}
@@ -468,14 +470,14 @@ namespace UnityEditor
 	[CustomEditor(typeof(GameObjectBrush))]
 	public class GameObjectBrushEditor : GridBrushEditorBase
 	{
-		public GameObjectBrush brush { get { return target as GameObjectBrush; } }
+		public GameObjectBrush Brush { get { return target as GameObjectBrush; } }
 
 		public override void OnPaintSceneGUI(GridLayout gridLayout, GameObject brushTarget, BoundsInt position, GridBrushBase.Tool tool, bool executing)
 		{
 			BoundsInt gizmoRect = position;
 
 			if (tool == GridBrushBase.Tool.Paint || tool == GridBrushBase.Tool.Erase)
-				gizmoRect = new BoundsInt(position.min - brush.pivot, brush.size);
+				gizmoRect = new BoundsInt(position.min - Brush.pivot, Brush.size);
 			
 			base.OnPaintSceneGUI(gridLayout, brushTarget, gizmoRect, tool, executing);
 		}
