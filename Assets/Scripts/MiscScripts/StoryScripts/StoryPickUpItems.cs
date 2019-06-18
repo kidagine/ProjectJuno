@@ -44,7 +44,7 @@ public class StoryPickUpItems : MonoBehaviour {
 					SceneTransitionManager.Instance.HasPickedItem(true);
 					itemToPickUp.SetActive(true);
 					//TODO I dont have animation yet. playerAnimation.SetBool("PickUpItem",true);
-					FindObjectOfType<PauseManager>().DisablePlayerMovement();
+					FindObjectOfType<PauseMenuManager>().DisablePlayerMovement();
 					itemMenuAnimator.SetTrigger("Open");
 					itemNameText.text = itemName;
 					itemDescriptionText.text = itemDescription;
@@ -54,7 +54,7 @@ public class StoryPickUpItems : MonoBehaviour {
 			{
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					FindObjectOfType<PauseManager>().EnablePlayerMovement();
+					FindObjectOfType<PauseMenuManager>().EnablePlayerMovement();
 					Vector2 itemPickParticlesPosition = itemToPickUp.transform.position;
 					Destroy(itemToPickUp);
 					//TODO I dont have animation yet. playerAnimation.SetBool("PickUpItem",false);

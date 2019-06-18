@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (!Input.GetButtonDown("Fire1"))
 		{
 			//Using KB/M
-			if (!PauseManager.isUsingController)
+			if (!PauseMenuManager.isUsingController)
 			{
 				if (Input.GetMouseButton(1) && !isMoving)
 				{
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 			//Using Controller
-			if (PauseManager.isUsingController)
+			if (PauseMenuManager.isUsingController)
 			{
 				if (Input.GetAxis("CameraHorizontal") != 0 || Input.GetAxis("CameraVertical") != 0 && !isMoving)
 				{

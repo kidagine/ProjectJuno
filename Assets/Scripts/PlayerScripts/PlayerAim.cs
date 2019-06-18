@@ -40,7 +40,7 @@ public class PlayerAim : MonoBehaviour
 
 	private void Shooting()
 	{
-		if (Input.GetButton("Fire1") && !PauseManager.GameIsPaused && bulletPrefab != null && !playerMovement.isMoving)
+		if (Input.GetButton("Fire1") && !PauseMenuManager.GameIsPaused && bulletPrefab != null && !playerMovement.isMoving)
 		{
 			if (cooldown <= 0 && gunClip >= 1 && !isReloading)
 			{
@@ -84,7 +84,7 @@ public class PlayerAim : MonoBehaviour
 		Vector2 directionOutBounds = Vector2.zero;
 
 		//Using Mouse
-		if (!PauseManager.isUsingController)
+		if (!PauseMenuManager.isUsingController)
 		{
 			Vector2 mousePos = Input.mousePosition;
 			mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -92,7 +92,7 @@ public class PlayerAim : MonoBehaviour
 		}
 
 		//Using Controller
-		if (PauseManager.isUsingController)
+		if (PauseMenuManager.isUsingController)
 		{
 			float directionX = Input.GetAxisRaw("PadHorizontal");
 			float directionY = Input.GetAxisRaw("PadVertical");

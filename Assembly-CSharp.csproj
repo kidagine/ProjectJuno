@@ -72,10 +72,12 @@
      <Compile Include="Assets\Scripts\MiscScripts\DontDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\FontFix.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\LevelProgress.cs" />
-     <Compile Include="Assets\Scripts\MiscScripts\PauseManager.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\ManagerScripts\IMenuManager.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\ManagerScripts\MainMenuManager.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\ManagerScripts\PauseMenuManager.cs" />
+     <Compile Include="Assets\Scripts\MiscScripts\ManagerScripts\SceneTransitionManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\PixelBoy.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\SceneSwitch.cs" />
-     <Compile Include="Assets\Scripts\MiscScripts\SceneTransitionManager.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryEvent.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryPickUpItems.cs" />
      <Compile Include="Assets\Scripts\MiscScripts\StoryScripts\StoryStateIntroStage.cs" />
@@ -104,6 +106,7 @@
      <None Include="Assets\Tiles\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
      <None Include="Assets\Tiles\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />
      <None Include="Assets\Scripts\ShaderScripts\KillLineShader.shader" />
+     <None Include="Assets\Scripts\ShaderScripts\ImageBlur.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Kid Agine/Desktop/CodeProjects/UnityProjects/ProjectJuno/ProjectJuno/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

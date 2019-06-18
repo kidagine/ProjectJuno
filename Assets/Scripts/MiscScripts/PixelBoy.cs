@@ -41,7 +41,7 @@ public class PixelBoy : MonoBehaviour
 			}
 			else
 			{
-				PauseManager.GameIsOver = true;
+				PauseMenuManager.GameIsOver = true;
 			}
 		}
 		if (isIncreasing)

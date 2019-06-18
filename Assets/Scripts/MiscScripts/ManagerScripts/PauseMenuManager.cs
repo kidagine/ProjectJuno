@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class PauseManager : MonoBehaviour {
+public class PauseMenuManager : MonoBehaviour, IMenuManager {
 
 	public static bool GameIsPaused;
 	public static bool GameIsOver;
