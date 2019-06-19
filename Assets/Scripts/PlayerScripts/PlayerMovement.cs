@@ -201,19 +201,22 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		float rayDistance = 5.0f;
 		RaycastHit2D hit = Physics2D.Raycast(movementRaycast.position, Vector2.down, rayDistance);
-		if (hit.collider != null)
+		if (!PauseMenuManager.GameIsPaused)
 		{
-			if (!hit.collider.CompareTag("Player"))
+			if (hit.collider != null)
 			{
-				Time.timeScale = 1.0f;
-				slowdownTimer = 0.3f;
-			}
-			else
-			{
-				slowdownTimer -= Time.deltaTime;
-				if (slowdownTimer <= 0.0f)
+				if (!hit.collider.CompareTag("Player"))
 				{
-					Time.timeScale = 0.1f;
+					Time.timeScale = 1.0f;
+					slowdownTimer = 0.3f;
+				}
+				else
+				{
+					slowdownTimer -= Time.deltaTime;
+					if (slowdownTimer <= 0.0f)
+					{
+						Time.timeScale = 0.1f;
+					}
 				}
 			}
 		}

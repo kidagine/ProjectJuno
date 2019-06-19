@@ -178,8 +178,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c94c79d431c5f7408c02aa3a8f23efd, type: 3}
-    m_FontSize: 11
+    m_Font: {fileID: 12800000, guid: c089e8a01736b284d9d77648c55de69d, type: 3}
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1019,8 +1019,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c94c79d431c5f7408c02aa3a8f23efd, type: 3}
-    m_FontSize: 11
+    m_Font: {fileID: 12800000, guid: c089e8a01736b284d9d77648c55de69d, type: 3}
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

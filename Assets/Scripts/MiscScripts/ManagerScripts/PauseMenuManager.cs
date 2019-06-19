@@ -18,12 +18,8 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 	public SpriteRenderer playerSpriteRenderer;
 	public PlayerMovement playerMovement;
 	public Animator animator;
-	public AnimatorUpdateMode animatorUpdateMode;
 	public Button resumeButton;
 	public Button bgmButton;
-	public Text backgroundMusicText;
-	public Text inputText;
-	public Text fullscreenText;
 	public AudioSource backgroundMusic;
 	public PixelBoy pixelBoy;
 	public int indexOfSceneToLoad;
@@ -101,7 +97,7 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 			backgroundMusic.Play();
 		generalMenuUI.SetActive(false);
 		optionsMenuUI.SetActive(false);
-		Time.timeScale = 0.05f;
+		Time.timeScale = 1f;
 		GameIsPaused = false;
 	}
 
@@ -137,7 +133,7 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 		bgmButton.Select();
 	}
 
-	public void BackgroundMusic()
+	public void SetBackgroundMusic(Text backgroundMusicText)
 	{
 		if (isBackgroundMusicOn)
 		{
@@ -152,7 +148,7 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 		}
 	}
 
-	public void SetInput()
+	public void SetInput(Text inputText)
 	{
 		if (isUsingController)
 		{
@@ -166,7 +162,16 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 		}
 	}
 
-	public void SetFullscreen()
+	public void SetVolume()
+	{
+		AudioListener.volume -= 0.1f;
+		if (AudioListener.volume <= -0.1f)
+		{
+			AudioListener.volume = 1;
+		}
+	}
+
+	public void SetFullscreen(Text fullscreenText)
 	{
 		if (Screen.fullScreen)
 		{
@@ -177,15 +182,6 @@ public class PauseMenuManager : MonoBehaviour, IMenuManager {
 		{
 			Screen.fullScreen = true;
 			fullscreenText.text = "fullscreen: on";
-		}
-	}
-
-	public void SetVolume()
-	{	
-		AudioListener.volume  -= 0.1f;
-		if (AudioListener.volume <= -0.1f)
-		{
-			AudioListener.volume = 1;
 		}
 	}
 
